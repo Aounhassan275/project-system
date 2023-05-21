@@ -13,7 +13,7 @@
                 <div class="media mb-0">
                     <div class="media-body">
                         <h3 class="font-weight-semibold mb-0 text-center">
-                            Madhusudan Law University
+                            Project System
                         </h3>
                     </div>
                 </div>

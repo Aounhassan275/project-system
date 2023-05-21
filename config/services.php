@@ -31,7 +31,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'razor_pay' => [
-        'merchant_name' => env('MERCHANT_NAME','MADHUSUDAN LAW UNIVERSITY'),
+        'merchant_name' => env('MERCHANT_NAME','Project System'),
         'merchant_id' => env('MERCHANT_ID','APIMER'),
         'merchant_sub_id' => env('MERCHANT_SUB_ID','BHUMLU'),
         'encryption_key' => env('ENCRYPTION_KEY','84BA57072F1E39ED568B73729B1A398B'),
