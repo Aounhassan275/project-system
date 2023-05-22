@@ -33,7 +33,7 @@
                     </div>
                     <div class="media-body text-right">
                     <h3 class="mb-0">{{App\Models\User::where('role_id',2)->count()}}</h3>
-                        <span class="text-uppercase font-size-xs">Total Project Users</span>
+                        <span class="text-uppercase font-size-xs">Total Project Managers</span>
                     </div>
                 </div>
             </div>

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>{{Auth::user()->name}} Admin Panel | PROJECT SYSTEM</title>
+	<title>{{Auth::user()->name}} Admin Panel | SDS MIS</title>
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -137,7 +137,7 @@
 
 							<div class="media-body">
 								<div class="media-title font-weight-semibold">{{Auth::user()->name}}</div>
-								<div class="font-size-xs opacity-50">MLU
+								<div class="font-size-xs opacity-50">SDS
 								</div>
 							</div>
 
@@ -165,7 +165,7 @@
 							<a href="#" class="nav-link"><i class="icon-cart-remove"></i> <span>Users</span></a>
 
 							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('admin/user*') ?'display:block':''}}">
-								<li class="nav-item"><a href="{{route('admin.user.index')}}" class="nav-link {{Request::is('admin/user')?'active':''}}">Project User</a></li>
+								<li class="nav-item"><a href="{{route('admin.user.index')}}" class="nav-link {{Request::is('admin/user')?'active':''}}">Project Manager</a></li>
 							</ul>
 						</li>
 						<li class="nav-item">
