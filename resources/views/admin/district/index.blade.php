@@ -28,6 +28,15 @@ Manage District
                             <label>District Name</label>
                             <input name="name" type="text" class="form-control" placeholder="Enter District Name" required>
                         </div>
+                        <div class="form-group col-md-6">
+                            <label>Choose State</label>
+                            <select  name="state_id"  class="form-control select-search" data-fouc required>
+                                <option selected disabled>Select State</option>
+                                @foreach(App\Models\State::all() as $state)
+                                <option value="{{$state->id}}">{{$state->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Create <i class="icon-paperplane ml-2"></i></button>
@@ -48,6 +57,7 @@ Manage District
             <tr>
                 <th>#</th>
                 <th>Name</th>
+                <th>State Name</th>
                 <th>Action</th>
                 <th>Action</th>
             </tr>
@@ -57,9 +67,10 @@ Manage District
             <tr>
                 <td>{{$key+1}}</td>
                 <td>{{$district->name}}</td>
+                <td>{{@$district->state->name}}</td>
                 <td>
                     <button data-toggle="modal" data-target="#edit_modal" name="{{$district->name}}" 
-                        id="{{$district->id}}" class="edit-btn btn btn-primary">Edit</button>
+                        state_id="{{$district->state_id}}" id="{{$district->id}}" class="edit-btn btn btn-primary">Edit</button>
                 </td>
                 <td>
                     <form action="{{route('admin.district.destroy',$district->id)}}" method="POST">
@@ -89,6 +100,15 @@ Manage District
                         <label for="name">District Name</label>
                         <input class="form-control" type="text" id="name" name="name" placeholder="Enter name" required>
                     </div>
+                    <div class="form-group">
+                        <label>Choose State</label>
+                        <select  name="state_id" id="state_id" class="form-control select-search" data-fouc required>
+                            <option selected disabled>Select State</option>
+                            @foreach(App\Models\State::all() as $state)
+                            <option value="{{$state->id}}">{{$state->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary waves-effect" data-dismiss="modal">Cancel</button>
@@ -106,6 +126,8 @@ Manage District
         $('.edit-btn').click(function(){
             let name = $(this).attr('name');
             let id = $(this).attr('id');
+            let state_id = $(this).attr('state_id');
+            $('#state_id').val(state_id);
             $('#name').val(name);
             $('#id').val(id);
             $('#updateForm').attr('action','{{route('admin.district.update','')}}' +'/'+id);

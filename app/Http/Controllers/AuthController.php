@@ -28,7 +28,7 @@ class AuthController extends Controller
         //User Authentication Code Start
         if(Auth::guard('user')->attempt($creds))
         {
-            if($user->role->name == 'Admin')
+            if($user->role->name == 'Super Admin')
             {
                 toastr()->success('You Login Successfully');
                 return redirect()->intended(route('admin.dashboard.index'));

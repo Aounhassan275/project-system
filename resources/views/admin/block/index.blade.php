@@ -1,7 +1,7 @@
 @extends('admin.layout.index')
 
 @section('title')
-Manage Police Station
+Manage Block
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@ Manage Police Station
         <!-- Basic layout-->
         <div class="card">
             <div class="card-header header-elements-inline">
-                <h5 class="card-title">Add New Police Station</h5>
+                <h5 class="card-title">Add New Block</h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
@@ -21,19 +21,19 @@ Manage Police Station
             </div>
 
             <div class="card-body">
-                <form action="{{route('admin.police_station.store')}}" method="post" enctype="multipart/form-data" >
+                <form action="{{route('admin.block.store')}}" method="post" enctype="multipart/form-data" >
                     @csrf
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label>Police Station Name</label>
-                            <input name="name" type="text" class="form-control" placeholder="Enter Police Station Name" required>
+                            <label>Block Name</label>
+                            <input name="name" type="text" class="form-control" placeholder="Enter Block Name" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <label>Choose Block</label>
-                            <select  name="block_id"  class="form-control select-search" data-fouc required>
-                                <option selected disabled>Select Block</option>
-                                @foreach(App\Models\Block::all() as $block)
-                                <option value="{{$block->id}}">{{$block->name}}</option>
+                            <label>Choose District</label>
+                            <select  name="district_id"  class="form-control select-search" data-fouc required>
+                                <option selected disabled>Select State</option>
+                                @foreach(App\Models\District::all() as $district)
+                                <option value="{{$district->id}}">{{$district->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -57,23 +57,23 @@ Manage Police Station
             <tr>
                 <th>#</th>
                 <th>Name</th>
-                <th>Block Name</th>
+                <th>District Name</th>
                 <th>Action</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (App\Models\PoliceStation::all()  as $key => $police_station)
+            @foreach (App\Models\Block::all()  as $key => $block)
             <tr>
                 <td>{{$key+1}}</td>
-                <td>{{$police_station->name}}</td>
-                <td>{{@$police_station->block->name}}</td>
+                <td>{{$block->name}}</td>
+                <td>{{@$block->district->name}}</td>
                 <td>
-                    <button data-toggle="modal" data-target="#edit_modal" name="{{$police_station->name}}" 
-                        block_id="{{$police_station->block_id}}" id="{{$police_station->id}}" class="edit-btn btn btn-primary">Edit</button>
+                    <button data-toggle="modal" data-target="#edit_modal" name="{{$block->name}}" 
+                        district_id="{{$block->district_id}}" id="{{$block->id}}" class="edit-btn btn btn-primary">Edit</button>
                 </td>
                 <td>
-                    <form action="{{route('admin.police_station.destroy',$police_station->id)}}" method="POST">
+                    <form action="{{route('admin.block.destroy',$block->id)}}" method="POST">
                         @method('DELETE')
                         @csrf
                     <button class="btn btn-danger">Delete</button>
@@ -92,20 +92,20 @@ Manage Police Station
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title mt-0" id="myModalLabel">Update Police Station</h5>
+                    <h5 class="modal-title mt-0" id="myModalLabel">Update Block</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name">Police Station Name</label>
+                        <label for="name">Block Name</label>
                         <input class="form-control" type="text" id="name" name="name" placeholder="Enter name" required>
                     </div>
                     <div class="form-group">
-                        <label>Choose Block</label>
-                        <select  name="block_id" id="block_id" class="form-control select-search" data-fouc required>
-                            <option selected disabled>Select Block</option>
-                            @foreach(App\Models\Block::all() as $block)
-                            <option value="{{$block->id}}">{{$block->name}}</option>
+                        <label>Choose District</label>
+                        <select  name="district_id" id="district_id" class="form-control select-search" data-fouc required>
+                            <option selected disabled>Select District</option>
+                            @foreach(App\Models\District::all() as $district)
+                            <option value="{{$district->id}}">{{$district->name}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -126,11 +126,11 @@ Manage Police Station
         $('.edit-btn').click(function(){
             let name = $(this).attr('name');
             let id = $(this).attr('id');
-            let block_id = $(this).attr('block_id');
-            $('#block_id').val(block_id);
+            let district_id = $(this).attr('district_id');
+            $('#district_id').val(district_id);
             $('#name').val(name);
             $('#id').val(id);
-            $('#updateForm').attr('action','{{route('admin.police_station.update','')}}' +'/'+id);
+            $('#updateForm').attr('action','{{route('admin.block.update','')}}' +'/'+id);
         });
     });
 </script>

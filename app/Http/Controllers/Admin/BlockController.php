@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\District;
+use App\Models\Block;
 use Exception;
 use Illuminate\Http\Request;
 
-class DistrictController extends Controller
+class BlockController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,7 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        return view('admin.district.index');
+        return view('admin.block.index');
     }
 
     /**
@@ -36,14 +36,14 @@ class DistrictController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {  
         try{
             $this->validate($request,[
                 'name' => 'required',
-                'state_id' => 'required',
+                'district_id' => 'required',
             ]);
-            District::create($request->all());
-            toastr()->success('District Added Successfully');
+            Block::create($request->all());
+            toastr()->success('Block Added Successfully');
             return redirect()->back();
         }catch (Exception $e)
         {
@@ -55,10 +55,10 @@ class DistrictController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\District  $district
+     * @param  \App\Models\Block  $block
      * @return \Illuminate\Http\Response
      */
-    public function show(District $district)
+    public function show(Block $block)
     {
         //
     }
@@ -66,10 +66,10 @@ class DistrictController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\District  $district
+     * @param  \App\Models\Block  $block
      * @return \Illuminate\Http\Response
      */
-    public function edit(District $district)
+    public function edit(Block $block)
     {
         //
     }
@@ -78,28 +78,28 @@ class DistrictController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\District  $district
+     * @param  \App\Models\Block  $block
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request,$id)
     {
-        $district = District::find($id);
-        $district->update($request->all());
-        toastr()->success('District Updated successfully');
+        $block = Block::find($id);
+        $block->update($request->all());
+        toastr()->success('Block Updated successfully');
         return redirect()->back(); 
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\District  $district
+     * @param  \App\Models\Block  $block
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $district = District::find($id);
-        $district->delete();
-        toastr()->success('District Deleted successfully');
+        $block = Block::find($id);
+        $block->delete();
+        toastr()->success('Block Deleted successfully');
         return redirect()->back();
     }
 }

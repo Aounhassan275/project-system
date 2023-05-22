@@ -1,7 +1,7 @@
 @extends('admin.layout.index')
 
 @section('title')
-Manage Police Station
+Manage Gram Panchyats
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@ Manage Police Station
         <!-- Basic layout-->
         <div class="card">
             <div class="card-header header-elements-inline">
-                <h5 class="card-title">Add New Police Station</h5>
+                <h5 class="card-title">Add New Gram Panchyat</h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
@@ -21,12 +21,12 @@ Manage Police Station
             </div>
 
             <div class="card-body">
-                <form action="{{route('admin.police_station.store')}}" method="post" enctype="multipart/form-data" >
+                <form action="{{route('admin.gram_panchyat.store')}}" method="post" enctype="multipart/form-data" >
                     @csrf
                     <div class="row">
                         <div class="form-group col-md-6">
-                            <label>Police Station Name</label>
-                            <input name="name" type="text" class="form-control" placeholder="Enter Police Station Name" required>
+                            <label>Gram Panchyat Name</label>
+                            <input name="name" type="text" class="form-control" placeholder="Enter Gram Panchyat Name" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Choose Block</label>
@@ -63,17 +63,17 @@ Manage Police Station
             </tr>
         </thead>
         <tbody>
-            @foreach (App\Models\PoliceStation::all()  as $key => $police_station)
+            @foreach (App\Models\GramPanchyat::all()  as $key => $gram_panchyat)
             <tr>
                 <td>{{$key+1}}</td>
-                <td>{{$police_station->name}}</td>
-                <td>{{@$police_station->block->name}}</td>
+                <td>{{$gram_panchyat->name}}</td>
+                <td>{{@$gram_panchyat->block->name}}</td>
                 <td>
-                    <button data-toggle="modal" data-target="#edit_modal" name="{{$police_station->name}}" 
-                        block_id="{{$police_station->block_id}}" id="{{$police_station->id}}" class="edit-btn btn btn-primary">Edit</button>
+                    <button data-toggle="modal" data-target="#edit_modal" name="{{$gram_panchyat->name}}" 
+                        block_id="{{$gram_panchyat->block_id}}" id="{{$gram_panchyat->id}}" class="edit-btn btn btn-primary">Edit</button>
                 </td>
                 <td>
-                    <form action="{{route('admin.police_station.destroy',$police_station->id)}}" method="POST">
+                    <form action="{{route('admin.gram_panchyat.destroy',$gram_panchyat->id)}}" method="POST">
                         @method('DELETE')
                         @csrf
                     <button class="btn btn-danger">Delete</button>
@@ -92,12 +92,12 @@ Manage Police Station
             @csrf
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title mt-0" id="myModalLabel">Update Police Station</h5>
+                    <h5 class="modal-title mt-0" id="myModalLabel">Update Gram Panchyat</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name">Police Station Name</label>
+                        <label for="name">Gram Panchyat Name</label>
                         <input class="form-control" type="text" id="name" name="name" placeholder="Enter name" required>
                     </div>
                     <div class="form-group">
@@ -130,7 +130,7 @@ Manage Police Station
             $('#block_id').val(block_id);
             $('#name').val(name);
             $('#id').val(id);
-            $('#updateForm').attr('action','{{route('admin.police_station.update','')}}' +'/'+id);
+            $('#updateForm').attr('action','{{route('admin.gram_panchyat.update','')}}' +'/'+id);
         });
     });
 </script>

@@ -74,18 +74,17 @@
                                 <span id="confirmmsg"></span>
                             </div>
                         </div>
-                        <input type="hidden" name="role_id" value="2">
-                        {{-- <div class="col-md-4">
+                        <div class="col-md-4">
                             <label>Role</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
                                 <select name="role_id" class="form-control select-search" id="role_id" required>
                                     <option>Select</option>
-                                    @foreach(App\Models\Role::where('name','!=',['Admin'])->get() as $role)
+                                    @foreach(App\Models\Role::where('name','!=',['Super Admin'])->get() as $role)
                                     <option value="{{$role->id}}">{{$role->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
-                        </div> --}}
+                        </div>
 
                     </div>
                     <div class="text-right">

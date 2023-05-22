@@ -1,7 +1,7 @@
 @extends('admin.layout.index')
 
 @section('title')
-    All Users
+Project Managers
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
 <div class="card">
     
     <div class="card-header header-elements-inline">
-        <h5 class="card-title">All Users</h5>
+        <h5 class="card-title">Manage Project Managers</h5>
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
@@ -33,7 +33,7 @@
                 </thead>
                 <tbody>
                     
-                    @foreach ($users  as $key => $user)
+                    @foreach (App\Models\User::where('role_id',2)->get()  as $key => $user)
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>

@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class District extends Model
+class GramPanchyat extends Model
 {
     use HasFactory;
-
+    
     protected $guarded = [];
 
-    public function state()
+    public function block()
     {
-        return $this->belongsTo(State::class,'state_id');
+        return $this->belongsTo(Block::class,'block_id');
     }
 }

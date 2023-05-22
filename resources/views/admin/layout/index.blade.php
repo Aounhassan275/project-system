@@ -165,7 +165,9 @@
 							<a href="#" class="nav-link"><i class="icon-cart-remove"></i> <span>Users</span></a>
 
 							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('admin/user*') ?'display:block':''}}">
-								<li class="nav-item"><a href="{{route('admin.user.index')}}" class="nav-link {{Request::is('admin/user')?'active':''}}">Project Manager</a></li>
+								<li class="nav-item"><a href="{{route('admin.user.create')}}" class="nav-link {{Request::is('admin/user/create')?'active':''}}">Create User</a></li>
+								<li class="nav-item"><a href="{{route('admin.user.project_manager')}}" class="nav-link {{Request::is('admin/user/project_manager')?'active':''}}">Project Manager</a></li>
+								<li class="nav-item"><a href="{{route('admin.user.index')}}" class="nav-link {{Request::is('admin/user')?'active':''}}">All Users</a></li>
 							</ul>
 						</li>
 						<li class="nav-item">
@@ -174,15 +176,18 @@
 								<span>Project</span>
 							</a>
 						</li>
-						<li class="nav-item nav-item-submenu {{Request::is('admin/country*') || Request::is('admin/state*') || Request::is('admin/city*') || Request::is('admin/district*')  || Request::is('admin/police_station*') ?'nav-item-open':''}}">
+						<li class="nav-item nav-item-submenu {{Request::is('admin/country*') || Request::is('admin/state*') || Request::is('admin/city*') || Request::is('admin/district*')  || Request::is('admin/police_station*')  || Request::is('admin/block*') || Request::is('admin/gram_panchyat*') || Request::is('admin/village*') ?'nav-item-open':''}}">
 							<a href="#" class="nav-link"><i class="icon-map"></i> <span>Locations</span></a>
 
-							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('admin/country*') || Request::is('admin/state*') || Request::is('admin/city*') || Request::is('admin/district*') || Request::is('admin/police_station*')?'display:block':''}}">
+							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('admin/country*') || Request::is('admin/state*') || Request::is('admin/city*') || Request::is('admin/village*') || Request::is('admin/district*') || Request::is('admin/police_station*') || Request::is('admin/block*') || Request::is('admin/gram_panchyat*')?'display:block':''}}">
 								<li class="nav-item"><a href="{{route('admin.country.index')}}" class="nav-link {{Request::is('admin/country')?'active':''}}">Country</a></li>
 								<li class="nav-item"><a href="{{route('admin.state.index')}}" class="nav-link {{Request::is('admin/state')?'active':''}}">State</a></li>
 								<li class="nav-item"><a href="{{route('admin.city.index')}}" class="nav-link {{Request::is('admin/city')?'active':''}}">City</a></li>
 								<li class="nav-item"><a href="{{route('admin.police_station.index')}}" class="nav-link {{Request::is('admin/police_station')?'active':''}}">Police Station</a></li>
 								<li class="nav-item"><a href="{{route('admin.district.index')}}" class="nav-link {{Request::is('admin/district')?'active':''}}">District</a></li>
+								<li class="nav-item"><a href="{{route('admin.block.index')}}" class="nav-link {{Request::is('admin/block')?'active':''}}">Block</a></li>
+								<li class="nav-item"><a href="{{route('admin.gram_panchyat.index')}}" class="nav-link {{Request::is('admin/gram_panchyat')?'active':''}}">Gram Panchyat</a></li>
+								<li class="nav-item"><a href="{{route('admin.village.index')}}" class="nav-link {{Request::is('admin/village')?'active':''}}">Village</a></li>
 							</ul>
 						</li>
 					</ul>
