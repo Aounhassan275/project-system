@@ -38,6 +38,10 @@ Route::post('get_state_against_countries',[AuthController::class,'getStateAgains
 /*******************ADMIN ROUTE START*************/       
 include __DIR__ . '/admin.php';
 /*******************ADMIN ROUTE END*************/     
+
+/*******************PROJECT ROUTE START*************/       
+include __DIR__ . '/project.php';
+/*******************PROJECT ROUTE END*************/     
      
 /******************FUNCTIONALITY ROUTES****************/
 Route::get('cd', function() {

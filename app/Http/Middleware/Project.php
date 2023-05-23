@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Prospect
+class Project
 {
     /**
      * Handle an incoming request.
@@ -20,7 +20,7 @@ class Prospect
             return redirect()->to(url('/'));
 
         $user_role = Auth::user()->getRole();
-        if($user_role == 'Prospect')
+        if($user_role == 'Project Manager')
         {
             return $next($request);
         }else{

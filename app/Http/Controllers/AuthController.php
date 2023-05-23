@@ -32,6 +32,10 @@ class AuthController extends Controller
             {
                 toastr()->success('You Login Successfully');
                 return redirect()->intended(route('admin.dashboard.index'));
+            }else if($user->role->name == 'Project Manager')
+            {
+                toastr()->success('You Login Successfully');
+                return redirect()->intended(route('project.dashboard.index'));
             }
             else{
                 Auth::logout();
