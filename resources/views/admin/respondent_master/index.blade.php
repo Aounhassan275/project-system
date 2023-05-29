@@ -12,7 +12,7 @@
         <h5 class="card-title">Manage Respondent Master Form</h5>
         <div class="header-elements">
             <div class="list-icons">
-                <a href="{{route('admin.respondent_master.create')}}" class="btn btn-primary text-right">Add New Project</a>
+                <a href="{{route('admin.respondent_master.create')}}" class="btn btn-primary text-right">Add New Respondent Master Form</a>
                 <a class="list-icons-item" data-action="collapse"></a>
                 <a class="list-icons-item" data-action="remove"></a>
             </div>
