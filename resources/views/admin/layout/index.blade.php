@@ -175,6 +175,12 @@
 								<i class="icon-home4"></i>
 								<span>Project</span>
 							</a>
+						</li>	
+						<li class="nav-item">
+							<a href="{{route('admin.respondent_master.index')}}" class="nav-link {{Request::is('admin/respondent_master')?'active':''}}">
+								<i class="icon-home4"></i>
+								<span>Respondent Master Form</span>
+							</a>
 						</li>
 						<li class="nav-item nav-item-submenu {{Request::is('admin/country*') || Request::is('admin/state*') || Request::is('admin/city*') || Request::is('admin/district*')  || Request::is('admin/police_station*')  || Request::is('admin/block*') || Request::is('admin/gram_panchyat*') || Request::is('admin/village*') ?'nav-item-open':''}}">
 							<a href="#" class="nav-link"><i class="icon-map"></i> <span>Locations</span></a>

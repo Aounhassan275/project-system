@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\GramPanchyatController;
 use App\Http\Controllers\Admin\PoliceStationController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ProjectUserController;
+use App\Http\Controllers\Admin\RespondentMasterController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VillageController;
@@ -54,7 +55,10 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','middleware' => 'auth:user','a
     /*******************Project ROUTE END*************/        
     /*******************Project User ROUTE START*************/       
     Route::resource('project_user',ProjectUserController::class);
-    /*******************Project ROUTE END*************/   
+    /*******************Project ROUTE END*************/      
+    /*******************Respondent Master ROUTE START*************/       
+    Route::resource('respondent_master',RespondentMasterController::class);
+    /*******************Respondent Master ROUTE END*************/   
 });
 /****************** ADMIN MIDDLEWARE PAGES ROUTES END****************/
 ?>
