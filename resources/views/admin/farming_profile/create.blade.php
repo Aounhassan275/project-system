@@ -182,8 +182,8 @@
                             </div>
                         </div>
                     </div>
+                    <p>How many seed you have stock last year ?</p>
                     <div class="row">
-                        <p>How many seed you have stock last year ?</p>
                         <div class="form-group col-md-4">
                             <label>Year</label>
                             <input type="number" name="year" class="form-control" required>                            
@@ -228,8 +228,8 @@
                             </div>
                         </div>
                     </div>
+                    <p>Income from Fish sold last year</p>
                     <div class="row">
-                        <p>Income from Fish sold last year</p>
                         <div class="form-group col-md-3">
                             <label>Year</label>
                             <input type="number" name="fish_sold_year" class="form-control" required>                            
