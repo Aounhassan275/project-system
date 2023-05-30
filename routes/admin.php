@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\BlockController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DistrictController;
+use App\Http\Controllers\Admin\FarmingProfileController;
 use App\Http\Controllers\Admin\GramPanchyatController;
 use App\Http\Controllers\Admin\PoliceStationController;
 use App\Http\Controllers\Admin\ProjectController;
@@ -59,6 +60,9 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','middleware' => 'auth:user','a
     /*******************Respondent Master ROUTE START*************/       
     Route::resource('respondent_master',RespondentMasterController::class);
     /*******************Respondent Master ROUTE END*************/   
+    /*******************Farming Profile ROUTE START*************/       
+    Route::resource('farming_profile',FarmingProfileController::class);
+    /*******************Farming Profile ROUTE END*************/   
 });
 /****************** ADMIN MIDDLEWARE PAGES ROUTES END****************/
 ?>
