@@ -72,15 +72,16 @@
     </div>
     <div class="col-sm-4 col-xl-4">
         <a href="{{route('admin.farming_profile.index')}}">
-            <div class="card card-body bg-danger-400 has-bg-image">
+            <div class="card card-body bg-teal-400 has-bg-image">
                 <div class="media">
                     <div class="mr-3 align-self-center">
-                        <i class="icon-stack-picture icon-3x opacity-75"></i>
+                        <i class="icon-question4 icon-3x opacity-75"></i>
                     </div>
-                    <div class="media-body text-right">
-                    <h3 class="mb-0">{{App\Models\FarmingProfile::count()}}</h3>
+                    <div class="media-body text-right"> 
+                        <h3 class="mb-0">{{App\Models\FarmingProfile::count()}}</h3>
                         <span class="text-uppercase font-size-xs">Total Farming Profile</span>
                     </div>
+
                 </div>
             </div>
         </a>
