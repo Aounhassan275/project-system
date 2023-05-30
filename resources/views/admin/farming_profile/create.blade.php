@@ -97,19 +97,19 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Own Water Body (In Kani.)</label>
-                            <input type="number" name="own_water_body" id="own_water_body" required placeholder="Own Water Body" class="form-control">
+                            <input type="number" name="own_water_body" value="0" id="own_water_body" required placeholder="Own Water Body" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Lease in Body (In Kani.)</label>
-                            <input type="number" name="lease_in_water_body" id="lease_in_water_body" required placeholder="Lease In Water Body" class="form-control">
+                            <input type="number" name="lease_in_water_body" value="0" id="lease_in_water_body" required placeholder="Lease In Water Body" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Lease Out Body (In Kani.)</label>
-                            <input type="number" name="lease_out_water_body" id="lease_out_water_body" required placeholder="Lease Out Water Body" class="form-control">
+                            <input type="number" name="lease_out_water_body" value="0" id="lease_out_water_body" required placeholder="Lease Out Water Body" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Total Water Body (In Kani.)</label>
-                            <input type="number" name="total_water_body" id="total_water_body" required placeholder="Total Water Body" class="form-control">
+                            <input type="number" name="total_water_body" value="0" id="total_water_body" required placeholder="Total Water Body" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Have Pump Set ? </label>
