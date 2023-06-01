@@ -36,15 +36,15 @@
                         <div class="form-group col-md-4">
                             <label>SHG Member</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <input type="radio" onchange="shg_member('yes')" name="shg_member" value="1" class=""> Yes 
-                                <input type="radio" onchange="shg_member('no')"name="shg_member" value="0" class=""> No 
+                                <input type="radio" name="shg_member" value="1" class=""> Yes 
+                                <input type="radio" name="shg_member" value="0" class=""> No 
                             </div>
                         </div>
                         <div class="form-group col-md-4 fish_pb_member_field" hidden>
                             <label>Fish PG Member</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <input type="radio"  onchange="fish_pb_member('yes')"  name="fish_pb_member" value="1" class=""> Yes 
-                                <input type="radio"  onchange="fish_pb_member('no')"  name="fish_pb_member" value="0" class=""> No 
+                                <input type="radio" name="fish_pb_member" value="1" class=""> Yes 
+                                <input type="radio" name="fish_pb_member" value="0" class=""> No 
                             </div>
                         </div>
                         <div class="form-group col-md-4 head_of_hh_field" hidden>
@@ -279,27 +279,24 @@
 
 @section('scripts')
 <script>
-    function shg_member(type)
-    {
-        if(type == 'yes')
-        {
-            $('.fish_pb_member_field').show();
-        }else{
-            $('.fish_pb_member_field').hide();
-            $('.head_of_hh_field').hide();
-        }
-    }
-    function fish_pb_member(type)
-    {
-        if(type == 'yes')
-        {
-            $('.head_of_hh_field').show();
-        }else{
-            $('.head_of_hh_field').hide();
-        }
-    }
     $(document).ready(function(){
-        
+        $('input[type=radio][name="fish_pb_member"]').on('change', function(event) {
+            var value=$(this).val();
+            if (value==1) {
+                $('.head_of_hh_field').attr('hidden',false);
+            }else{
+                $('.head_of_hh_field').attr('hidden',true);
+            }
+        });
+        $('input[type=radio][name="shg_member"]').on('change', function(event) {
+            var value=$(this).val()
+            if (value==1) {
+                $('.fish_pb_member_field').attr('hidden',false);
+            }else{
+                $('.fish_pb_member_field').attr('hidden',true);
+                $('.head_of_hh_field').attr('hidden',true);
+            }
+        });
         $('#own_water_body').change(function(){
             amount = parseFloat(this.value);
             total_water_body =  parseFloat($('#total_water_body').val());
