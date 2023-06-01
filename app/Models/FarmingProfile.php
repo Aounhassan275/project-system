@@ -17,12 +17,16 @@ class FarmingProfile extends Model
         'have_tube_well','fishing_net','aereator','have_boundary_regularly','have_remove_black_soil',
         'have_applied_lime','have_apply_cow_dung','have_regularly_apply_lime','have_regularly_apply_cow_dung',
         'type_of_feed_used','done_feeding_regularly','have_water_ph_regularly','have_meeting_regularly',
-        'attend_training_programme','exposure_good_practics'
+        'attend_training_programme','exposure_good_practics','shg_member_name','fish_pb_member_name','project_id'
     ];
 
     public function respondent_master()
     {
         return $this->belongsTo(RespondentMaster::class,'respondent_master_id');
+    }
+    public function project()
+    {
+        return $this->belongsTo(Project::class,'project_id');
     }
     public function farming_income()
     {

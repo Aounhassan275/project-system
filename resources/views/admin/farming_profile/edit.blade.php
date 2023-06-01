@@ -1,7 +1,7 @@
 @extends('admin.layout.index')
 
 @section('title')
-    Edit {{$respondent_master->name}} Respondent Master
+    Edit Farming Profile
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
         <!-- Basic layout-->
         <div class="card">
             <div class="card-header header-elements-inline">
-                <h5 class="card-title">Edit {{$respondent_master->name}} Respondent Master</h5>
+                <h5 class="card-title">Edit Farming Profile</h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
@@ -21,102 +21,270 @@
             </div>
 
             <div class="card-body">
-                <form action="{{route('admin.respondent_master.update',$respondent_master->id)}}" method="post" enctype="multipart/form-data" >
+                <form action="{{route('admin.farming_profile.update',$farming_profile->id)}}" method="post" enctype="multipart/form-data" >
                     @method('PUT')
                     @csrf
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label>Name</label>
-                            <input name="name" type="text" value="{{$respondent_master->name}}" class="form-control" placeholder="Enter Name" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Choose Block</label>
-                            <select  name="block_id"  class="form-control select-search" data-fouc required>
-                                <option selected disabled>Select Block</option>
-                                @foreach(App\Models\Block::all() as $block)
-                                <option {{$respondent_master->block_id == $block->id?'selected':''}} value="{{$block->id}}">{{$block->name}}</option>
+                            <label>Choose Farmer</label>
+                            <select  name="respondent_master_id"  class="form-control select-search" data-fouc required>
+                                <option selected disabled>Select Farmer</option>
+                                @foreach(App\Models\RespondentMaster::all() as $respondent_master)
+                                <option @if($farming_profile->respondent_master_id == $respondent_master->id) selected @endif value="{{$respondent_master->id}}">{{$respondent_master->name}} ({{$respondent_master->farmer_id}})</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose District</label>
-                            <select  name="district_id"  class="form-control select-search" data-fouc required>
-                                <option selected disabled>Select District</option>
-                                @foreach(App\Models\District::all() as $district)
-                                <option {{$respondent_master->district_id == $district->id?'selected':''}} value="{{$district->id}}">{{$district->name}}</option>
+                            <label>Choose Project</label>
+                            <select  name="project_id"  class="form-control select-search" data-fouc>
+                                <option selected disabled>Select Project</option>
+                                @foreach(App\Models\Project::all() as $project)
+                                <option @if($farming_profile->project_id == $project->id) selected @endif value="{{$project->id}}">{{$project->name}}</option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Gram Panchyat</label>
-                            <select  name="gram_panchyat_id" class="form-control select-search" data-fouc required>
-                                <option disabled>Select Gram Panchyat</option>
-                                @foreach(App\Models\GramPanchyat::all() as $gram_panchyat)
-                                <option {{$respondent_master->gram_panchyat_id == $gram_panchyat->id?'selected':''}} value="{{$gram_panchyat->id}}">{{$gram_panchyat->name}}</option>
-                                @endforeach
-                            </select>
+                            <label>SHG Member</label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" @if($farming_profile->shg_member) checked @endif name="shg_member" required value="1" class=""> Yes 
+                                <input type="radio" @if(!$farming_profile->shg_member) checked @endif name="shg_member" required value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4" id="shg_member_name_field" @if(!$farming_profile->shg_member) hidden @endif>
+                            <label>SHG Member Name</label>
+                            <input type="text" name="shg_member_name" value="{{@$farming_profile->shg_member_name}}" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4" >
+                            <label>Fish PG Member</label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="fish_pb_member"  @if($farming_profile->fish_pb_member) checked @endif required value="1" class=""> Yes 
+                                <input type="radio" name="fish_pb_member"  @if(!$farming_profile->fish_pb_member) checked @endif required value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4" id="fish_pb_member_name_field" @if(!$farming_profile->fish_pb_member) hidden @endif>
+                            <label>Fish PG Member Name</label>
+                            <input type="text" name="fish_pb_member_name" value="{{$farming_profile->fish_pb_member_name}}" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4" >
+                            <label>Name of Head of HH</label>
+                            <input type="text" name="head_of_hh" value="{{$farming_profile->head_of_hh}}" required placeholder="Name of Head of HH" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Village</label>
-                            <select  name="village_id" class="form-control select-search" data-fouc required>
-                                <option disabled>Select Village</option>
-                                @foreach(App\Models\Village::all() as $village)
-                                <option {{$respondent_master->village_id == $village->id?'selected':''}} value="{{$village->id}}">{{$village->name}}</option>
-                                @endforeach
-                            </select>
+                            <label>Does HH has BPL No ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="has_hh_bpl_no"  @if($farming_profile->has_hh_bpl_no) checked @endif required value="1" class=""> Yes 
+                                <input type="radio" name="has_hh_bpl_no" @if(!$farming_profile->has_hh_bpl_no) checked @endif required value="0" class=""> No 
+                            </div>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Gender</label>
-                            <select  name="gender" class="form-control select-search" data-fouc required>
-                                <option disabled>Select Gender</option>
-                                <option {{$respondent_master->gender == 'Male'?'selected':''}} value="Male">Male</option>
-                                <option {{$respondent_master->gender == 'Female'?'selected':''}} value="Female">Female</option>
-                            </select>
+                            <label>Does HH has MGNREGA Card ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="has_hh_mgnrega_card" @if($farming_profile->has_hh_mgnrega_card) checked @endif  required value="1" class=""> Yes 
+                                <input type="radio" name="has_hh_mgnrega_card" @if(!$farming_profile->has_hh_mgnrega_card) checked @endif  required value="0" class=""> No 
+                            </div>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Age</label>
-                            <input name="age" type="number" value="{{$respondent_master->age}}" class="form-control" placeholder="Enter Age" required>
+                            <label>Does HH has Bank Account ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="has_hh_bank_account" @if($farming_profile->has_hh_bank_account) checked @endif  required value="1" class=""> Yes 
+                                <input type="radio" name="has_hh_bank_account" @if(!$farming_profile->has_hh_bank_account) checked @endif  required value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4" >
+                            <label>Does HH has KCC Account ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="has_hh_kcc_account" @if($farming_profile->has_hh_kcc_account) checked @endif  required value="1" class=""> Yes 
+                                <input type="radio" name="has_hh_kcc_account" @if(!$farming_profile->has_hh_kcc_account) checked @endif  required value="0" class=""> No 
+                            </div>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Education</label>
-                            <select  name="education" class="form-control select-search" data-fouc required>
-                                <option disabled>Select Education</option>
-                                <option {{$respondent_master->education == 'Illiterate'?'selected':''}} value="Illiterate">Illiterate</option>
-                                <option {{$respondent_master->education == 'Primary'?'selected':''}} value="Primary">Primary</option>
-                                <option {{$respondent_master->education == 'HSLC'?'selected':''}} value="HSLC">HSLC</option>
-                                <option {{$respondent_master->education == 'Graduate'?'selected':''}} value="Graduate">Graduate</option>
-                                <option {{$respondent_master->education == 'PG'?'selected':''}} value="PG">PG</option>
-                                <option {{$respondent_master->education == 'Technical Education'?'selected':''}} value="Technical Education">Technical Education</option>
-                            </select>
+                            <label>Total Annual Income (In Rs.)</label>
+                            <input type="number" name="total_annual_income" value="{{$farming_profile->total_annual_income}}" required placeholder="Total Annual Income" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Number Family Members</label>
-                            <input name="number_family_member" value="{{$respondent_master->number_family_member}}" type="number" class="form-control" placeholder="Enter Number Family Member" required>
+                            <label>Total Annual Income from Fishery (In Rs.)</label>
+                            <input type="number" name="total_annual_income_from_fishery" value="{{$farming_profile->total_annual_income_from_fishery}}" required placeholder="Total Annual Income from Fishery" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Caste</label>
-                            <select  name="caste" class="form-control select-search" data-fouc required>
-                                <option disabled>Select Caste</option>
-                                <option {{$respondent_master->caste == 'ST'?'selected':''}} value="ST">ST</option>
-                                <option {{$respondent_master->caste == 'SC'?'selected':''}} value="SC">SC</option>
-                                <option {{$respondent_master->caste == 'OBC'?'selected':''}} value="OBC">OBC</option>
-                                <option {{$respondent_master->caste == 'General'?'selected':''}} value="General">General</option>
-                            </select>
+                            <label>Involvement in Fishery as</label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="involvement_in_fishery" @if($farming_profile->involvement_in_fishery == "Nursery Farmer") checked @endif  value="Nursery Farmer" class=""> Nursery Farmer 
+                                <input type="radio" name="involvement_in_fishery" @if($farming_profile->involvement_in_fishery == "Grower") checked @endif value="Grower" class=""> Grower 
+                                <input type="radio" name="involvement_in_fishery" @if($farming_profile->involvement_in_fishery == "Both") checked @endif value="Both" class=""> Both 
+                            </div>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Religion</label>
-                            <select  name="religion" class="form-control select-search" data-fouc required>
-                                <option disabled>Select Religion</option>
-                                <option {{$respondent_master->religion == 'Hindu'?'selected':''}} value="Hindu">Hindu</option>
-                                <option {{$respondent_master->religion == 'Muslim'?'selected':''}} value="Muslim">Muslim</option>
-                                <option {{$respondent_master->religion == 'Christian'?'selected':''}} value="Christian">Christian</option>
-                                <option {{$respondent_master->religion == 'Buddhist'?'selected':''}} value="Buddhist">Buddhist</option>
-                                <option {{$respondent_master->religion == 'Others'?'selected':''}} value="Others">Others</option>
-                            </select>
+                            <label>Own Water Body (In Kani.)</label>
+                            <input type="number" name="own_water_body" value="{{$farming_profile->own_water_body}}" id="own_water_body" required placeholder="Own Water Body" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Lease in Body (In Kani.)</label>
+                            <input type="number" name="lease_in_water_body" value="{{$farming_profile->lease_in_water_body}}" id="lease_in_water_body" required placeholder="Lease In Water Body" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Lease Out Body (In Kani.)</label>
+                            <input type="number" name="lease_out_water_body" value="{{$farming_profile->lease_out_water_body}}" id="lease_out_water_body" required placeholder="Lease Out Water Body" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Total Water Body (In Kani.)</label>
+                            <input type="number" name="total_water_body" value="{{$farming_profile->total_water_body}}" id="total_water_body" required placeholder="Total Water Body" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Have Pump Set ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="have_pump_set" @if($farming_profile->have_pump_set) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="have_pump_set" @if(!$farming_profile->have_pump_set) checked @endif value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Have Boring or tube well ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="have_tube_well" @if($farming_profile->have_tube_well) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="have_tube_well" @if(!$farming_profile->have_tube_well) checked @endif  value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Fishing Net ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="fishing_net" @if($farming_profile->fishing_net) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="fishing_net" @if(!$farming_profile->fishing_net) checked @endif  value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Aereator ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="aereator" @if($farming_profile->aereator) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="aereator" @if(!$farming_profile->aereator) checked @endif  value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Have you clean pond boundary Regularly ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="have_boundary_regularly" @if($farming_profile->have_boundary_regularly) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="have_boundary_regularly" @if(!$farming_profile->have_boundary_regularly) checked @endif  value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Have you remove black soil or mud during last 3 years ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="have_remove_black_soil" @if($farming_profile->have_remove_black_soil) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="have_remove_black_soil" @if(!$farming_profile->have_remove_black_soil) checked @endif  value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Have you applied lime during pond preparation in last year ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="have_applied_lime" @if($farming_profile->have_applied_lime) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="have_applied_lime" @if(!$farming_profile->have_applied_lime) checked @endif  value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Have you apply cow dung during pond preparation in last year ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="have_apply_cow_dung" @if($farming_profile->have_apply_cow_dung) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="have_apply_cow_dung" @if(!$farming_profile->have_apply_cow_dung) checked @endif  value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Have you regularly applied lime after stocking in last year ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="have_regularly_apply_lime" @if($farming_profile->have_regularly_apply_lime) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="have_regularly_apply_lime" @if(!$farming_profile->have_regularly_apply_lime) checked @endif  value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Have you regularly applied cow dung or organic fertiliser after stocking in last year ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="have_regularly_apply_cow_dung" @if($farming_profile->have_regularly_apply_cow_dung) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="have_regularly_apply_cow_dung" @if(!$farming_profile->have_regularly_apply_cow_dung) checked @endif  value="0" class=""> No 
+                            </div>
+                        </div>
+                    </div>
+                    <p>How many seed you have stock last year ?</p>
+                    <div class="row">
+                        <input type="hidden" value="{{$farming_profile->farming_yearling?$farming_profile->farming_yearling->id:''}}" name="farming_yearling_id" class="form-control">                            
+                        <div class="form-group col-md-4">
+                            <label>Year</label>
+                            <input type="number" value="{{$farming_profile->farming_yearling?$farming_profile->farming_yearling->year:''}}" name="year" class="form-control" required>                            
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Figerlings</label>
+                            <input type="number" name="figerlings" value="{{$farming_profile->farming_yearling?$farming_profile->farming_yearling->figerlings:''}}" class="form-control" required>                            
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Yearlings</label>
+                            <input type="number" name="yearlings"  value="{{$farming_profile->farming_yearling?$farming_profile->farming_yearling->yearlings:''}}" class="form-control" required>                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label>What Type of Feed you used regularly ?</label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="type_of_feed_used" @if($farming_profile->type_of_feed_used == "MOC") checked @endif  value="MOC" class=""> MOC 
+                                <input type="radio" name="type_of_feed_used" @if($farming_profile->type_of_feed_used == "Sinking") checked @endif  value="Sinking" class=""> Sinking  
+                                <input type="radio" name="type_of_feed_used" @if($farming_profile->type_of_feed_used == "Floating") checked @endif  value="Floating" class=""> Floating  
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Have you done feeding regularly ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="done_feeding_regularly" @if($farming_profile->done_feeding_regularly) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="done_feeding_regularly" @if(!$farming_profile->done_feeding_regularly) checked @endif  value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Have you checked Water PH regularly ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="have_water_ph_regularly" @if($farming_profile->have_water_ph_regularly) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="have_water_ph_regularly" @if(!$farming_profile->have_water_ph_regularly) checked @endif value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Have you done meeting regularly ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="have_meeting_regularly" @if($farming_profile->have_meeting_regularly) checked @endif value="1" class=""> Yes 
+                                <input type="radio" name="have_meeting_regularly" @if(!$farming_profile->have_meeting_regularly) checked @endif value="0" class=""> No 
+                            </div>
+                        </div>
+                    </div>
+                    <p>Income from Fish sold last year</p>
+                    <div class="row">
+                        <input type="hidden" value="{{$farming_profile->farming_income?$farming_profile->farming_income->id:''}}" name="farming_income_id" class="form-control">                            
+                        <div class="form-group col-md-3">
+                            <label>Year</label>
+                            <input type="number" name="fish_sold_year" value="{{$farming_profile->farming_income?$farming_profile->farming_income->year:''}}" class="form-control" required>                            
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Quantity</label>
+                            <input type="number" value="{{$farming_profile->farming_income?$farming_profile->farming_income->quantity:'0'}}"  name="fish_sold_quantity" id="fish_sold_quantity" class="form-control" required>                            
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Rate</label>
+                            <input type="number" value="{{$farming_profile->farming_income?$farming_profile->farming_income->rate:'0'}}" value="0" name="fish_sold_rate" id="fish_sold_rate" class="form-control" required>                            
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Amount</label>
+                            <input type="number" value="{{$farming_profile->farming_income?$farming_profile->farming_income->amount:''}}" readonly name="fish_sold_amount" id="fish_sold_amount" class="form-control" required>                            
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Have you attend any training programme on scientific fish farming ?</label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="attend_training_programme" @if($farming_profile->attend_training_programme) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="attend_training_programme" @if(!$farming_profile->attend_training_programme) checked @endif  value="0" class=""> No  
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Have you ever made exposure to good practices of fish farming ?</label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="exposure_good_practics" @if($farming_profile->exposure_good_practics) checked @endif  value="1" class=""> Yes 
+                                <input type="radio" name="exposure_good_practics" @if(!$farming_profile->exposure_good_practics) checked @endif  value="0" class=""> No  
+                            </div>
                         </div>
                     </div>
                     <div class="text-right">
-                        <button type="submit" class="btn btn-primary">Edit <i class="icon-paperplane ml-2"></i></button>
+                        <button type="submit" class="btn btn-primary">Create <i class="icon-paperplane ml-2"></i></button>
                     </div>
                     
                 </form>
@@ -130,4 +298,54 @@
 @endsection
 
 @section('scripts')
+<script>
+    $(document).ready(function(){
+        $('input[type=radio][name="fish_pb_member"]').on('change', function(event) {
+            var value=$(this).val();
+            if (value==1) {
+                $('#fish_pb_member_name_field').attr('hidden',false);
+            }else{
+                $('#fish_pb_member_name_field').attr('hidden',true);
+            }
+        });
+        $('input[type=radio][name="shg_member"]').on('change', function(event) {
+            var value=$(this).val()
+            if (value==1) {
+                $('#shg_member_name_field').attr('hidden',false);
+            }else{
+                $('#shg_member_name_field').attr('hidden',true);
+            }
+        });
+        $('#own_water_body').change(function(){
+            amount = parseFloat(this.value);
+            total_water_body =  parseFloat($('#total_water_body').val());
+            total_amount = amount + total_water_body;
+            $('#total_water_body').val(total_amount.toFixed(2));
+        });
+        $('#lease_in_water_body').change(function(){
+            amount = parseFloat(this.value);
+            total_water_body =  parseFloat($('#total_water_body').val());
+            total_amount = amount + total_water_body;
+            $('#total_water_body').val(total_amount.toFixed(2));
+        });
+        $('#lease_out_water_body').change(function(){
+            amount = parseFloat(this.value);
+            total_water_body =  parseFloat($('#total_water_body').val());
+            total_amount = total_water_body - amount;
+            $('#total_water_body').val(total_amount.toFixed(2));
+        });
+        $('#fish_sold_quantity').change(function(){
+            qty = parseFloat(this.value);
+            rate =  parseFloat($('#fish_sold_rate').val());
+            total_amount = qty * rate;
+            $('#fish_sold_amount').val(total_amount.toFixed(2));
+        });
+        $('#fish_sold_rate').change(function(){
+            rate = parseFloat(this.value);
+            qty =  parseFloat($('#fish_sold_quantity').val());
+            total_amount = qty * rate;
+            $('#fish_sold_amount').val(total_amount.toFixed(2));
+        });
+    });
+</script>
 @endsection

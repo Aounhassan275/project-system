@@ -34,49 +34,66 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
+                            <label>Choose Project</label>
+                            <select  name="project_id"  class="form-control select-search" data-fouc>
+                                <option selected disabled>Select Project</option>
+                                @foreach(App\Models\Project::all() as $project)
+                                <option value="{{$project->id}}">{{$project->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label>SHG Member</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <input type="radio" name="shg_member" value="1" class=""> Yes 
-                                <input type="radio" name="shg_member" value="0" class=""> No 
+                                <input type="radio" name="shg_member" required value="1" class=""> Yes 
+                                <input type="radio" name="shg_member" required value="0" class=""> No 
                             </div>
                         </div>
-                        <div class="form-group col-md-4 fish_pb_member_field" hidden>
+                        <div class="form-group col-md-4" id="shg_member_name_field" hidden>
+                            <label>SHG Member Name</label>
+                            <input type="text" name="shg_member_name" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4" >
                             <label>Fish PG Member</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <input type="radio" name="fish_pb_member" value="1" class=""> Yes 
-                                <input type="radio" name="fish_pb_member" value="0" class=""> No 
+                                <input type="radio" name="fish_pb_member" required value="1" class=""> Yes 
+                                <input type="radio" name="fish_pb_member" required value="0" class=""> No 
                             </div>
                         </div>
-                        <div class="form-group col-md-4 head_of_hh_field" hidden>
-                            <label>Name of Head of HH</label>
-                            <input type="text" name="head_of_hh" placeholder="Name of Head of HH" class="form-control">
+                        <div class="form-group col-md-4" id="fish_pb_member_name_field" hidden>
+                            <label>Fish PG Member Name</label>
+                            <input type="text" name="fish_pb_member_name" class="form-control">
                         </div>
-                        <div class="form-group col-md-4 head_of_hh_field" hidden>
+                        <div class="form-group col-md-4" >
+                            <label>Name of Head of HH</label>
+                            <input type="text" name="head_of_hh" required placeholder="Name of Head of HH" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4">
                             <label>Does HH has BPL No ? </label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <input type="radio" name="has_hh_bpl_no" value="1" class=""> Yes 
-                                <input type="radio" name="has_hh_bpl_no" value="0" class=""> No 
+                                <input type="radio" name="has_hh_bpl_no" required value="1" class=""> Yes 
+                                <input type="radio" name="has_hh_bpl_no" required value="0" class=""> No 
                             </div>
                         </div>
-                        <div class="form-group col-md-4 head_of_hh_field" hidden>
+                        <div class="form-group col-md-4">
                             <label>Does HH has MGNREGA Card ? </label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <input type="radio" name="has_hh_mgnrega_card" value="1" class=""> Yes 
-                                <input type="radio" name="has_hh_mgnrega_card" value="0" class=""> No 
+                                <input type="radio" name="has_hh_mgnrega_card" required value="1" class=""> Yes 
+                                <input type="radio" name="has_hh_mgnrega_card" required value="0" class=""> No 
                             </div>
                         </div>
-                        <div class="form-group col-md-4 head_of_hh_field" hidden>
+                        <div class="form-group col-md-4">
                             <label>Does HH has Bank Account ? </label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <input type="radio" name="has_hh_bank_account" value="1" class=""> Yes 
-                                <input type="radio" name="has_hh_bank_account" value="0" class=""> No 
+                                <input type="radio" name="has_hh_bank_account" required value="1" class=""> Yes 
+                                <input type="radio" name="has_hh_bank_account" required value="0" class=""> No 
                             </div>
                         </div>
-                        <div class="form-group col-md-4 head_of_hh_field" hidden>
+                        <div class="form-group col-md-4" >
                             <label>Does HH has KCC Account ? </label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <input type="radio" name="has_hh_kcc_account" value="1" class=""> Yes 
-                                <input type="radio" name="has_hh_kcc_account" value="0" class=""> No 
+                                <input type="radio" name="has_hh_kcc_account" required value="1" class=""> Yes 
+                                <input type="radio" name="has_hh_kcc_account" required value="0" class=""> No 
                             </div>
                         </div>
                         <div class="form-group col-md-4">
@@ -283,18 +300,17 @@
         $('input[type=radio][name="fish_pb_member"]').on('change', function(event) {
             var value=$(this).val();
             if (value==1) {
-                $('.head_of_hh_field').attr('hidden',false);
+                $('#fish_pb_member_name_field').attr('hidden',false);
             }else{
-                $('.head_of_hh_field').attr('hidden',true);
+                $('#fish_pb_member_name_field').attr('hidden',true);
             }
         });
         $('input[type=radio][name="shg_member"]').on('change', function(event) {
             var value=$(this).val()
             if (value==1) {
-                $('.fish_pb_member_field').attr('hidden',false);
+                $('#shg_member_name_field').attr('hidden',false);
             }else{
-                $('.fish_pb_member_field').attr('hidden',true);
-                $('.head_of_hh_field').attr('hidden',true);
+                $('#shg_member_name_field').attr('hidden',true);
             }
         });
         $('#own_water_body').change(function(){

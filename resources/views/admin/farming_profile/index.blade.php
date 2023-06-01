@@ -34,6 +34,7 @@
             <tbody>
                 @foreach (App\Models\FarmingProfile::all()  as $key => $farming_profile)
                 <tr>
+                    <td>{{$key+1}}</td>
                     <td>{{@$farming_profile->respondent_master->name .'('.@$farming_profile->respondent_master->farmer_id.')'}}</td>
                     <td>{{$farming_profile->shg_member?'Yes':'No'}}</td>
                     <td>{{$farming_profile->total_annual_income}}</td>

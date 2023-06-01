@@ -80,9 +80,11 @@ class FarmingProfileController extends Controller
      * @param  \App\Models\FarmingProfile  $farmingProfile
      * @return \Illuminate\Http\Response
      */
-    public function edit(FarmingProfile $farmingProfile)
+    public function edit($id)
     {
-        //
+        $farming_profile = FarmingProfile::find($id);
+        return view('admin.farming_profile.edit',compact('farming_profile'));
+
     }
 
     /**
@@ -92,9 +94,54 @@ class FarmingProfileController extends Controller
      * @param  \App\Models\FarmingProfile  $farmingProfile
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, FarmingProfile $farmingProfile)
+    public function update(Request $request, $id)
     {
-        //
+        try{
+            $farming_profile = FarmingProfile::find($id);
+            $farming_profile->update($request->all());
+            if($request->farming_yearling_id)
+            {
+                $farming_yearling = FarmingYearling::find($request->farming_yearling_id);
+                $farming_yearling->update([
+                    'year' => $request->year,
+                    'figerlings' => $request->figerlings,
+                    'yearlings' => $request->yearlings,
+                ]);
+
+            }else{
+                FarmingYearling::create([
+                    'year' => $request->year,
+                    'figerlings' => $request->figerlings,
+                    'yearlings' => $request->yearlings,
+                    'farming_profile_id' => $farming_profile->id
+                ]);
+            }
+            if($request->farming_income_id)
+            {
+                $farming_income = FarmingIncome::find($request->farming_income_id);
+                $farming_income->update([
+                    'year' => $request->fish_sold_year,
+                    'quantity' => $request->fish_sold_quantity,
+                    'rate' => $request->fish_sold_rate,
+                    'amount' => $request->fish_sold_amount
+                ]);
+
+            }else{
+                FarmingIncome::create([
+                    'year' => $request->fish_sold_year,
+                    'quantity' => $request->fish_sold_quantity,
+                    'rate' => $request->fish_sold_rate,
+                    'amount' => $request->fish_sold_amount,
+                    'farming_profile_id' => $farming_profile->id
+                ]);
+            }
+            toastr()->success('Farming Profile Updated Successfully');
+            return redirect()->back();
+        }catch (Exception $e)
+        {
+            toastr()->error($e->getMessage());
+            return redirect()->back();
+        }
     }
 
     /**
