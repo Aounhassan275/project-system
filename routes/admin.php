@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\FarmingProfileController;
 use App\Http\Controllers\Admin\GramPanchyatController;
 use App\Http\Controllers\Admin\PoliceStationController;
+use App\Http\Controllers\Admin\PondPreparationController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ProjectUserController;
 use App\Http\Controllers\Admin\RespondentMasterController;
@@ -63,6 +64,9 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','middleware' => 'auth:user','a
     /*******************Farming Profile ROUTE START*************/       
     Route::resource('farming_profile',FarmingProfileController::class);
     /*******************Farming Profile ROUTE END*************/   
+    /*******************Pond Preparation ROUTE START*************/       
+    Route::resource('pond_preparation',PondPreparationController::class);
+    /*******************Pond Preparation ROUTE END*************/   
 });
 /****************** ADMIN MIDDLEWARE PAGES ROUTES END****************/
 ?>
