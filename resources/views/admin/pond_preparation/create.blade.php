@@ -167,7 +167,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Expenditure (in Rs) For Urea  </label>
-                            <input type="text" name="urea_expenditure" id="urea_expenditure" class="form-control">
+                            <input type="text" readonly name="urea_expenditure" id="urea_expenditure" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Quantity (in Kg) For SSP  </label>
@@ -179,7 +179,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Expenditure (in Rs) For SSP  </label>
-                            <input type="text" name="ssp_expenditure" id="ssp_expenditure" class="form-control">
+                            <input type="text" readonly name="ssp_expenditure" id="ssp_expenditure" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Quantity (in Kg) For Potas  </label>
@@ -191,7 +191,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Expenditure (in Rs) For Potas  </label>
-                            <input type="text" name="potas_expenditure" id="potas_expenditure" class="form-control">
+                            <input type="text" name="potas_expenditure" readonly id="potas_expenditure" class="form-control">
                         </div>
                     </div>
                     <div class="text-right">
