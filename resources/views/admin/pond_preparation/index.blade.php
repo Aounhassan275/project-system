@@ -36,7 +36,7 @@
                 <tr>
                     <td>{{$key+1}}</td>
                     <td>{{@$pond_preparation->respondent_master->name .'('.@$pond_preparation->respondent_master->farmer_id.')'}}</td>
-                    <td>{{@$pond_preparation->shg_member?'Yes':'No'}}</td>
+                    <td>{{@$pond_preparation->shg_member}}</td>
                     <td>{{@$pond_preparation->total_annual_income}}</td>
                     <td>{{@$pond_preparation->location}}</td>
                     <td>

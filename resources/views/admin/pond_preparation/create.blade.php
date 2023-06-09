@@ -119,15 +119,15 @@
                         </div>
                         <div class="form-group col-md-3 is_done_liming_field"  hidden>
                             <label>Quantity (in Kg) For Liming </label>
-                            <input type="text" name="done_liming_quantity" class="form-control">
+                            <input type="text" name="done_liming_quantity" id="done_liming_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-3 is_done_liming_field"  hidden>
                             <label>Rate (Rs/Kg) For Liming </label>
-                            <input type="text" name="done_liming_rate" class="form-control">
+                            <input type="text" name="done_liming_rate" id="done_liming_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-3 is_done_liming_field"  hidden>
                             <label>Expenditure (in Rs) </label>
-                            <input type="text" name="done_liming_expenditure" class="form-control">
+                            <input type="text" readonly name="done_liming_expenditure" id="done_liming_expenditure" class="form-control">
                         </div>
                         <div class="form-group col-md-3">
                             <label>Have you apply cow dung  ? </label>
@@ -138,15 +138,15 @@
                         </div>
                         <div class="form-group col-md-3 is_cow_dung_field" hidden>
                             <label>Quantity (in Kg) For Cow Dung </label>
-                            <input type="text" name="cow_dung_quantity" class="form-control">
+                            <input type="text" name="cow_dung_quantity" id="cow_dung_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-3 is_cow_dung_field" hidden>
                             <label>Rate (Rs/Kg) For Cow Dung </label>
-                            <input type="text" name="cow_dung_rate" class="form-control">
+                            <input type="text" name="cow_dung_rate" id="cow_dung_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-3 is_cow_dung_field" hidden>
                             <label>Expenditure (in Rs) For Cow Dung </label>
-                            <input type="text" name="cow_dung_expenditure" class="form-control">
+                            <input type="text" name="cow_dung_expenditure" id="cow_dung_expenditure" readonly class="form-control">
                         </div>
                         <div class="form-group col-md-3">
                             <label>Have you apply NPK ? </label>
@@ -159,39 +159,39 @@
                     <div class="row" id="is_apply_npk_fields"  hidden>
                         <div class="form-group col-md-4 ">
                             <label>Quantity (in Kg) For Urea  </label>
-                            <input type="text" name="urea_quantity" class="form-control">
+                            <input type="text" name="urea_quantity" id="urea_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Rate (Rs/Kg) For Urea  </label>
-                            <input type="text" name="urea_rate" class="form-control">
+                            <input type="text" name="urea_rate" id="urea_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Expenditure (in Rs) For Urea  </label>
-                            <input type="text" name="urea_expenditure" class="form-control">
+                            <input type="text" name="urea_expenditure" id="urea_expenditure" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Quantity (in Kg) For SSP  </label>
-                            <input type="text" name="ssp_quantity" class="form-control">
+                            <input type="text" name="ssp_quantity" id="ssp_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Rate (Rs/Kg) For SSP  </label>
-                            <input type="text" name="ssp_rate" class="form-control">
+                            <input type="text" name="ssp_rate" id="ssp_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Expenditure (in Rs) For SSP  </label>
-                            <input type="text" name="ssp_expenditure" class="form-control">
+                            <input type="text" name="ssp_expenditure" id="ssp_expenditure" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Quantity (in Kg) For Potas  </label>
-                            <input type="text" name="potas_quantity" class="form-control">
+                            <input type="text" name="potas_quantity" id="potas_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Rate (Rs/Kg) For Potas  </label>
-                            <input type="text" name="potas_rate" class="form-control">
+                            <input type="text" name="potas_rate" id="potas_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Expenditure (in Rs) For Potas  </label>
-                            <input type="text" name="potas_expenditure" class="form-control">
+                            <input type="text" name="potas_expenditure" id="potas_expenditure" class="form-control">
                         </div>
                     </div>
                     <div class="text-right">
@@ -265,6 +265,66 @@
             }else{
                 $('#is_apply_npk_fields').attr('hidden',true);
             }
+        });
+        $('#done_liming_quantity').change(function(){
+            qty = parseFloat(this.value);
+            rate =  parseFloat($('#done_liming_rate').val());
+            total_amount = qty * rate;
+            $('#done_liming_expenditure').val(total_amount.toFixed(2));
+        });
+        $('#done_liming_rate').change(function(){
+            rate = parseFloat(this.value);
+            qty =  parseFloat($('#done_liming_quantity').val());
+            total_amount = qty * rate;
+            $('#done_liming_expenditure').val(total_amount.toFixed(2));
+        });
+        $('#cow_dung_quantity').change(function(){
+            qty = parseFloat(this.value);
+            rate =  parseFloat($('#cow_dung_rate').val());
+            total_amount = qty * rate;
+            $('#cow_dung_expenditure').val(total_amount.toFixed(2));
+        });
+        $('#cow_dung_rate').change(function(){
+            rate = parseFloat(this.value);
+            qty =  parseFloat($('#cow_dung_quantity').val());
+            total_amount = qty * rate;
+            $('#cow_dung_expenditure').val(total_amount.toFixed(2));
+        });
+        $('#urea_quantity').change(function(){
+            qty = parseFloat(this.value);
+            rate =  parseFloat($('#urea_rate').val());
+            total_amount = qty * rate;
+            $('#urea_expenditure').val(total_amount.toFixed(2));
+        });
+        $('#urea_rate').change(function(){
+            rate = parseFloat(this.value);
+            qty =  parseFloat($('#urea_quantity').val());
+            total_amount = qty * rate;
+            $('#urea_expenditure').val(total_amount.toFixed(2));
+        });
+        $('#ssp_quantity').change(function(){
+            qty = parseFloat(this.value);
+            rate =  parseFloat($('#ssp_rate').val());
+            total_amount = qty * rate;
+            $('#ssp_expenditure').val(total_amount.toFixed(2));
+        });
+        $('#ssp_rate').change(function(){
+            rate = parseFloat(this.value);
+            qty =  parseFloat($('#ssp_quantity').val());
+            total_amount = qty * rate;
+            $('#ssp_expenditure').val(total_amount.toFixed(2));
+        });
+        $('#potas_quantity').change(function(){
+            qty = parseFloat(this.value);
+            rate =  parseFloat($('#potas_rate').val());
+            total_amount = qty * rate;
+            $('#potas_expenditure').val(total_amount.toFixed(2));
+        });
+        $('#potas_rate').change(function(){
+            rate = parseFloat(this.value);
+            qty =  parseFloat($('#potas_quantity').val());
+            total_amount = qty * rate;
+            $('#potas_expenditure').val(total_amount.toFixed(2));
         });
     });
 </script>
