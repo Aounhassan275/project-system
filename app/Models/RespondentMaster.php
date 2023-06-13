@@ -29,5 +29,9 @@ class RespondentMaster extends Model
     {
         return $this->belongsTo(Village::class,'village_id');
     }
+    public function farming_profile()
+    {
+        return $this->hasMany(FarmingProfile::class,'respondent_master_id');
+    }
 
 }

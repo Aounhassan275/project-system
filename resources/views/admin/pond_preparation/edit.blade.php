@@ -30,7 +30,9 @@
                             <select  name="respondent_master_id"  class="form-control select-search" data-fouc required>
                                 <option selected disabled>Select Farmer</option>
                                 @foreach(App\Models\RespondentMaster::all() as $respondent_master)
-                                <option @if($pond_preparation->respondent_master_id == $respondent_master->id) selected @endif value="{{$respondent_master->id}}">{{$respondent_master->name}} ({{$respondent_master->farmer_id}})</option>
+                                @if($respondent_master->farming_profile->count() > 0)
+                                    <option @if($pond_preparation->respondent_master_id == $respondent_master->id) selected @endif value="{{$respondent_master->id}}">{{$respondent_master->name}} ({{$respondent_master->farmer_id}})</option>
+                                @endif
                                 @endforeach
                             </select>
                         </div>
