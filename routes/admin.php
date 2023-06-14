@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\FarmingProfileController;
 use App\Http\Controllers\Admin\GramPanchyatController;
+use App\Http\Controllers\Admin\MonthlyFarmingReportController;
 use App\Http\Controllers\Admin\PoliceStationController;
 use App\Http\Controllers\Admin\PondPreparationController;
 use App\Http\Controllers\Admin\ProjectController;
@@ -67,6 +68,10 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','middleware' => 'auth:user','a
     /*******************Pond Preparation ROUTE START*************/       
     Route::resource('pond_preparation',PondPreparationController::class);
     /*******************Pond Preparation ROUTE END*************/   
+    /*******************Monthly Farming Report ROUTE START*************/       
+    Route::post('get_months',[MonthlyFarmingReportController::class,'getMonths'])->name('monthly_farming_report.getMonths');
+    Route::resource('monthly_farming_report',MonthlyFarmingReportController::class);
+    /*******************Monthly Farming Report ROUTE END*************/   
 });
 /****************** ADMIN MIDDLEWARE PAGES ROUTES END****************/
 ?>

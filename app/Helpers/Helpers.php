@@ -11,4 +11,22 @@ class Helpers
         return User::find($id)->name;
     } 
 
+    public static function getMonths()
+    {
+        return [
+          'Jan',  
+          'Feb',  
+          'March',  
+          'April',  
+          'May',  
+          'June',  
+          'July',  
+          'August',  
+          'Sep',  
+          'Oct',  
+          'Nov',  
+          'Dec',  
+        ];
+    } 
+
 }

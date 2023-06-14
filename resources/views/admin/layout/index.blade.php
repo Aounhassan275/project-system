@@ -194,6 +194,12 @@
 								<span>Pond Preparation</span>
 							</a>
 						</li>
+						<li class="nav-item">
+							<a href="{{route('admin.monthly_farming_report.index')}}" class="nav-link {{Request::is('admin/monthly_farming_report') || Request::is('admin/monthly_farming_report*') ?'active':''}}">
+								<i class="icon-home4"></i>
+								<span>Monthly Farming Report</span>
+							</a>
+						</li>
 						<li class="nav-item nav-item-submenu {{Request::is('admin/country*') || Request::is('admin/state*') || Request::is('admin/city*') || Request::is('admin/district*')  || Request::is('admin/police_station*')  || Request::is('admin/block*') || Request::is('admin/gram_panchyat*') || Request::is('admin/village*') ?'nav-item-open':''}}">
 							<a href="#" class="nav-link"><i class="icon-map"></i> <span>Locations</span></a>
 
