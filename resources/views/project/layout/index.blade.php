@@ -160,13 +160,19 @@
 								<i class="icon-home4"></i>
 								<span>Dashboard</span>
 							</a>
-						</li>
-						{{-- <li class="nav-item">
+						</li>	
+						<li class="nav-item">
 							<a href="{{route('project.project.index')}}" class="nav-link {{Request::is('project/project')?'active':''}}">
 								<i class="icon-home4"></i>
-								<span>Projects</span>
+								<span>Project</span>
 							</a>
-						</li> --}}
+						</li>
+						<li class="nav-item">
+							<a href="{{route('project.user.index')}}" class="nav-link {{Request::is('project/user')?'active':''}}">
+								<i class="icon-user"></i>
+								<span>User</span>
+							</a>
+						</li>
 					</ul>
 				</div>
 				<!-- /main navigation -->

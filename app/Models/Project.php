@@ -28,4 +28,8 @@ class Project extends Model
     {
         return $this->belongsTo(District::class,'district_id');
     }
+    public function farming_profiles()
+    {
+        return $this->hasMany(FarmingProfile::class,'project_id');
+    }
 }
