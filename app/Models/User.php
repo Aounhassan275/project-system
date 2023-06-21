@@ -29,6 +29,9 @@ class User extends Authenticatable
         'is_verified',
         'is_active',
         'user_id',
+        'state_id',
+        'district_id',
+        'block_id',
     ];
 
     /**

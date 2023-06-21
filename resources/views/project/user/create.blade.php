@@ -80,11 +80,56 @@
                             <div class="form-group form-group-feedback form-group-feedback-left">
                                 <select name="role_id" class="form-control select-search" id="role_id" required>
                                     <option>Select</option>
-                                    @foreach(App\Models\Role::where('name',['District Coordinator','Field Staff'])->get() as $role)
+                                    @foreach(App\Models\Role::whereIn('name',['District Coordinator','Field Staff'])->get() as $role)
                                     <option value="{{$role->id}}">{{$role->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
+                        </div>
+                        <div class="form-group col-md-4 staff_fields" style="display:none;">
+                            <label>Choose State</label>
+                            <select  name="state_id"  class="form-control select-search" >
+                                <option selected disabled>Select State</option>
+                                @foreach(App\Models\State::all() as $state)
+                                <option value="{{$state->id}}">{{$state->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4 district_fields" style="display:none;">
+                            <label>Choose District</label>
+                            <select  name="district_id"  class="form-control select-search" >
+                                <option selected disabled>Select District</option>
+                                @foreach(App\Models\District::all() as $district)
+                                <option value="{{$district->id}}">{{$district->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4 district_fields" style="display:none;">
+                            <label>Choose Blocks</label>
+                            <select  name="block_id" class="form-control select-search" >
+                                <option disabled>Select Block</option>
+                                @foreach(App\Models\Block::all() as $block)
+                                <option value="{{$block->id}}">{{$block->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4 staff_fields" style="display:none;">
+                            <label>Choose Gram Panchyat</label>
+                            <select  name="gram_panchyat_ids[]" multiple class="form-control select-search" >
+                                <option disabled>Select Gram Panchyat</option>
+                                @foreach(App\Models\GramPanchyat::all() as $gram_panchyat)
+                                <option value="{{$gram_panchyat->id}}">{{$gram_panchyat->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4 staff_fields" style="display:none;">
+                            <label>Choose Village</label>
+                            <select  name="village_ids[]" multiple class="form-control select-search" >
+                                <option disabled>Select Village</option>
+                                @foreach(App\Models\Village::all() as $village)
+                                <option value="{{$village->id}}">{{$village->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                     </div>
@@ -165,5 +210,22 @@
         document.getElementById("confirmmsg").style.color = color;
     }
     
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('#role_id').change(function(){
+            role_id = this.value;
+            if(role_id == 3)
+            {
+                $('.district_fields').show();
+                $('.staff_fields').hide();
+            }else if(role_id == 4)
+            {
+                $('.district_fields').show();
+                $('.staff_fields').show();
+            }
+        });
+    });
 </script>
 @endsection

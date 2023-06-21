@@ -123,6 +123,51 @@
 													<label>Upload profile image</label>
 				                                    <input type="file" class="form-input-styled" name="image" data-fouc>
 												</div>
+												<div class="form-group col-md-4 staff_fields" @if($user->role_id == 3) style="display:none;" @endif>
+													<label>Choose State</label>
+													<select  name="state_id"  class="form-control select-search" >
+														<option selected disabled>Select State</option>
+														@foreach(App\Models\State::all() as $state)
+														<option  @if($user->state_id == $state->id) selected @endif value="{{$state->id}}">{{$state->name}}</option>
+														@endforeach
+													</select>
+												</div>
+												<div class="form-group col-md-4 district_fields" >
+													<label>Choose District</label>
+													<select  name="district_id"  class="form-control select-search" >
+														<option selected disabled>Select District</option>
+														@foreach(App\Models\District::all() as $district)
+														<option @if($user->district_id == $district->id) selected @endif value="{{$district->id}}">{{$district->name}}</option>
+														@endforeach
+													</select>
+												</div>
+												<div class="form-group col-md-4 district_fields">
+													<label>Choose Blocks</label>
+													<select  name="block_id" class="form-control select-search" >
+														<option disabled>Select Block</option>
+														@foreach(App\Models\Block::all() as $block)
+														<option  @if($user->block_id == $block->id) selected @endif value="{{$block->id}}">{{$block->name}}</option>
+														@endforeach
+													</select>
+												</div>
+												<div class="form-group col-md-4 staff_fields" @if($user->role_id == 3) style="display:none;" @endif>
+													<label>Choose Gram Panchyat</label>
+													<select  name="gram_panchyat_ids[]" multiple class="form-control select-search" >
+														<option disabled>Select Gram Panchyat</option>
+														@foreach(App\Models\GramPanchyat::all() as $gram_panchyat)
+														<option @if(in_array($gram_panchyat->id,$user_gram_panchyats)) selected @endif value="{{$gram_panchyat->id}}">{{$gram_panchyat->name}}</option>
+														@endforeach
+													</select>
+												</div>
+												<div class="form-group col-md-4 staff_fields" @if($user->role_id == 3) style="display:none;" @endif>
+													<label>Choose Village</label>
+													<select  name="village_ids[]" multiple class="form-control select-search" >
+														<option disabled>Select Village</option>
+														@foreach(App\Models\Village::all() as $village)
+														<option @if(in_array($village->id,$user_gram_panchyats)) selected @endif value="{{$village->id}}">{{$village->name}}</option>
+														@endforeach
+													</select>
+												</div>
 											</div>
 										</div>
 
@@ -142,4 +187,20 @@
 				<!-- /inner container -->
 @endsection
 @section('scripts')
+<script>
+    $(document).ready(function(){
+        $('#role_id').change(function(){
+            role_id = this.value;
+            if(role_id == 3)
+            {
+                $('.district_fields').show();
+                $('.staff_fields').hide();
+            }else if(role_id == 4)
+            {
+                $('.district_fields').show();
+                $('.staff_fields').show();
+            }
+        });
+    });
+</script>
 @endsection

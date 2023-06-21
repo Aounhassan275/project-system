@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Project;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserGramPanchyat;
+use App\Models\UserVillage;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +60,27 @@ class UserController extends Controller
                 toastr()->error('Email already exists');
                 return redirect()->back();
             }
-            User::create($request->all());
+            $user = User::create($request->all());
+            if($request->gram_panchyat_ids)
+            {
+                foreach($request->gram_panchyat_ids as $gram_panchyat_id)
+                {
+                    UserGramPanchyat::create([
+                        'gram_panchyat_id' => $gram_panchyat_id,
+                        'user_id' => $user->id
+                    ]);
+                }
+            }
+            if($request->gram_panchyat_ids)
+            {
+                foreach($request->village_ids as $village_id)
+                {
+                    UserVillage::create([
+                        'village_id' => $village_id,
+                        'user_id' => $user->id
+                    ]);
+                }
+            }
             toastr()->success('User Added Successfully');
             return redirect()->back();
         }catch (Exception $e)
@@ -77,7 +99,9 @@ class UserController extends Controller
     public function show(Request $request,$id)
     {
         $user = User::find($id);
-        return view('project.user.show',compact('user'));
+        $user_gram_panchyats = UserGramPanchyat::where('user_id',$user->id)->get()->pluck('gram_panchyat_id')->toArray();
+        $user_villages = UserVillage::where('user_id',$user->id)->get()->pluck('village_id')->toArray();
+        return view('project.user.show',compact('user','user_gram_panchyats','user_villages'));
     }
 
     /**
@@ -101,7 +125,49 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
+        $delete_existing_panchyat = false;
+        if($user->role_id == 4 && $request->role_id == 3)
+        {
+            $delete_existing_panchyat = true;
+        }
         $user->update($request->all());
+        if($delete_existing_panchyat)
+        {
+            UserGramPanchyat::where('user_id',$user->id)->delete();
+            UserVillage::where('user_id',$user->id)->delete();
+        }
+        if($request->gram_panchyat_ids)
+        {
+            UserGramPanchyat::whereNotIn('gram_panchyat_id',$request->gram_panchyat_ids)->where('user_id',$user->id)->delete();
+            foreach($request->gram_panchyat_ids as $gram_panchyat_id)
+            {
+                $gram_panchyat = UserGramPanchyat::where('gram_panchyat_id',$gram_panchyat_id)->where('user_id',$user->id)->first();
+                if(!$gram_panchyat)
+                {
+                    UserGramPanchyat::create([
+                        'gram_panchyat_id' => $gram_panchyat_id,
+                        'user_id' => $user->id
+                    ]);
+                }
+            }
+
+        }
+        if($request->village_ids)
+        {
+            UserVillage::whereNotIn('village_id',$request->village_ids)->where('user_id',$user->id)->delete();
+            foreach($request->village_ids as $village_id)
+            {
+                $village = UserVillage::where('village_id',$village_id)->where('user_id',$user->id)->first();
+                if(!$village)
+                {
+                    UserVillage::create([
+                        'village_id' => $village_id,
+                        'user_id' => $user->id
+                    ]);
+                }
+            }
+
+        }
         toastr()->success('User Updated successfully');
         return redirect()->back(); 
     }
