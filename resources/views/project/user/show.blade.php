@@ -112,18 +112,29 @@
 												</div>
 											</div>
 										</div>
-
 										<div class="form-group">
 											<div class="row">
 												<div class="col-md-6">
+													<label>Employee Code</label>
+													<input type="text" name="employee_code" value="{{$user->employee_code}}" class="form-control">
+												</div>
+												<div class="col-md-6">
+													<label>Contact</label>
+													<input type="text" value="{{$user->phone}}" name="phone" class="form-control">
+												</div>
+											</div>
+										</div>
+
+											<div class="row">
+												<div class="form-group col-md-6">
 													<label>Password <small style="color:red;">(Leave It Blank if you don't want to change)</small></label>
 													<input type="password" name="password" placeholder="Password" class="form-control">
 												</div>
-												<div class="col-md-6">
+												<div class="form-group col-md-6">
 													<label>Upload profile image</label>
 				                                    <input type="file" class="form-input-styled" name="image" data-fouc>
 												</div>
-												<div class="form-group col-md-4 staff_fields" @if($user->role_id == 3) style="display:none;" @endif>
+												<div class="form-group col-md-4 district_fields">
 													<label>Choose State</label>
 													<select  name="state_id"  class="form-control select-search" >
 														<option selected disabled>Select State</option>
@@ -141,12 +152,12 @@
 														@endforeach
 													</select>
 												</div>
-												<div class="form-group col-md-4 district_fields">
-													<label>Choose Blocks</label>
-													<select  name="block_id" class="form-control select-search" >
-														<option disabled>Select Block</option>
+												<div class="form-group col-md-4 district_fields" >
+													<label>Choose Block</label>
+													<select  name="block_ids[]" multiple class="form-control select-search" >
+														<option disabled>Select Gram Panchyat</option>
 														@foreach(App\Models\Block::all() as $block)
-														<option  @if($user->block_id == $block->id) selected @endif value="{{$block->id}}">{{$block->name}}</option>
+														<option @if(in_array($block->id,$user_blocks)) selected @endif  value="{{$block->id}}">{{$block->name}}</option>
 														@endforeach
 													</select>
 												</div>
@@ -169,7 +180,6 @@
 													</select>
 												</div>
 											</div>
-										</div>
 
 				                        <div class="text-right">
 				                        	<button type="submit" class="btn btn-primary">Save changes</button>

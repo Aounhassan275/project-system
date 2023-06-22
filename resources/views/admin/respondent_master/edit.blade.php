@@ -30,6 +30,10 @@
                             <input name="name" type="text" value="{{$respondent_master->name}}" class="form-control" placeholder="Enter Name" required>
                         </div>
                         <div class="form-group col-md-4">
+                            <label>Image @if($respondent_master->image) <a href="{{asset($respondent_master->image)}}" target="_blank"> ( Show Image )</a>@endif</label>
+                            <input name="image" type="file" class="form-control" placeholder="Enter Name" required>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label>Choose Block</label>
                             <select  name="block_id"  class="form-control select-search" data-fouc required>
                                 <option selected disabled>Select Block</option>

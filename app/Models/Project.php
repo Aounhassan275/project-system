@@ -9,7 +9,10 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','state_id','district_id','duration','sponcered_by','start_date'];
+    protected $fillable = [
+        'name','state_id','district_id','duration','sponcered_by','start_date','end_date',
+        'code','point_of_contact','email','phone'
+    ];
 
     /**
      * The attributes that should be cast.
@@ -18,6 +21,7 @@ class Project extends Model
      */
     protected $casts = [
         'start_date' => 'date',
+        'end_date' => 'date',
     ];
     
     public function state()

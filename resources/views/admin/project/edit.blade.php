@@ -26,6 +26,10 @@
                     @csrf
                     <div class="row">
                         <div class="form-group col-md-6">
+                            <label>Project Code</label>
+                            <input name="code" type="text" value="{{$project->code}}" class="form-control" placeholder="Enter Project Code" required>
+                        </div>
+                        <div class="form-group col-md-6">
                             <label>Project Name</label>
                             <input name="name" type="text" value="{{$project->name}}" class="form-control" placeholder="Enter Project Name" required>
                         </div>
@@ -38,8 +42,24 @@
                             <input name="sponcered_by" value="{{$project->sponcered_by}}" type="text" class="form-control" placeholder="Enter Project Sponcered By" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <label>Project Start Date <span class="badge badge-success">{{@$project->start_date?$project->start_date->format('d M,Y'):''}}</span></label>
-                            <input name="start_date"  value="{{$project->start_date}}" type="date" class="form-control" placeholder="Enter Project Sponcered By" >
+                            <label>Project Point of Contact</label>
+                            <input name="point_of_contact" type="text" value="{{$project->point_of_contact}}"  class="form-control" placeholder="Enter Project Point of Contact" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>PoC Email</label>
+                            <input name="email" type="email" value="{{$project->email}}"  class="form-control" placeholder="Enter PoC Email" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>PoC Phone</label>
+                            <input name="phone" type="text" value="{{$project->phone}}"  class="form-control" placeholder="Enter PoC Phone" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Project Start Date</label>
+                            <input name="start_date"  value="{{@$project->start_date?$project->start_date->format('Y-m-d'):''}}" type="date" class="form-control" placeholder="Enter Project Sponcered By" >
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Project End Date</label>
+                            <input name="end_date" type="date"  value="{{@$project->end_date?$project->end_date->format('Y-m-d'):''}}" class="form-control" placeholder="Enter Project Sponcered By" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Choose State</label>
@@ -52,10 +72,10 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Choose District</label>
-                            <select  name="district_id"  class="form-control select-search" data-fouc required>
-                                <option selected disabled>Select District</option>
+                            <select  name="district_ids[]" multiple class="form-control select-search" data-fouc required>
+                                <option disabled>Select District</option>
                                 @foreach(App\Models\District::all() as $district)
-                                <option {{$project->district_id == $district->id?'selected':''}} value="{{$district->id}}">{{$district->name}}</option>
+                                <option @if(in_array($district->id,$project_districts)) selected @endif value="{{$district->id}}">{{$district->name}}</option>
                                 @endforeach
                             </select>
                         </div>

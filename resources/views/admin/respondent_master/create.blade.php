@@ -29,6 +29,10 @@
                             <input name="name" type="text" class="form-control" placeholder="Enter Name" required>
                         </div>
                         <div class="form-group col-md-4">
+                            <label>Image</label>
+                            <input name="image" type="file" class="form-control" placeholder="Enter Name" required>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label>Choose Block</label>
                             <select  name="block_id"  class="form-control select-search" data-fouc required>
                                 <option selected disabled>Select Block</option>

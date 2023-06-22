@@ -35,6 +35,15 @@
                             </div>
                         </div>
                         <div class="col-md-4">
+                            <label>Employee Code</label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="text" id="employee_code" class="form-control"  value="{{old('employee_code')}}" placeholder="Enter Employee Code" name="employee_code" required>
+                                <div class="form-control-feedback">
+                                    <i class="icon-code text-muted"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <label>Email Address</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
                                 <input type="text" id="email" class="form-control"  value="{{old('email')}}" placeholder="Enter your email" name="email" required>
@@ -44,17 +53,23 @@
                             </div>
                         </div>
                         <div class="col-md-4">
+                            <label>Contact</label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="text" id="phone" class="form-control"  value="{{old('phone')}}" placeholder="Enter your phone" name="phone" required>
+                                <div class="form-control-feedback">
+                                    <i class="icon-phone text-muted"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
                             <label>Profile Image</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <input class="form-control" type="file" name="image" placeholder="Enter password" required>
+                                <input class="form-control" type="file" name="image" placeholder="Enter password">
                                 <div class="form-control-feedback">
                                     <i class="icon-file-picture text-muted"></i>
                                 </div>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="row">
                         <div class="col-md-4">
                             <label>Password</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
@@ -80,13 +95,13 @@
                             <div class="form-group form-group-feedback form-group-feedback-left">
                                 <select name="role_id" class="form-control select-search" id="role_id" required>
                                     <option>Select</option>
-                                    @foreach(App\Models\Role::whereIn('name',['District Coordinator','Field Staff'])->get() as $role)
+                                    @foreach(App\Models\Role::whereIn('name',['Executive','Field Staff'])->get() as $role)
                                     <option value="{{$role->id}}">{{$role->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group col-md-4 staff_fields" style="display:none;">
+                        <div class="form-group col-md-4 district_fields" style="display:none;">
                             <label>Choose State</label>
                             <select  name="state_id"  class="form-control select-search" >
                                 <option selected disabled>Select State</option>
@@ -106,8 +121,8 @@
                         </div>
                         <div class="form-group col-md-4 district_fields" style="display:none;">
                             <label>Choose Blocks</label>
-                            <select  name="block_id" class="form-control select-search" >
-                                <option disabled>Select Block</option>
+                            <select  name="block_ids[]" multiple class="form-control select-search" >
+                                <option disabled>Select Gram Panchyat</option>
                                 @foreach(App\Models\Block::all() as $block)
                                 <option value="{{$block->id}}">{{$block->name}}</option>
                                 @endforeach

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Project;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserBlock;
 use App\Models\UserGramPanchyat;
 use App\Models\UserVillage;
 use Exception;
@@ -71,6 +72,16 @@ class UserController extends Controller
                     ]);
                 }
             }
+            if($request->block_ids)
+            {
+                foreach($request->block_ids as $block_id)
+                {
+                    UserBlock::create([
+                        'block_id' => $block_id,
+                        'user_id' => $user->id
+                    ]);
+                }
+            }
             if($request->gram_panchyat_ids)
             {
                 foreach($request->village_ids as $village_id)
@@ -101,7 +112,8 @@ class UserController extends Controller
         $user = User::find($id);
         $user_gram_panchyats = UserGramPanchyat::where('user_id',$user->id)->get()->pluck('gram_panchyat_id')->toArray();
         $user_villages = UserVillage::where('user_id',$user->id)->get()->pluck('village_id')->toArray();
-        return view('project.user.show',compact('user','user_gram_panchyats','user_villages'));
+        $user_blocks= UserBlock::where('user_id',$user->id)->get()->pluck('block_id')->toArray();
+        return view('project.user.show',compact('user','user_gram_panchyats','user_villages','user_blocks'));
     }
 
     /**
@@ -135,6 +147,7 @@ class UserController extends Controller
         {
             UserGramPanchyat::where('user_id',$user->id)->delete();
             UserVillage::where('user_id',$user->id)->delete();
+            UserBlock::where('user_id',$user->id)->delete();
         }
         if($request->gram_panchyat_ids)
         {
@@ -146,6 +159,22 @@ class UserController extends Controller
                 {
                     UserGramPanchyat::create([
                         'gram_panchyat_id' => $gram_panchyat_id,
+                        'user_id' => $user->id
+                    ]);
+                }
+            }
+
+        }
+        if($request->block_ids)
+        {
+            UserBlock::whereNotIn('block_id',$request->block_ids)->where('user_id',$user->id)->delete();
+            foreach($request->block_ids as $block_id)
+            {
+                $block = UserBlock::where('block_id',$block_id)->where('user_id',$user->id)->first();
+                if(!$block)
+                {
+                    UserBlock::create([
+                        'block_id' => $block_id,
                         'user_id' => $user->id
                     ]);
                 }

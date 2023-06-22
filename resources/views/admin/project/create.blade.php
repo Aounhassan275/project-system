@@ -25,6 +25,10 @@
                     @csrf
                     <div class="row">
                         <div class="form-group col-md-6">
+                            <label>Project Code</label>
+                            <input name="code" type="text" class="form-control" placeholder="Enter Project Code" required>
+                        </div>
+                        <div class="form-group col-md-6">
                             <label>Project Name</label>
                             <input name="name" type="text" class="form-control" placeholder="Enter Project Name" required>
                         </div>
@@ -37,8 +41,24 @@
                             <input name="sponcered_by" type="text" class="form-control" placeholder="Enter Project Sponcered By" required>
                         </div>
                         <div class="form-group col-md-6">
+                            <label>Project Point of Contact</label>
+                            <input name="point_of_contact" type="text" class="form-control" placeholder="Enter Project Point of Contact" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>PoC Email</label>
+                            <input name="email" type="email" class="form-control" placeholder="Enter PoC Email" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>PoC Phone</label>
+                            <input name="phone" type="text" class="form-control" placeholder="Enter PoC Phone" required>
+                        </div>
+                        <div class="form-group col-md-6">
                             <label>Project Start Date</label>
                             <input name="start_date" type="date" class="form-control" placeholder="Enter Project Sponcered By" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Project End Date</label>
+                            <input name="end_date" type="date" class="form-control" placeholder="Enter Project Sponcered By" required>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Choose State</label>
@@ -51,8 +71,8 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Choose District</label>
-                            <select  name="district_id"  class="form-control select-search" data-fouc required>
-                                <option selected disabled>Select District</option>
+                            <select  name="district_ids[]" multiple class="form-control select-search" data-fouc required>
+                                <option disabled>Select District</option>
                                 @foreach(App\Models\District::all() as $district)
                                 <option value="{{$district->id}}">{{$district->name}}</option>
                                 @endforeach

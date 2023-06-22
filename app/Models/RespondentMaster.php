@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\ImageHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,8 +12,11 @@ class RespondentMaster extends Model
 
     protected $fillable = [
         'name','block_id','district_id','gram_panchyat_id','village_id','gender','age','education',
-        'number_family_member','caste','religion','farmer_id'
+        'number_family_member','caste','religion','farmer_id','image'
     ];
+    public function setImageAttribute($value){
+        $this->attributes['image'] = ImageHelper::saveImage($value,'/uploaded_images/profiles/');
+    }
     public function block()
     {
         return $this->belongsTo(Block::class,'block_id');

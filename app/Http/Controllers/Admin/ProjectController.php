@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Models\ProjectBlock;
+use App\Models\ProjectDistrict;
 use App\Models\ProjectGramPanchyat;
 use App\Models\ProjectVillage;
 use Exception;
@@ -48,6 +49,13 @@ class ProjectController extends Controller
                 'duration' => 'required',
             ]);
             $project = Project::create($request->all());
+            foreach($request->district_ids as $district_id)
+            {
+                ProjectDistrict::create([
+                    'district_id' => $district_id,
+                    'project_id' => $project->id
+                ]);
+            }
             foreach($request->block_ids as $block_id)
             {
                 ProjectBlock::create([
@@ -101,7 +109,8 @@ class ProjectController extends Controller
         $project_blocks = ProjectBlock::where('project_id',$project->id)->get()->pluck('block_id')->toArray();
         $project_gram_panchyats = ProjectGramPanchyat::where('project_id',$project->id)->get()->pluck('gram_panchyat_id')->toArray();
         $project_villages = ProjectVillage::where('project_id',$project->id)->get()->pluck('village_id')->toArray();
-        return view('admin.project.edit',compact('project','project_blocks','project_gram_panchyats','project_villages'));
+        $project_districts = ProjectDistrict::where('project_id',$project->id)->get()->pluck('district_id')->toArray();
+        return view('admin.project.edit',compact('project','project_blocks','project_gram_panchyats','project_villages','project_districts'));
     }
 
     /**
@@ -115,6 +124,18 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $project->update($request->all());
+        ProjectDistrict::whereNotIn('district_id',$request->district_ids)->where('project_id',$project->id)->delete();
+        foreach($request->district_ids as $district_id)
+        {
+            $project_block = ProjectDistrict::where('district_id',$district_id)->where('project_id',$project->id)->first();
+            if(!$project_block)
+            {
+                ProjectDistrict::create([
+                    'district_id' => $district_id,
+                    'project_id' => $project->id
+                ]);
+            }
+        }
         ProjectBlock::whereNotIn('block_id',$request->block_ids)->where('project_id',$project->id)->delete();
         foreach($request->block_ids as $block_id)
         {

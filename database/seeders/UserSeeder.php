@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         DB::table('roles')->insert([
             [ 'id' => 1 ,'name' => 'Super Admin', 'created_at' => Carbon::now()],
             [ 'id' => 2 ,'name' => 'Project Manager', 'created_at' => Carbon::now()],
-            [ 'id' => 3 ,'name' => 'District Coordinator', 'created_at' => Carbon::now()],
+            [ 'id' => 3 ,'name' => 'Executive', 'created_at' => Carbon::now()],
             [ 'id' => 4 ,'name' => 'Field Staff', 'created_at' => Carbon::now()],
         ]);
         DB::table('users')->insert([
