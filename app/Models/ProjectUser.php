@@ -19,4 +19,12 @@ class ProjectUser extends Model
     {
         return $this->belongsTo(Project::class,'project_id');
     }
+    public function project_user_executives()
+    {
+        return $this->hasMany(ProjectUserExecutive::class,'project_user_id');
+    }
+    public function project_user_field_staffs()
+    {
+        return $this->hasMany(ProjectUserFieldStaff::class,'project_user_id');
+    }
 }

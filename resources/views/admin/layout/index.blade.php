@@ -170,12 +170,15 @@
 								<li class="nav-item"><a href="{{route('admin.user.index')}}" class="nav-link {{Request::is('admin/user')?'active':''}}">All Users</a></li>
 							</ul>
 						</li>
-						<li class="nav-item">
-							<a href="{{route('admin.project.index')}}" class="nav-link {{Request::is('admin/project')?'active':''}}">
-								<i class="icon-home4"></i>
-								<span>Project</span>
-							</a>
-						</li>	
+						<li class="nav-item nav-item-submenu {{Request::is('admin/project*') || Request::is('admin/project_user*') || Request::is('admin/major_delivery*')?'nav-item-open':''}}">
+							<a href="#" class="nav-link"><i class="icon-home4"></i> <span>Projects</span></a>
+
+							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('admin/project*')  || Request::is('admin/project_user*') || Request::is('admin/major_delivery*') ?'display:block':''}}">
+								<li class="nav-item"><a href="{{route('admin.project.index')}}" class="nav-link {{Request::is('admin/project') || Request::is('admin/project/*') ?'active':''}}">Project Master</a></li>
+								<li class="nav-item"><a href="{{route('admin.project_user.index')}}" class="nav-link {{Request::is('admin/project_user') || Request::is('admin/project_user/*') ?'active':''}}">Project Team</a></li>
+								<li class="nav-item"><a href="{{route('admin.major_delivery.index')}}" class="nav-link {{Request::is('admin/major_delivery') || Request::is('admin/major_delivery/*') ?'active':''}}">Major Delivery</a></li>
+							</ul>
+						</li>
 						<li class="nav-item">
 							<a href="{{route('admin.respondent_master.index')}}" class="nav-link {{Request::is('admin/respondent_master')?'active':''}}">
 								<i class="icon-home4"></i>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProjectUser;
+use App\Models\ProjectUserExecutive;
+use App\Models\ProjectUserFieldStaff;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,7 @@ class ProjectUserController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.project_user.index');
     }
 
     /**
@@ -26,7 +28,7 @@ class ProjectUserController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.project_user.create');
     }
 
     /**
@@ -42,7 +44,21 @@ class ProjectUserController extends Controller
                 'project_id' => 'required',
                 'user_id' => 'required',
             ]);
-            ProjectUser::create($request->all());
+            $project_user = ProjectUser::create($request->all());
+            foreach($request->executive_ids as $executive_id)
+            {
+                ProjectUserExecutive::create([
+                    'user_id' => $executive_id,
+                    'project_user_id' => $project_user->id,
+                ]);
+            }
+            foreach($request->field_staff_ids as $field_staff_id)
+            {
+                ProjectUserFieldStaff::create([
+                    'user_id' => $field_staff_id,
+                    'project_user_id' => $project_user->id,
+                ]);
+            }
             toastr()->success('Project User Added Successfully');
             return redirect()->back();
         }catch (Exception $e)
@@ -69,9 +85,12 @@ class ProjectUserController extends Controller
      * @param  \App\Models\ProjectUser  $projectUser
      * @return \Illuminate\Http\Response
      */
-    public function edit(ProjectUser $projectUser)
+    public function edit($id)
     {
-        //
+        $project_user = ProjectUser::find($id);
+        $project_user_exectives = ProjectUserExecutive::where('project_user_id',$project_user->id)->get()->pluck('user_id')->toArray();
+        $project_user_field_staffs= ProjectUserFieldStaff::where('project_user_id',$project_user->id)->get()->pluck('user_id')->toArray();
+        return view('admin.project_user.edit',compact('project_user','project_user_exectives','project_user_field_staffs'));
     }
 
     /**
@@ -81,9 +100,36 @@ class ProjectUserController extends Controller
      * @param  \App\Models\ProjectUser  $projectUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProjectUser $projectUser)
+    public function update(Request $request,$id)
     {
-        //
+        $project_user = ProjectUser::find($id);
+        $project_user->update($request->all());
+        ProjectUserExecutive::whereNotIn('user_id',$request->executive_ids)->where('project_user_id',$project_user->id)->delete();
+        foreach($request->executive_ids as $executive_id)
+        {
+            $project_executive = ProjectUserExecutive::where('user_id',$executive_id)->where('project_user_id',$project_user->id)->first();
+            if(!$project_executive)
+            {
+                ProjectUserExecutive::create([
+                    'user_id' => $executive_id,
+                    'project_user_id' => $project_user->id
+                ]);
+            }
+        }
+        ProjectUserFieldStaff::whereNotIn('user_id',$request->field_staff_ids)->where('project_user_id',$project_user->id)->delete();
+        foreach($request->field_staff_ids as $field_staff_id)
+        {
+            $project_field_staff = ProjectUserFieldStaff::where('user_id',$field_staff_id)->where('project_user_id',$project_user->id)->first();
+            if(!$project_field_staff)
+            {
+                ProjectUserFieldStaff::create([
+                    'user_id' => $field_staff_id,
+                    'project_user_id' => $project_user->id
+                ]);
+            }
+        }
+        toastr()->success('Project Team Updated successfully');
+        return redirect()->back(); 
     }
 
     /**
@@ -94,9 +140,11 @@ class ProjectUserController extends Controller
      */
     public function destroy($id)
     {
-        $projectUser = ProjectUser::find($id);
-        $projectUser->delete();
-        toastr()->success('Project User Deleted successfully');
+        $project_user = ProjectUser::find($id);
+        ProjectUserFieldStaff::where('project_user_id',$project_user->id)->delete();
+        ProjectUserExecutive::where('project_user_id',$project_user->id)->delete();
+        $project_user->delete();
+        toastr()->success('Project Team Deleted successfully');
         return redirect()->back();
     }
 }

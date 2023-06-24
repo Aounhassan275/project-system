@@ -74,12 +74,12 @@
 												 Basic profile
 											</a>
 										</li>
-										<li class="nav-item">
+										{{-- <li class="nav-item">
 											<a href="#inbox" class="nav-link" data-toggle="tab">
 												<i class="icon-book"></i>
 												Projects
 											</a>
-										</li>
+										</li> --}}
 										<li class="nav-item-divider"></li>
 										<li class="nav-item">
 											<a href="{{route('admin.user.index')}}" class="nav-link" data-toggle="tab">
@@ -155,7 +155,7 @@
 							<!-- /profile info -->
 
 					    </div>
-					    <div class="tab-pane fade" id="inbox">
+					    {{-- <div class="tab-pane fade" id="inbox">
 
 							<!-- My inbox -->
 							<div class="card">
@@ -215,7 +215,7 @@
 							</div>
 							<!-- /my inbox -->
 
-				    	</div>
+				    	</div> --}}
 					</div>
 					<!-- /right content -->
 

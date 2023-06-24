@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\FarmingProfileController;
 use App\Http\Controllers\Admin\GramPanchyatController;
+use App\Http\Controllers\Admin\MajorDeliveryController;
 use App\Http\Controllers\Admin\MonthlyFarmingReportController;
 use App\Http\Controllers\Admin\PoliceStationController;
 use App\Http\Controllers\Admin\PondPreparationController;
@@ -58,7 +59,10 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','middleware' => 'auth:user','a
     /*******************Project ROUTE END*************/        
     /*******************Project User ROUTE START*************/       
     Route::resource('project_user',ProjectUserController::class);
-    /*******************Project ROUTE END*************/      
+    /*******************Project User ROUTE END*************/      
+    /*******************Major Delivery ROUTE START*************/       
+    Route::resource('major_delivery',MajorDeliveryController::class);
+    /*******************Major Delivery ROUTE END*************/      
     /*******************Respondent Master ROUTE START*************/       
     Route::resource('respondent_master',RespondentMasterController::class);
     /*******************Respondent Master ROUTE END*************/   
