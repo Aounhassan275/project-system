@@ -40,10 +40,16 @@ class MajorDeliveryController extends Controller
         try{
             $this->validate($request,[
                 'project_id' => 'required',
-                'deliverable' => 'required',
-                'date' => 'required',
             ]);
-            MajorDelivery::create($request->all());
+            foreach($request->deliverable as $key => $deliverable)
+            {
+                MajorDelivery::create([
+                    'project_id' => $request->project_id,
+                    'deliverable' => $deliverable,
+                    'date' => $request->date[$key],
+                ]);
+
+            }
             toastr()->success('Major Delivery Added Successfully');
             return redirect()->back();
         }catch (Exception $e)

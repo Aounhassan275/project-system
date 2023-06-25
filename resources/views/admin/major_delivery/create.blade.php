@@ -33,14 +33,21 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group col-md-6 text-right">
+                            <button type="button" class="btn btn-primary" id="add-more-delivery">Add More Delivery</button>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-6">
                             <label>Deliverable</label>
-                            <input type="text" name="deliverable" class="form-control" required>
+                            <input type="text" name="deliverable[]" class="form-control" >
                         </div>
                         <div class="form-group col-md-6">
                             <label>Date</label>
-                            <input type="date" name="date" class="form-control" required>
+                            <input type="date" name="date[]" class="form-control" >
                         </div>
+                    </div>
+                    <div id="delivery_fields">
                     </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Create <i class="icon-paperplane ml-2"></i></button>
@@ -53,8 +60,28 @@
 
     </div>
 </div>
+<div id="new_fields" style="display:none;">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <label>Deliverable</label>
+            <input type="text" name="deliverable[]" class="form-control" >
+        </div>
+        <div class="form-group col-md-6">
+            <label>Date</label>
+            <input type="date" name="date[]" class="form-control" >
+        </div>
+    </div>
+</div>
 
 @endsection
 
 @section('scripts')
+<script>
+    $(document).ready(function(){
+        $('#add-more-delivery').click(function(){
+            html = $('#new_fields').html();
+            $('#delivery_fields').append(html);
+        });
+    });
+</script>
 @endsection

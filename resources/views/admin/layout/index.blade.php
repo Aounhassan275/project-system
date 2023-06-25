@@ -179,28 +179,19 @@
 								<li class="nav-item"><a href="{{route('admin.major_delivery.index')}}" class="nav-link {{Request::is('admin/major_delivery') || Request::is('admin/major_delivery/*') ?'active':''}}">Major Delivery</a></li>
 							</ul>
 						</li>
+						<li class="nav-item nav-item-submenu {{Request::is('admin/farming_profile*') || Request::is('admin/pond_preparation*') || Request::is('admin/monthly_farming_report*')?'nav-item-open':''}}">
+							<a href="#" class="nav-link"><i class="icon-home4"></i> <span>Fishery Project</span></a>
+
+							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('admin/farming_profile*')  || Request::is('admin/pond_preparation*') || Request::is('admin/monthly_farming_report*') ?'display:block':''}}">
+								<li class="nav-item"><a href="{{route('admin.farming_profile.index')}}" class="nav-link {{Request::is('admin/farming_profile') || Request::is('admin/farming_profile/*') ?'active':''}}">Farming Profile</a></li>
+								<li class="nav-item"><a href="{{route('admin.pond_preparation.index')}}" class="nav-link {{Request::is('admin/pond_preparation') || Request::is('admin/pond_preparation/*') ?'active':''}}">Pond Preparation</a></li>
+								<li class="nav-item"><a href="{{route('admin.monthly_farming_report.index')}}" class="nav-link {{Request::is('admin/monthly_farming_report') || Request::is('admin/monthly_farming_report/*') ?'active':''}}">Monthly Farming Report</a></li>
+							</ul>
+						</li>
 						<li class="nav-item">
 							<a href="{{route('admin.respondent_master.index')}}" class="nav-link {{Request::is('admin/respondent_master')?'active':''}}">
 								<i class="icon-home4"></i>
 								<span>Respondent Master Form</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="{{route('admin.farming_profile.index')}}" class="nav-link {{Request::is('admin/farming_profile')?'active':''}}">
-								<i class="icon-home4"></i>
-								<span>Farming Profile</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="{{route('admin.pond_preparation.index')}}" class="nav-link {{Request::is('admin/pond_preparation')?'active':''}}">
-								<i class="icon-home4"></i>
-								<span>Pond Preparation</span>
-							</a>
-						</li>
-						<li class="nav-item">
-							<a href="{{route('admin.monthly_farming_report.index')}}" class="nav-link {{Request::is('admin/monthly_farming_report') || Request::is('admin/monthly_farming_report*') ?'active':''}}">
-								<i class="icon-home4"></i>
-								<span>Monthly Farming Report</span>
 							</a>
 						</li>
 						<li class="nav-item nav-item-submenu {{Request::is('admin/country*') || Request::is('admin/state*') || Request::is('admin/city*') || Request::is('admin/district*')  || Request::is('admin/police_station*')  || Request::is('admin/block*') || Request::is('admin/gram_panchyat*') || Request::is('admin/village*') ?'nav-item-open':''}}">
