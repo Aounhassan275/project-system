@@ -3,7 +3,9 @@
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BlockController;
 use App\Http\Controllers\Api\DistrictController;
+use App\Http\Controllers\Api\FarmingProfileController;
 use App\Http\Controllers\Api\GramPanchyatController;
+use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\RespondentMasterController;
 use App\Http\Controllers\Api\VillageController;
 use Illuminate\Http\Request;
@@ -31,5 +33,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource('village', VillageController::class);
     Route::resource('district', DistrictController::class);
     Route::resource('gram-panchyat', GramPanchyatController::class);
+    Route::resource('farming-profile', FarmingProfileController::class);
+    Route::post('farming-profile/store', [FarmingProfileController::class,'store']);
+    Route::resource('project', ProjectController::class);
     // Route::post('logout',[AuthController::class,'logout'])->name('logout');;
 });
