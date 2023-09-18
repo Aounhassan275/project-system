@@ -12,7 +12,7 @@ class RespondentMaster extends Model
 
     protected $fillable = [
         'name','block_id','district_id','gram_panchyat_id','village_id','gender','age','education',
-        'number_family_member','caste','religion','farmer_id','image'
+        'number_family_member','caste','religion','farmer_id','image','api_id'
     ];
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveImage($value,'/uploaded_images/profiles/');
