@@ -78,8 +78,10 @@ class FarmingProfileController extends Controller
             ], 200);
         }catch (Exception $e)
         {
-            toastr()->error($e->getMessage());
-            return redirect()->back();
+            return response([
+                "success" => false,
+                "message" => $e->getMessage(),
+            ], 500);
         }
     }
 

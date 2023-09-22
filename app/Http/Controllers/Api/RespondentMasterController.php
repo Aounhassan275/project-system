@@ -63,10 +63,12 @@ class RespondentMasterController extends Controller
             ]);
             $respondent_master = RespondentMaster::create($request->all());
             return response([
+                "success" => true,
                 "respondent_master" => $respondent_master,
             ], 200);
         } catch (\Exception $e) {
             return response([
+                "success" => false,
                 "error" => $e->getMessage()
             ], 500);
         }
