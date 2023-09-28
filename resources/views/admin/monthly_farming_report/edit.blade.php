@@ -112,6 +112,23 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Is Pond Preparation ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" @if($monthly_farming_report->is_pond_preparation) checked @endif name="is_pond_preparation" required value="1" class=""> Yes 
+                                <input type="radio" @if(!$monthly_farming_report->is_pond_preparation) checked @endif name="is_pond_preparation" required value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 is_pond_preparation_field" @if(!$monthly_farming_report->is_pond_preparation) hidden @endif >
+                            <label>Boundary cleaning and repairing expenditure</label>
+                            <input type="text" name="boundary_cleaning_expenditure" value="{{@$monthly_farming_report->boundary_cleaning_expenditure}}" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4 is_pond_preparation_field" @if(!$monthly_farming_report->is_pond_preparation) hidden @endif >
+                            <label>Fym application expenditure </label>
+                            <input type="text" name="fym_application_expenditure" value="{{@$monthly_farming_report->fym_application_expenditure}}" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-6">
                             <label>Hydrological parameter Tested ? </label>
                             <div class="form-group form-group-feedback form-group-feedback-left">

@@ -36,5 +36,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource('farming-profile', FarmingProfileController::class);
     Route::post('farming-profile/store', [FarmingProfileController::class,'store']);
     Route::resource('project', ProjectController::class);
+    Route::post('monthly_farming_report/store', [MonthlyFarmingReportController::class,'store']);
+    Route::resource('monthly_farming_report',MonthlyFarmingReportController::class);
     // Route::post('logout',[AuthController::class,'logout'])->name('logout');;
 });

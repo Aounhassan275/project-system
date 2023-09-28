@@ -59,6 +59,9 @@ class MonthlyFarmingReport extends Model
         'fish_quantity',
         'fish_rate',
         'fish_amount',
+        'is_pond_preparation',
+        'boundary_cleaning_expenditure',
+        'fym_application_expenditure',
     ];
     
     protected $casts = [

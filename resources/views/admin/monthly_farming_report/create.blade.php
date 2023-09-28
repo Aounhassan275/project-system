@@ -107,6 +107,23 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Is Pond Preparation ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="is_pond_preparation" required value="1" class=""> Yes 
+                                <input type="radio" name="is_pond_preparation" required value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 is_pond_preparation_field" hidden>
+                            <label>Boundary cleaning and repairing expenditure</label>
+                            <input type="text" name="boundary_cleaning_expenditure" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4 is_pond_preparation_field" hidden>
+                            <label>Fym application expenditure </label>
+                            <input type="text" name="fym_application_expenditure" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-6">
                             <label>Hydrological parameter Tested ? </label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
@@ -362,6 +379,14 @@
                 $('.is_netting_field').attr('hidden',false);
             }else{
                 $('.is_netting_field').attr('hidden',true);
+            }
+        });
+        $('input[type=radio][name="is_pond_preparation"]').on('change', function(event) {
+            var value=$(this).val()
+            if (value==1) {
+                $('.is_pond_preparation_field').attr('hidden',false);
+            }else{
+                $('.is_pond_preparation_field').attr('hidden',true);
             }
         });
         $('#fry_quantity').change(function(){
