@@ -65,7 +65,7 @@ class User extends Authenticatable
     }
     public function getRole()
     {
-        return $this->role->name;
+        return $this->role->name ?? null;
     }
     
     public function setPasswordAttribute($value){

@@ -12,7 +12,7 @@ class RespondentMaster extends Model
 
     protected $fillable = [
         'name','block_id','district_id','gram_panchyat_id','village_id','gender','age','education',
-        'number_family_member','caste','religion','farmer_id','image','api_id'
+        'number_family_member','caste','religion','farmer_id','image','api_id','user_id'
     ];
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveImage($value,'/uploaded_images/profiles/');
@@ -32,6 +32,10 @@ class RespondentMaster extends Model
     public function village()
     {
         return $this->belongsTo(Village::class,'village_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id');
     }
     public function farming_profile()
     {

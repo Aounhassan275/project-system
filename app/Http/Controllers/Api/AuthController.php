@@ -31,14 +31,21 @@ class AuthController extends Controller
                 'message' => 'Wrong Password'
             ], 401);
         }
+        if($user->getRole() == 'Field Staff')
+        {
+            $token = $user->createToken('myapptoken')->plainTextToken;
+    
+            $response = [
+                'user' => $user,
+                'token' => $token
+            ];
+    
+            return response($response, 201);
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
-
-        $response = [
-            'user' => $user,
-            'token' => $token
-        ];
-
-        return response($response, 201);
+        }else{
+            return response([
+                'message' => 'Unauthorize'
+            ], 401);
+        }
     }
 }

@@ -21,7 +21,8 @@ class RespondentMasterController extends Controller
                 'district',
                 'gram_panchyat',
                 'village',
-                'farming_profile'
+                'farming_profile',
+                'user'
                 )->get();
 
             return response([
@@ -56,6 +57,7 @@ class RespondentMasterController extends Controller
             $this->validate($request,[
                 'name' => 'required',
                 'district_id' => 'required',
+                'user_id' => 'required',
             ]);
             $randomNumber = random_int(100000, 999999);
             $request->merge([

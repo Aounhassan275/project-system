@@ -62,6 +62,7 @@ class MonthlyFarmingReport extends Model
         'is_pond_preparation',
         'boundary_cleaning_expenditure',
         'fym_application_expenditure',
+        'user_id'
     ];
     
     protected $casts = [
@@ -70,5 +71,9 @@ class MonthlyFarmingReport extends Model
     public function respondent_master()
     {
         return $this->belongsTo(RespondentMaster::class,'respondent_master_id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class,'user_id');
     }
 }

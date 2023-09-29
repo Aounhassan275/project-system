@@ -19,7 +19,8 @@ class MonthlyFarmingReportController extends Controller
         try {
             $monthlyFarmingReports = MonthlyFarmingReport::select('monthly_farming_reports.*')
             ->with(
-                'respondent_master'
+                'respondent_master',
+                'user'
                 )->get();
 
             return response([
@@ -51,6 +52,9 @@ class MonthlyFarmingReportController extends Controller
     public function store(Request $request)
     {
         try{
+            $this->validate($request,[
+                'user_id' => 'required',
+            ]);
             $monthlyFarmingReport = MonthlyFarmingReport::create($request->all());
             return response([
                 "monthlyFarmingReport" => $monthlyFarmingReport,
