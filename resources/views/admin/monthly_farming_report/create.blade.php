@@ -51,6 +51,8 @@
                             <label>Date And Time Of Update</label>
                             <input type="datetime-local" class="form-control" name="date_of_update"  required>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-4">
                             <label>Is FYK Applied ? </label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
@@ -62,6 +64,26 @@
                             <label>FYK expenditure</label>
                             <input type="number" name="fyk_expenditure" class="form-control">
                         </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Is Pond Preparation ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="is_pond_preparation" required value="1" class=""> Yes 
+                                <input type="radio" name="is_pond_preparation" required value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 is_pond_preparation_field" hidden>
+                            <label>Boundary cleaning and repairing expenditure</label>
+                            <input type="number" name="boundary_cleaning_expenditure" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4 is_pond_preparation_field" hidden>
+                            <label>Fym application expenditure </label>
+                            <input type="number" name="fym_application_expenditure" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        
                         <div class="form-group col-md-4">
                             <label>Stocking?</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
@@ -117,23 +139,9 @@
                             <input type="text" readonly name="fry_amount" id="fry_amount" class="form-control">
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label>Is Pond Preparation ? </label>
-                            <div class="form-group form-group-feedback form-group-feedback-left">
-                                <input type="radio" name="is_pond_preparation" required value="1" class=""> Yes 
-                                <input type="radio" name="is_pond_preparation" required value="0" class=""> No 
-                            </div>
-                        </div>
-                        <div class="form-group col-md-4 is_pond_preparation_field" hidden>
-                            <label>Boundary cleaning and repairing expenditure</label>
-                            <input type="number" name="boundary_cleaning_expenditure" class="form-control">
-                        </div>
-                        <div class="form-group col-md-4 is_pond_preparation_field" hidden>
-                            <label>Fym application expenditure </label>
-                            <input type="number" name="fym_application_expenditure" class="form-control">
-                        </div>
-                    </div>
+                    {{-- <div class="row">
+                        
+                    </div> --}}
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label>Hydrological parameter Tested ? </label>
