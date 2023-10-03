@@ -305,6 +305,13 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Disease Indentified ?</label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="is_disease_indentified" required value="1" class=""> Yes 
+                                <input type="radio" name="is_disease_indentified" required value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 is_disease_indentified_field" hidden>
+                            <label>Specify the Disease</label>
                             <select  name="disease" class="form-control select-search "  data-fouc required>
                                 <option selected disabled>Select Farmer</option>
                                 <option value="FN">FN</option>
@@ -323,6 +330,8 @@
                             <label>Netting Expenditure </label>
                             <input type="number" name="netting_expenditure" class="form-control">
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-4 ">
                             <label>Fish Solde Quantity (in Kg) </label>
                             <input type="number" name="fish_quantity" id="fish_quantity" class="form-control">
@@ -414,6 +423,14 @@
                 $('.is_fyk_field').attr('hidden',false);
             }else{
                 $('.is_fyk_field').attr('hidden',true);
+            }
+        });
+        $('input[type=radio][name="is_disease_indentified"]').on('change', function(event) {
+            var value=$(this).val()
+            if (value==1) {
+                $('.is_disease_indentified_field').attr('hidden',false);
+            }else{
+                $('.is_disease_indentified_field').attr('hidden',true);
             }
         });
         $('#fry_quantity').change(function(){

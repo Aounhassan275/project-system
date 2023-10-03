@@ -64,6 +64,7 @@ class MonthlyFarmingReport extends Model
         'fym_application_expenditure',
         'is_fyk_applied',
         'fyk_expenditure',
+        'is_disease_indentified',
         'user_id'
     ];
     
