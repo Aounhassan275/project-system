@@ -62,6 +62,8 @@ class MonthlyFarmingReport extends Model
         'is_pond_preparation',
         'boundary_cleaning_expenditure',
         'fym_application_expenditure',
+        'is_fyk_applied',
+        'fyk_expenditure',
         'user_id'
     ];
     

@@ -52,6 +52,17 @@
                             <input type="datetime-local" class="form-control" name="date_of_update"  required>
                         </div>
                         <div class="form-group col-md-4">
+                            <label>Is FYK Applied ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="is_fyk_applied" required value="1" class=""> Yes 
+                                <input type="radio" name="is_fyk_applied" required value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 is_fyk_field" hidden>
+                            <label>FYK expenditure</label>
+                            <input type="number" name="fyk_expenditure" class="form-control">
+                        </div>
+                        <div class="form-group col-md-4">
                             <label>Stocking?</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
                                 <input type="radio" name="is_stocking" required value="1" class=""> Yes 
@@ -85,7 +96,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Acclimatisation (HR)</label>
-                            <input type="text" name="hr_fry" class="form-control">
+                            <input type="number" name="hr_fry" class="form-control">
                         </div>
                     </div>
                     
@@ -95,11 +106,11 @@
                     <div class="row is_stocking_field" hidden>
                         <div class="form-group col-md-4">
                             <label>Quantity (in Kg)</label>
-                            <input type="text" name="fry_quantity" id="fry_quantity" class="form-control">
+                            <input type="number" name="fry_quantity" id="fry_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4"  >
                             <label>Rate (Rs/Kg)</label>
-                            <input type="text" name="fry_rate" id="fry_rate" class="form-control">
+                            <input type="number" name="fry_rate" id="fry_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Amount (in Rs) </label>
@@ -116,11 +127,11 @@
                         </div>
                         <div class="form-group col-md-4 is_pond_preparation_field" hidden>
                             <label>Boundary cleaning and repairing expenditure</label>
-                            <input type="text" name="boundary_cleaning_expenditure" class="form-control">
+                            <input type="number" name="boundary_cleaning_expenditure" class="form-control">
                         </div>
                         <div class="form-group col-md-4 is_pond_preparation_field" hidden>
                             <label>Fym application expenditure </label>
-                            <input type="text" name="fym_application_expenditure" class="form-control">
+                            <input type="number" name="fym_application_expenditure" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -135,23 +146,23 @@
                     <div class="row is_hydrological_field" hidden>
                         <div class="form-group col-md-4">
                             <label>Temp</label>
-                            <input type="text" name="temp" class="form-control">
+                            <input type="number" name="temp" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>PH</label>
-                            <input type="text" name="ph" class="form-control">
+                            <input type="number" name="ph" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>DO</label>
-                            <input type="text" name="do" class="form-control">
+                            <input type="number" name="do" class="form-control">
                         </div>
                         <div class="form-group col-md-6">
                             <label>Transperency (S. Disc)</label>
-                            <input type="text" name="transperency" class="form-control">
+                            <input type="number" name="transperency" class="form-control">
                         </div>
                         <div class="form-group col-md-6">
                             <label>Water Depth (In Ft)</label>
-                            <input type="text" name="water_depth" class="form-control">
+                            <input type="number" name="water_depth" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -180,11 +191,11 @@
                     <div class="row is_providing_feed_field" hidden>
                         <div class="form-group col-md-4 ">
                             <label>Quantity (in Kg) </label>
-                            <input type="text" name="mash_feed_quantity" id="mash_feed_quantity" class="form-control">
+                            <input type="number" name="mash_feed_quantity" id="mash_feed_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Rate (Rs/Kg) </label>
-                            <input type="text" name="mash_feed_rate" id="mash_feed_rate" class="form-control">
+                            <input type="number" name="mash_feed_rate" id="mash_feed_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Amount (in Rs) </label>
@@ -198,15 +209,15 @@
                     <div class="row is_providing_feed_field" hidden>
                         <div class="form-group col-md-4 ">
                             <label>Quantity (in Kg) </label>
-                            <input type="text" name="commerical_feed_quantity" id="commerical_feed_quantity" class="form-control">
+                            <input type="number" name="commerical_feed_quantity" id="commerical_feed_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Rate (Rs/Kg) </label>
-                            <input type="text" name="commerical_feed_rate" id="commerical_feed_rate" class="form-control">
+                            <input type="number" name="commerical_feed_rate" id="commerical_feed_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Amount (in Rs) </label>
-                            <input type="text" readonly name="commerical_feed_amount" id="commerical_feed_amount" class="form-control">
+                            <input type="number" readonly name="commerical_feed_amount" id="commerical_feed_amount" class="form-control">
                         </div>
                     </div>
                     <div class="row is_providing_feed_field" hidden>
@@ -215,15 +226,15 @@
                     <div class="row is_providing_feed_field" hidden>
                         <div class="form-group col-md-4 ">
                             <label>Quantity (in Kg) </label>
-                            <input type="text" name="mineral_quantity" id="mineral_quantity" class="form-control">
+                            <input type="number" name="mineral_quantity" id="mineral_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Rate (Rs/Kg) </label>
-                            <input type="text" name="mineral_rate" id="mineral_rate" class="form-control">
+                            <input type="number" name="mineral_rate" id="mineral_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Amount (in Rs) </label>
-                            <input type="text" readonly name="mineral_amount" id="mineral_amount" class="form-control">
+                            <input type="number" readonly name="mineral_amount" id="mineral_amount" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -238,11 +249,11 @@
                     <div class="row is_lime_applied_field" hidden>
                         <div class="form-group col-md-4 ">
                             <label>Quantity (in Kg) </label>
-                            <input type="text" name="lime_quantity" id="lime_quantity" class="form-control">
+                            <input type="number" name="lime_quantity" id="lime_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Rate (Rs/Kg) </label>
-                            <input type="text" name="lime_rate" id="lime_rate" class="form-control">
+                            <input type="number" name="lime_rate" id="lime_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Amount (in Rs) </label>
@@ -259,23 +270,23 @@
                         </div>
                         <div class="form-group col-md-4 is_netting_field" hidden>
                             <label>C </label>
-                            <input type="text" name="c" class="form-control">
+                            <input type="number" name="c" class="form-control">
                         </div>
                         <div class="form-group col-md-4 is_netting_field" hidden>
                             <label>R </label>
-                            <input type="text" name="r" class="form-control">
+                            <input type="number" name="r" class="form-control">
                         </div>
                         <div class="form-group col-md-4 is_netting_field" hidden>
                             <label>M </label>
-                            <input type="text" name="m" class="form-control">
+                            <input type="number" name="m" class="form-control">
                         </div>
                         <div class="form-group col-md-4 is_netting_field" hidden>
                             <label>CC </label>
-                            <input type="text" name="cc" class="form-control">
+                            <input type="number" name="cc" class="form-control">
                         </div>
                         <div class="form-group col-md-4 is_netting_field" hidden>
                             <label>O </label>
-                            <input type="text" name="o" class="form-control">
+                            <input type="number" name="o" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Have you done KMNO4 Bath ?</label>
@@ -302,15 +313,15 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Netting Expenditure </label>
-                            <input type="text" name="netting_expenditure" class="form-control">
+                            <input type="number" name="netting_expenditure" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Fish Solde Quantity (in Kg) </label>
-                            <input type="text" name="fish_quantity" id="fish_quantity" class="form-control">
+                            <input type="number" name="fish_quantity" id="fish_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Fish Solde Rate (Rs/Kg) </label>
-                            <input type="text" name="fish_rate" id="fish_rate" class="form-control">
+                            <input type="number" name="fish_rate" id="fish_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Fish Solde Amount (in Rs) </label>
@@ -387,6 +398,14 @@
                 $('.is_pond_preparation_field').attr('hidden',false);
             }else{
                 $('.is_pond_preparation_field').attr('hidden',true);
+            }
+        });
+        $('input[type=radio][name="is_fyk_applied"]').on('change', function(event) {
+            var value=$(this).val()
+            if (value==1) {
+                $('.is_fyk_field').attr('hidden',false);
+            }else{
+                $('.is_fyk_field').attr('hidden',true);
             }
         });
         $('#fry_quantity').change(function(){
