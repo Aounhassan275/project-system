@@ -322,7 +322,7 @@
                                 <option value="GF">GF</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-4 is_disease_indentified_field" hidden>
                             <label>Action for Disease </label>
                             <input type="text" name="action_for_disease" class="form-control">
                         </div>

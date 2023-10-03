@@ -321,7 +321,7 @@
                                 <option @if($monthly_farming_report->disease == 'GF') checked @endif value="GF">GF</option>
                             </select>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-4 is_disease_indentified_field" @if(!$monthly_farming_report->is_disease_indentified) hidden @endif>
                             <label>Action for Disease </label>
                             <input type="text" name="action_for_disease" value="{{$monthly_farming_report->action_for_disease}}" class="form-control">
                         </div>
