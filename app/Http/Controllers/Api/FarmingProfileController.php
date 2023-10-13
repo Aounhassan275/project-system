@@ -57,6 +57,9 @@ class FarmingProfileController extends Controller
     {
         
         try{
+            $this->validate($request,[
+                'user_id' => 'required',
+            ]);
             $profile = FarmingProfile::create($request->all());
             $farmingYearling = FarmingYearling::create([
                 'year' => $request->year,

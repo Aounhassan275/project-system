@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\FarmingProfileController;
 use App\Http\Controllers\Api\GramPanchyatController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\RespondentMasterController;
+use App\Http\Controllers\Api\TrainingReportController;
 use App\Http\Controllers\Api\VillageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,5 +39,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::resource('project', ProjectController::class);
     Route::post('monthly_farming_report/store', [MonthlyFarmingReportController::class,'store']);
     Route::resource('monthly_farming_report',MonthlyFarmingReportController::class);
+    Route::post('training_report/store', [TrainingReportController::class,'store']);
+    Route::resource('training_report',TrainingReportController::class);
     // Route::post('logout',[AuthController::class,'logout'])->name('logout');;
 });

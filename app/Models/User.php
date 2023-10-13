@@ -63,6 +63,22 @@ class User extends Authenticatable
     {
         return $this->hasMany(ProjectUser::class);
     }
+    public function trainingReports()
+    {
+        return $this->hasMany(TrainingReport::class);
+    }
+    public function respondentMasters()
+    {
+        return $this->hasMany(RespondentMaster::class);
+    }
+    public function monthlyFarmingReports()
+    {
+        return $this->hasMany(MonthlyFarmingReport::class);
+    }
+    public function farmingProfiles()
+    {
+        return $this->hasMany(FarmingProfile::class);
+    }
     public function getRole()
     {
         return $this->role->name ?? null;

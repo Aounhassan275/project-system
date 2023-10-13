@@ -42,6 +42,10 @@ include __DIR__ . '/admin.php';
 /*******************PROJECT ROUTE START*************/       
 include __DIR__ . '/project.php';
 /*******************PROJECT ROUTE END*************/     
+
+/*******************FIELD STAFF ROUTE START*************/       
+include __DIR__ . '/field_staff.php';
+/*******************FIELD STAFF ROUTE END*************/     
      
 /******************FUNCTIONALITY ROUTES****************/
 Route::get('cd', function() {
