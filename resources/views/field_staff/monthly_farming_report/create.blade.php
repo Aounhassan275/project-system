@@ -55,7 +55,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label>Is Pond Preparation ? </label>
+                            <label>Is Pond Preparation Done ? </label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
                                 <input type="radio" name="is_pond_preparation" required value="1" class=""> Yes 
                                 <input type="radio" name="is_pond_preparation" required value="0" class=""> No 
