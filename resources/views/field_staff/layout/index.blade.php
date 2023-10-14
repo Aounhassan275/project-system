@@ -161,15 +161,21 @@
 								<span>Dashboard</span>
 							</a>
 						</li>	
-						<li class="nav-item nav-item-submenu {{Request::is('field_staff/farming_profile*') || Request::is('field_staff/monthly_farming_report*') || Request::is('field_staff/training_report*') ?'nav-item-open':''}}">
+						<li class="nav-item nav-item-submenu {{Request::is('field_staff/farming_profile*') || Request::is('field_staff/monthly_farming_report*') ?'nav-item-open':''}}">
 							<a href="#" class="nav-link"><i class="icon-home4"></i> <span>Fishery Project</span></a>
 
-							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('field_staff/farming_profile*')  || Request::is('field_staff/monthly_farming_report*') || Request::is('field_staff/training_report*') ?'display:block':''}}">
+							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('field_staff/farming_profile*')  || Request::is('field_staff/monthly_farming_report*') ?'display:block':''}}">
 								<li class="nav-item"><a href="{{route('field_staff.farming_profile.index')}}" class="nav-link {{Request::is('field_staff/farming_profile') || Request::is('field_staff/farming_profile/*') ?'active':''}}">Farming Profile</a></li>
 								<li class="nav-item"><a href="{{route('field_staff.monthly_farming_report.index')}}" class="nav-link {{Request::is('field_staff/monthly_farming_report') || Request::is('field_staff/monthly_farming_report/*') ?'active':''}}">Monthly Farming Report</a></li>
-								<li class="nav-item"><a href="{{route('field_staff.training_report.index')}}" class="nav-link {{Request::is('field_staff/training_report') || Request::is('field_staff/training_report/*') ?'active':''}}">Training Report</a></li>
 							</ul>
 						</li>
+						<li class="nav-item">
+						<a href="{{route('field_staff.training_report.index')}}" class="nav-link {{Request::is('field_staff/training_report') || Request::is('field_staff/training_report/*') ?'active':''}}">
+						<i class="icon-home4"></i>
+						<span>Training Report</span>
+						</a>
+						</li>
+
 						<li class="nav-item">
 							<a href="{{route('field_staff.respondent_master.index')}}" class="nav-link {{Request::is('field_staff/respondent_master') || Request::is('field_staff/respondent_master/*')?'active':''}}">
 								<i class="icon-home4"></i>
