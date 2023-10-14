@@ -147,19 +147,19 @@
                         </div>
                     </div>
                     <div class="row is_hydrological_field"  @if(!$monthly_farming_report->is_hydrological) hidden @endif>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label>PH</label>
                             <input type="number" name="ph"  value="{{$monthly_farming_report->ph}}" class="form-control">
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label>DO (mg/L)</label>
                             <input type="number" name="do" value="{{$monthly_farming_report->do}}" class="form-control">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                             <label>Transperency (S. Disc in cm)</label>
                             <input type="number" name="transperency" value="{{$monthly_farming_report->transperency}}" class="form-control">
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                             <label>Ammonia (In ppm)</label>
                             <input type="number" name="water_depth" value="{{$monthly_farming_report->water_depth}}" class="form-control">
                         </div>
