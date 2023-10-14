@@ -23,7 +23,6 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Photograph</th>
                     <th>Name</th>
                     <th>Objective</th>
                     <th>Type of Participants</th>
@@ -31,14 +30,12 @@
                     <th>Total Mens</th>
                     <th>Total Females</th>
                     <th>Action</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (Auth::user()->trainingReports  as $key => $training_report)
                 <tr>
                     <td>{{$key+1}}</td>
-                    <td><img src="{{asset($training_report->image)}}" height="150" width="150" alt=""></td>
                     <td>{{$training_report->name}}</td>
                     <td>{{$training_report->objective}}</td>
                     <td>{{$training_report->type_of_participants}}</td>
@@ -47,13 +44,6 @@
                     <td>{{$training_report->number_of_female}}</td>
                     <td>
                         <a href="{{route('field_staff.training_report.edit',$training_report->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                    </td>
-                    <td>
-                        <form action="{{route('field_staff.training_report.destroy',$training_report->id)}}" method="POST">
-                            @method('DELETE')
-                            @csrf
-                        <button class="btn btn-danger">Delete</button>
-                        </form>
                     </td>
                 </tr>
                 @endforeach

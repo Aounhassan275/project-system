@@ -28,8 +28,6 @@
                     <th>Date Of Update</th>
                     <th>Time Of Update</th>
                     <th>Location</th>
-                    <th>Action</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,16 +39,6 @@
                     <td>{{@$monthly_farming_report->date_of_update?$monthly_farming_report->date_of_update->format('d M,Y'):''}}</td>
                     <td>{{@$monthly_farming_report->date_of_update?$monthly_farming_report->date_of_update->format('H i A'):''}}</td>
                     <td>{{@$monthly_farming_report->location}}</td>
-                    <td>
-                        <a href="{{route('field_staff.monthly_farming_report.edit',$monthly_farming_report->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                    </td>
-                    <td>
-                        <form action="{{route('field_staff.monthly_farming_report.destroy',$monthly_farming_report->id)}}" method="POST">
-                            @method('DELETE')
-                            @csrf
-                        <button class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
                 </tr>
                 @endforeach
             </tbody>

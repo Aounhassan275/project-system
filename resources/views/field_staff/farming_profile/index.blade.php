@@ -28,7 +28,6 @@
                     <th>Total Annual Income</th>
                     <th>Annual Income From Fishery</th>
                     <th>Action</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,13 +40,6 @@
                     <td>{{$farming_profile->total_annual_income_from_fishery}}</td>
                     <td>
                         <a href="{{route('field_staff.farming_profile.edit',$farming_profile->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                    </td>
-                    <td>
-                        <form action="{{route('field_staff.farming_profile.destroy',$farming_profile->id)}}" method="POST">
-                            @method('DELETE')
-                            @csrf
-                        <button class="btn btn-danger">Delete</button>
-                        </form>
                     </td>
                 </tr>
                 @endforeach
