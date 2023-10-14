@@ -30,7 +30,6 @@
                     <th>Total Mens</th>
                     <th>Total Females</th>
                     <th>Action</th>
-                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,13 +44,6 @@
                     <td>{{$training_report->number_of_female}}</td>
                     <td>
                         <a href="{{route('field_staff.training_report.edit',$training_report->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                    </td>
-                    <td>
-                        <form action="{{route('field_staff.training_report.destroy',$training_report->id)}}" method="POST">
-                            @method('DELETE')
-                            @csrf
-                        <button class="btn btn-danger">Delete</button>
-                        </form>
                     </td>
                 </tr>
                 @endforeach
