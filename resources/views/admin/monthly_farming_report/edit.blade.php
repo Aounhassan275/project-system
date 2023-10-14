@@ -78,7 +78,7 @@
                         </div>
                         <div class="form-group col-md-4 is_fyk_field" @if(!$monthly_farming_report->is_fyk_applied) hidden @endif>
                             <label>FYM expenditure</label>
-                            <input type="number" name="fyk_expenditure" class="form-control">
+                            <input type="number" value="{{$monthly_farming_report->fyk_expenditure}}" name="fyk_expenditure" class="form-control">
                         </div>
                     </div>
                     <div class="row">
