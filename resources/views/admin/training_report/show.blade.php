@@ -23,7 +23,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="form-group col-md-12 text-center">
-                        <img src="{{asset($training_report->image)}}" height="350" width="450" alt="">
+                        <img src="{{asset($training_report->image)}}" height="300" width="450" alt="">
                     </div>
                 </div>
                 <div class="row">
