@@ -188,6 +188,13 @@
 								<li class="nav-item"><a href="{{route('admin.monthly_farming_report.index')}}" class="nav-link {{Request::is('admin/monthly_farming_report') || Request::is('admin/monthly_farming_report/*') ?'active':''}}">Monthly Farming Report</a></li>
 							</ul>
 						</li>
+						<li class="nav-item nav-item-submenu {{Request::is('admin/training_report*') ?'nav-item-open':''}}">
+							<a href="#" class="nav-link"><i class="icon-home4"></i> <span>Report</span></a>
+
+							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('admin/training_report*')   ?'display:block':''}}">
+								<li class="nav-item"><a href="{{route('admin.training_report.index')}}" class="nav-link {{Request::is('admin/training_report') || Request::is('admin/training_report/*') ?'active':''}}">Training Report</a></li>
+							</ul>
+						</li>
 						<li class="nav-item">
 							<a href="{{route('admin.respondent_master.index')}}" class="nav-link {{Request::is('admin/respondent_master')?'active':''}}">
 								<i class="icon-home4"></i>

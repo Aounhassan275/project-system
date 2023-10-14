@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ProjectUserController;
 use App\Http\Controllers\Admin\RespondentMasterController;
 use App\Http\Controllers\Admin\StateController;
+use App\Http\Controllers\Admin\TrainingReportController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\VillageController;
 
@@ -76,6 +77,9 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','middleware' => 'auth:user','a
     Route::post('get_months',[MonthlyFarmingReportController::class,'getMonths'])->name('monthly_farming_report.getMonths');
     Route::resource('monthly_farming_report',MonthlyFarmingReportController::class);
     /*******************Monthly Farming Report ROUTE END*************/   
+    /*******************TRAINING REPORT ROUTE START*************/       
+    Route::resource('training_report',TrainingReportController::class);
+    /*******************TRAINING REPORT ROUTE END*************/   
 });
 /****************** ADMIN MIDDLEWARE PAGES ROUTES END****************/
 ?>

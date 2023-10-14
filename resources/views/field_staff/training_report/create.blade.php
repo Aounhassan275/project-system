@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Geo Location</label>
-                            <input type="text" name="geo_location" placeholder="Geo Location" class="form-control" required>
+                            <input type="text" readonly name="geo_location" id="geo_location" placeholder="Geo Location" class="form-control" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label>Level of Training</label>
@@ -157,6 +157,11 @@
 @section('scripts')
 <script>
     $(document).ready(function(){
+        navigator.geolocation.getCurrentPosition(showPosition);
+        
+        function showPosition(position) {
+            $('#geo_location').val(position.coords.latitude+','+position.coords.longitude);
+        }
         $('input[type=radio][name="is_co_facilitator_name"]').on('change', function(event) {
             var value=$(this).val();
             if (value==1) {
