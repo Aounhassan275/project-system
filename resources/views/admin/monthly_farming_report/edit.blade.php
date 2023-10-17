@@ -65,7 +65,7 @@
                         </div>
                         <div class="form-group col-md-4 is_pond_preparation_field" @if(!$monthly_farming_report->is_pond_preparation) hidden @endif >
                             <label>Boundary cleaning and repairing expenditure</label>
-                            <input type="number" name="boundary_cleaning_expenditure" value="{{@$monthly_farming_report->boundary_cleaning_expenditure}}" class="form-control">
+                            <input type="number" step="0.01" name="boundary_cleaning_expenditure" value="{{@$monthly_farming_report->boundary_cleaning_expenditure}}" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -78,7 +78,7 @@
                         </div>
                         <div class="form-group col-md-4 is_fyk_field" @if(!$monthly_farming_report->is_fyk_applied) hidden @endif>
                             <label>FYM expenditure</label>
-                            <input type="number" value="{{$monthly_farming_report->fyk_expenditure}}" name="fyk_expenditure" class="form-control">
+                            <input type="number" step="0.01"  value="{{$monthly_farming_report->fyk_expenditure}}" name="fyk_expenditure" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -96,23 +96,23 @@
                     <div class="row is_stocking_field" @if(!$monthly_farming_report->is_stocking) hidden @endif>
                         <div class="form-group col-md-4">
                             <label>Catla</label>
-                            <input type="number" value="{{$monthly_farming_report->catia_fry}}" name="catia_fry" class="form-control">
+                            <input type="number" step="0.01" value="{{$monthly_farming_report->catia_fry}}" name="catia_fry" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Rahu</label>
-                            <input type="number" value="{{$monthly_farming_report->rahu_fry}}" name="rahu_fry" class="form-control">
+                            <input type="number" step="0.01" value="{{$monthly_farming_report->rahu_fry}}" name="rahu_fry" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Mirgal</label>
-                            <input type="number" value="{{$monthly_farming_report->mirgal_fry}}" name="mirgal_fry" class="form-control">
+                            <input type="number" step="0.01" value="{{$monthly_farming_report->mirgal_fry}}" name="mirgal_fry" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Common Carp</label>
-                            <input type="number" value="{{$monthly_farming_report->common_carp_fry}}" name="common_carp_fry" class="form-control">
+                            <input type="number" step="0.01" value="{{$monthly_farming_report->common_carp_fry}}" name="common_carp_fry" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Other</label>
-                            <input type="number" name="other_fry" value="{{$monthly_farming_report->other_fry}}"  class="form-control">
+                            <input type="number" step="0.01" name="other_fry" value="{{$monthly_farming_report->other_fry}}"  class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Acclimatisation (HR)</label>
@@ -126,11 +126,11 @@
                     <div class="row is_stocking_field"  @if(!$monthly_farming_report->is_stocking) hidden @endif>
                         <div class="form-group col-md-4">
                             <label>Quantity (in Kg)</label>
-                            <input type="number" name="fry_quantity" value="{{$monthly_farming_report->fry_quantity}}" id="fry_quantity" class="form-control">
+                            <input type="number" step="0.01" name="fry_quantity" value="{{$monthly_farming_report->fry_quantity}}" id="fry_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4"  >
                             <label>Rate (Rs/Kg)</label>
-                            <input type="number" name="fry_rate" id="fry_rate"  value="{{$monthly_farming_report->fry_rate}}"  class="form-control">
+                            <input type="number" step="0.01" name="fry_rate" id="fry_rate"  value="{{$monthly_farming_report->fry_rate}}"  class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Amount (in Rs) </label>
@@ -149,19 +149,19 @@
                     <div class="row is_hydrological_field"  @if(!$monthly_farming_report->is_hydrological) hidden @endif>
                         <div class="form-group col-md-3">
                             <label>PH</label>
-                            <input type="number" name="ph"  value="{{$monthly_farming_report->ph}}" class="form-control">
+                            <input type="number" step="0.01" name="ph"  value="{{$monthly_farming_report->ph}}" class="form-control">
                         </div>
                         <div class="form-group col-md-3">
                             <label>DO (mg/L)</label>
-                            <input type="number" name="do" value="{{$monthly_farming_report->do}}" class="form-control">
+                            <input type="number"  step="0.01" name="do" value="{{$monthly_farming_report->do}}" class="form-control">
                         </div>
                         <div class="form-group col-md-3">
                             <label>Transperency (S. Disc in cm)</label>
-                            <input type="number" name="transperency" value="{{$monthly_farming_report->transperency}}" class="form-control">
+                            <input type="number" step="0.01" name="transperency" value="{{$monthly_farming_report->transperency}}" class="form-control">
                         </div>
                         <div class="form-group col-md-3">
                             <label>Ammonia (In ppm)</label>
-                            <input type="number" name="water_depth" value="{{$monthly_farming_report->water_depth}}" class="form-control">
+                            <input type="number" step="0.01" name="water_depth" value="{{$monthly_farming_report->water_depth}}" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -190,11 +190,11 @@
                     <div class="row is_providing_feed_field" @if(!$monthly_farming_report->is_providing_feed) hidden @endif>
                         <div class="form-group col-md-4 ">
                             <label>Quantity (in Kg) </label>
-                            <input type="number" name="mash_feed_quantity" value="{{$monthly_farming_report->mash_feed_quantity}}" id="mash_feed_quantity" class="form-control">
+                            <input type="number" step="0.01" name="mash_feed_quantity" value="{{$monthly_farming_report->mash_feed_quantity}}" id="mash_feed_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Rate (Rs/Kg) </label>
-                            <input type="number" name="mash_feed_rate" value="{{$monthly_farming_report->mash_feed_rate}}" id="mash_feed_rate" class="form-control">
+                            <input type="number" step="0.01" name="mash_feed_rate" value="{{$monthly_farming_report->mash_feed_rate}}" id="mash_feed_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Amount (in Rs) </label>
@@ -208,11 +208,11 @@
                     <div class="row is_providing_feed_field" @if(!$monthly_farming_report->is_providing_feed) hidden @endif>
                         <div class="form-group col-md-4 ">
                             <label>Quantity (in Kg) </label>
-                            <input type="number" name="commerical_feed_quantity" value="{{$monthly_farming_report->commerical_feed_quantity}}"  id="commerical_feed_quantity" class="form-control">
+                            <input type="number" step="0.01" name="commerical_feed_quantity" value="{{$monthly_farming_report->commerical_feed_quantity}}"  id="commerical_feed_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Rate (Rs/Kg) </label>
-                            <input type="number" name="commerical_feed_rate" value="{{$monthly_farming_report->commerical_feed_rate}}"  id="commerical_feed_rate" class="form-control">
+                            <input type="number" step="0.01" name="commerical_feed_rate" value="{{$monthly_farming_report->commerical_feed_rate}}"  id="commerical_feed_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Amount (in Rs) </label>
@@ -225,11 +225,11 @@
                     <div class="row is_providing_feed_field" @if(!$monthly_farming_report->is_providing_feed) hidden @endif>
                         <div class="form-group col-md-4 ">
                             <label>Quantity (in Kg) </label>
-                            <input type="number" name="mineral_quantity" value="{{$monthly_farming_report->mineral_quantity}}"  id="mineral_quantity" class="form-control">
+                            <input type="number" step="0.01" name="mineral_quantity" value="{{$monthly_farming_report->mineral_quantity}}"  id="mineral_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Rate (Rs/Kg) </label>
-                            <input type="number" name="mineral_rate" value="{{$monthly_farming_report->mineral_rate}}"  id="mineral_rate" class="form-control">
+                            <input type="number" step="0.01" name="mineral_rate" value="{{$monthly_farming_report->mineral_rate}}"  id="mineral_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Amount (in Rs) </label>
@@ -248,11 +248,11 @@
                     <div class="row is_lime_applied_field"  @if(!$monthly_farming_report->is_lime_applied) hidden @endif>
                         <div class="form-group col-md-4 ">
                             <label>Quantity (in Kg) </label>
-                            <input type="number" name="lime_quantity" value="{{$monthly_farming_report->lime_quantity}}" id="lime_quantity" class="form-control">
+                            <input type="number" step="0.01" name="lime_quantity" value="{{$monthly_farming_report->lime_quantity}}" id="lime_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Rate (Rs/Kg) </label>
-                            <input type="number" name="lime_rate" value="{{$monthly_farming_report->lime_rate}}" id="lime_rate" class="form-control">
+                            <input type="number" step="0.01" name="lime_rate" value="{{$monthly_farming_report->lime_rate}}" id="lime_rate" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Amount (in Rs) </label>
@@ -269,23 +269,23 @@
                         </div>
                         <div class="form-group col-md-4 is_netting_field" @if(!$monthly_farming_report->is_netting) hidden @endif>
                             <label>C (Avg. weight in gram) </label>
-                            <input type="number" name="c" value="{{$monthly_farming_report->c}}" class="form-control">
+                            <input type="number" step="0.01" name="c" value="{{$monthly_farming_report->c}}" class="form-control">
                         </div>
                         <div class="form-group col-md-4 is_netting_field"  @if(!$monthly_farming_report->is_netting) hidden @endif>
                             <label>R (Avg. weight in gram) </label>
-                            <input type="number" name="r" value="{{$monthly_farming_report->r}}"  class="form-control">
+                            <input type="number" step="0.01" name="r" value="{{$monthly_farming_report->r}}"  class="form-control">
                         </div>
                         <div class="form-group col-md-4 is_netting_field"  @if(!$monthly_farming_report->is_netting) hidden @endif>
                             <label>M (Avg. weight in gram) </label>
-                            <input type="number" name="m" value="{{$monthly_farming_report->m}}"  class="form-control">
+                            <input type="number" step="0.01" name="m" value="{{$monthly_farming_report->m}}"  class="form-control">
                         </div>
                         <div class="form-group col-md-4 is_netting_field"  @if(!$monthly_farming_report->is_netting) hidden @endif>
                             <label>CC (Avg. weight in gram) </label>
-                            <input type="number" name="cc" value="{{$monthly_farming_report->cc}}"  class="form-control">
+                            <input type="number" step="0.01" name="cc" value="{{$monthly_farming_report->cc}}"  class="form-control">
                         </div>
                         <div class="form-group col-md-4 is_netting_field"  @if(!$monthly_farming_report->is_netting) hidden @endif>
                             <label>O (Avg. weight in gram) </label>
-                            <input type="number" name="o" value="{{$monthly_farming_report->o}}"  class="form-control">
+                            <input type="number" step="0.01" name="o" value="{{$monthly_farming_report->o}}"  class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Have you done KMNO4 Bath ?</label>
@@ -319,17 +319,17 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Netting Expenditure </label>
-                            <input type="number" name="netting_expenditure" value="{{$monthly_farming_report->netting_expenditure}}" class="form-control">
+                            <input type="number" step="0.01" name="netting_expenditure" value="{{$monthly_farming_report->netting_expenditure}}" class="form-control">
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4 ">
                             <label>Fish Solde Quantity (in Kg) </label>
-                            <input type="number" name="fish_quantity" value="{{$monthly_farming_report->fish_quantity}}" id="fish_quantity" class="form-control">
+                            <input type="number" step="0.01" name="fish_quantity" value="{{$monthly_farming_report->fish_quantity}}" id="fish_quantity" class="form-control">
                         </div>
                         <div class="form-group col-md-4 ">
                             <label>Fish Solde Rate (Rs/Kg) </label>
-                            <input type="number" name="fish_rate" id="fish_rate" value="{{$monthly_farming_report->fish_rate}}" class="form-control">
+                            <input type="number" step="0.01" name="fish_rate" id="fish_rate" value="{{$monthly_farming_report->fish_rate}}" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Fish Solde Amount (in Rs) </label>

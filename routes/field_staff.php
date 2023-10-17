@@ -21,6 +21,9 @@ Route::group(['prefix' => 'field_staff', 'as'=>'field_staff.','middleware' => 'a
     /*******************Farming Profile ROUTE END*************/  
     /*******************Monthly Farming Report ROUTE START*************/       
     Route::post('get_months',[MonthlyFarmingReportController::class,'getMonths'])->name('monthly_farming_report.getMonths');
+    Route::post('get_blocks',[MonthlyFarmingReportController::class,'getBlocks'])->name('monthly_farming_report.get_blocks');
+    Route::post('get_gram_panchyats',[MonthlyFarmingReportController::class,'getGramPanchyats'])->name('monthly_farming_report.get_gram_panchyats');
+    Route::post('get_villages',[MonthlyFarmingReportController::class,'getVillages'])->name('monthly_farming_report.get_villages');
     Route::resource('monthly_farming_report',MonthlyFarmingReportController::class);
     /*******************Monthly Farming Report ROUTE END*************/    
 });        

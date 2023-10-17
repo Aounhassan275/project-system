@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
+use App\Models\Block;
+use App\Models\GramPanchyat;
 use App\Models\MonthlyFarmingReport;
+use App\Models\Village;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -132,6 +135,27 @@ class MonthlyFarmingReportController extends Controller
         }
         return response()->json([
             'available_months' => $available_months,
+        ]);
+    }
+    public function getBlocks(Request $request)
+    {
+        $blocks = Block::where('district_id',$request->district_id)->get();
+        return response()->json([
+            'blocks' => $blocks,
+        ]);
+    }
+    public function getGramPanchyats(Request $request)
+    {
+        $gram_panchyats = GramPanchyat::where('block_id',$request->block_id)->get();
+        return response()->json([
+            'gram_panchyats' => $gram_panchyats,
+        ]);
+    }
+    public function getVillages(Request $request)
+    {
+        $villages = Village::where('gram_panchyat_id',$request->gram_panchyat_id)->get();
+        return response()->json([
+            'villages' => $villages,
         ]);
     }
 }
