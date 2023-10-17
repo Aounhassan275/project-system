@@ -22,7 +22,6 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Photograph</th>
                     <th>Name</th>
                     <th>Objective</th>
                     <th>Type of Participants</th>
@@ -37,7 +36,6 @@
                 @foreach (App\Models\TrainingReport::all()  as $key => $training_report)
                 <tr>
                     <td>{{$key+1}}</td>
-                    <td><img src="{{asset($training_report->image)}}" height="150" width="150" alt=""></td>
                     <td>{{$training_report->name}}</td>
                     <td>{{$training_report->objective}}</td>
                     <td>{{$training_report->type_of_participants}}</td>

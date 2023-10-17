@@ -54,20 +54,7 @@
                     </div>
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label>Is FYK Applied ? </label>
-                            <div class="form-group form-group-feedback form-group-feedback-left">
-                                <input type="radio" name="is_fyk_applied" required value="1" class=""> Yes 
-                                <input type="radio" name="is_fyk_applied" required value="0" class=""> No 
-                            </div>
-                        </div>
-                        <div class="form-group col-md-4 is_fyk_field" hidden>
-                            <label>FYK expenditure</label>
-                            <input type="number" step="0.01" name="fyk_expenditure" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label>Is Pond Preparation ? </label>
+                            <label>Is Pond Preparation Done ? </label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
                                 <input type="radio" name="is_pond_preparation" required value="1" class=""> Yes 
                                 <input type="radio" name="is_pond_preparation" required value="0" class=""> No 
@@ -75,11 +62,20 @@
                         </div>
                         <div class="form-group col-md-4 is_pond_preparation_field" hidden>
                             <label>Boundary cleaning and repairing expenditure</label>
-                            <input type="number" step="0.01" name="boundary_cleaning_expenditure" class="form-control">
+                            <input type="number"  step="0.01" name="boundary_cleaning_expenditure" class="form-control">
                         </div>
-                        <div class="form-group col-md-4 is_pond_preparation_field" hidden>
-                            <label>Fym application expenditure </label>
-                            <input type="number" step="0.01" name="fym_application_expenditure" class="form-control">
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label>Is FYM Applied ? </label>
+                            <div class="form-group form-group-feedback form-group-feedback-left">
+                                <input type="radio" name="is_fyk_applied" required value="1" class=""> Yes 
+                                <input type="radio" name="is_fyk_applied" required value="0" class=""> No 
+                            </div>
+                        </div>
+                        <div class="form-group col-md-4 is_fyk_field" hidden>
+                            <label>FYM expenditure</label>
+                            <input type="number"  step="0.01" name="fyk_expenditure" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -93,7 +89,7 @@
                         </div>
                     </div>
                     <div class="row is_stocking_field" hidden>
-                        <p><strong>Numbers Of Stock Fry</strong></p>
+                        <p><strong>Numbers Of Stock Fry/Figerling</strong></p>
                     </div>
                     <div class="row is_stocking_field" hidden>
                         <div class="form-group col-md-4">
@@ -152,25 +148,21 @@
                         </div>
                     </div>
                     <div class="row is_hydrological_field" hidden>
-                        <div class="form-group col-md-4">
-                            <label>Temp</label>
-                            <input type="number" step="0.01" name="temp" class="form-control">
-                        </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label>PH</label>
                             <input type="number" step="0.01" name="ph" class="form-control">
                         </div>
-                        <div class="form-group col-md-4">
-                            <label>DO</label>
-                            <input type="number" step="0.01" name="do" class="form-control">
+                        <div class="form-group col-md-3">
+                            <label>DO (mg/L)</label>
+                            <input type="number" step="0.01"  name="do" class="form-control">
                         </div>
-                        <div class="form-group col-md-6">
-                            <label>Transperency (S. Disc)</label>
-                            <input type="number" step="0.01" name="transperency" class="form-control">
+                        <div class="form-group col-md-3">
+                            <label>Transperency (S. Disc in cm)</label>
+                            <input type="number" step="0.01"  name="transperency" class="form-control">
                         </div>
-                        <div class="form-group col-md-6">
-                            <label>Water Depth (In Ft)</label>
-                            <input type="number" step="0.01" name="water_depth" class="form-control">
+                        <div class="form-group col-md-3">
+                            <label>Ammonia (In ppm)</label>
+                            <input type="number" step="0.01"  name="water_depth" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -184,7 +176,7 @@
                         <div class="form-group col-md-6 is_providing_feed_field" hidden>
                             <label>Providing Feed in Last Month ? </label>
                             <select  name="number_of_feed" class="form-control select-search "  data-fouc required>
-                                <option selected disabled>Select Farmer</option>
+                                <option selected disabled>Number of Times</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -277,24 +269,24 @@
                             </div>
                         </div>
                         <div class="form-group col-md-4 is_netting_field" hidden>
-                            <label>C </label>
-                            <input type="number" step="0.01" name="c" class="form-control">
+                            <label>C (Avg. weight in gram) </label>
+                            <input type="number" step="0.01"  name="c" class="form-control">
                         </div>
                         <div class="form-group col-md-4 is_netting_field" hidden>
-                            <label>R </label>
-                            <input type="number" step="0.01" name="r" class="form-control">
+                            <label>R (Avg. weight in gram) </label>
+                            <input type="number" step="0.01"  name="r" class="form-control">
                         </div>
                         <div class="form-group col-md-4 is_netting_field" hidden>
-                            <label>M </label>
-                            <input type="number" step="0.01" name="m" class="form-control">
+                            <label>M (Avg. weight in gram) </label>
+                            <input type="number" step="0.01"  name="m" class="form-control">
                         </div>
                         <div class="form-group col-md-4 is_netting_field" hidden>
-                            <label>CC </label>
-                            <input type="number" step="0.01" name="cc" class="form-control">
+                            <label>CC (Avg. weight in gram) </label>
+                            <input type="number" step="0.01"  name="cc" class="form-control">
                         </div>
                         <div class="form-group col-md-4 is_netting_field" hidden>
-                            <label>O </label>
-                            <input type="number" step="0.01" name="o" class="form-control">
+                            <label>O (Avg. weight in gram)</label>
+                            <input type="number" step="0.01"  name="o" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Have you done KMNO4 Bath ?</label>
@@ -313,7 +305,7 @@
                         <div class="form-group col-md-4 is_disease_indentified_field" hidden>
                             <label>Specify the Disease</label>
                             <select  name="disease" class="form-control select-search "  data-fouc required>
-                                <option selected disabled>Select Farmer</option>
+                                <option selected disabled>Select Disease</option>
                                 <option value="FN">FN</option>
                                 <option value="TR">TR</option>
                                 <option value="DR">DR</option>
