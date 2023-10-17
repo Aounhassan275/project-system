@@ -125,15 +125,15 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Total Number of Participants</label>
-                            <input type="number" name="number_of_participants"  placeholder="Number of Participants" class="form-control" required>
+                            <input type="number" step="0.01" name="number_of_participants"  placeholder="Number of Participants" class="form-control" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label>Number of Male</label>
-                            <input type="number" name="number_of_male"  placeholder="Number of Male" class="form-control" required>
+                            <input type="number" step="0.01" name="number_of_male"  placeholder="Number of Male" class="form-control" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label>Number of Female</label>
-                            <input type="number" name="number_of_female"  placeholder="Number of Female" class="form-control" required>
+                            <input type="number" step="0.01" name="number_of_female"  placeholder="Number of Female" class="form-control" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label>Photograph</label>

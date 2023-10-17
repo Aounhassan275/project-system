@@ -99,11 +99,11 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Total Annual Income (In Rs.)</label>
-                            <input type="number" name="total_annual_income" required placeholder="Total Annual Income" class="form-control">
+                            <input type="number" step="0.01" name="total_annual_income" required placeholder="Total Annual Income" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Total Annual Income from Fishery (In Rs.)</label>
-                            <input type="number" name="total_annual_income_from_fishery" required placeholder="Total Annual Income from Fishery" class="form-control">
+                            <input type="number" step="0.01" name="total_annual_income_from_fishery" required placeholder="Total Annual Income from Fishery" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Involvement in Fishery as</label>
@@ -115,19 +115,19 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Own Water Body (In Kani.)</label>
-                            <input type="number" name="own_water_body" value="0" id="own_water_body" required placeholder="Own Water Body" class="form-control">
+                            <input type="number" step="0.01" name="own_water_body" value="0" id="own_water_body" required placeholder="Own Water Body" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Lease in Body (In Kani.)</label>
-                            <input type="number" name="lease_in_water_body" value="0" id="lease_in_water_body" required placeholder="Lease In Water Body" class="form-control">
+                            <input type="number" step="0.01" name="lease_in_water_body" value="0" id="lease_in_water_body" required placeholder="Lease In Water Body" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Lease Out Body (In Kani.)</label>
-                            <input type="number" name="lease_out_water_body" value="0" id="lease_out_water_body" required placeholder="Lease Out Water Body" class="form-control">
+                            <input type="number" step="0.01" name="lease_out_water_body" value="0" id="lease_out_water_body" required placeholder="Lease Out Water Body" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Total Water Body (In Kani.)</label>
-                            <input type="number" name="total_water_body" value="0" id="total_water_body" required placeholder="Total Water Body" class="form-control">
+                            <input type="number" step="0.01" name="total_water_body" value="0" id="total_water_body" required placeholder="Total Water Body" class="form-control">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Have Pump Set ? </label>
@@ -204,15 +204,15 @@
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label>Year</label>
-                            <input type="number" name="year" class="form-control" required>                            
+                            <input type="number" step="0.01" name="year" class="form-control" required>                            
                         </div>
                         <div class="form-group col-md-4">
                             <label>Figerlings</label>
-                            <input type="number" name="figerlings" class="form-control" required>                            
+                            <input type="number" step="0.01" name="figerlings" class="form-control" required>                            
                         </div>
                         <div class="form-group col-md-4">
                             <label>Yearlings</label>
-                            <input type="number" name="yearlings" class="form-control" required>                            
+                            <input type="number" step="0.01" name="yearlings" class="form-control" required>                            
                         </div>
                     </div>
                     <div class="row">
@@ -250,19 +250,19 @@
                     <div class="row">
                         <div class="form-group col-md-3">
                             <label>Year</label>
-                            <input type="number" name="fish_sold_year" class="form-control" required>                            
+                            <input type="number" step="0.01" name="fish_sold_year" class="form-control" required>                            
                         </div>
                         <div class="form-group col-md-3">
                             <label>Quantity</label>
-                            <input type="number" value="0" name="fish_sold_quantity" id="fish_sold_quantity" class="form-control" required>                            
+                            <input type="number" step="0.01" value="0" name="fish_sold_quantity" id="fish_sold_quantity" class="form-control" required>                            
                         </div>
                         <div class="form-group col-md-3">
                             <label>Rate</label>
-                            <input type="number" value="0" name="fish_sold_rate" id="fish_sold_rate" class="form-control" required>                            
+                            <input type="number" step="0.01" value="0" name="fish_sold_rate" id="fish_sold_rate" class="form-control" required>                            
                         </div>
                         <div class="form-group col-md-3">
                             <label>Amount</label>
-                            <input type="number" readonly name="fish_sold_amount" id="fish_sold_amount" class="form-control" required>                            
+                            <input type="number" step="0.01" readonly name="fish_sold_amount" id="fish_sold_amount" class="form-control" required>                            
                         </div>
                     </div>
                     <div class="row">

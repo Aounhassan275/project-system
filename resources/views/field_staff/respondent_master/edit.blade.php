@@ -34,15 +34,6 @@
                             <input name="image" type="file" class="form-control" placeholder="Enter Name" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Block</label>
-                            <select  name="block_id"  class="form-control select-search" data-fouc required>
-                                <option selected disabled>Select Block</option>
-                                @foreach(App\Models\Block::all() as $block)
-                                <option {{$respondent_master->block_id == $block->id?'selected':''}} value="{{$block->id}}">{{$block->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
                             <label>Choose District</label>
                             <select  name="district_id"  class="form-control select-search" data-fouc required>
                                 <option selected disabled>Select District</option>
@@ -52,10 +43,19 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
+                            <label>Choose Block</label>
+                            <select  name="block_id"  class="form-control select-search" data-fouc required>
+                                <option value="">Select Block</option>
+                                @foreach(App\Models\Block::where('district_id',$respondent_master->district_id)->get() as $block)
+                                <option {{$respondent_master->block_id == $block->id?'selected':''}} value="{{$block->id}}">{{$block->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
                             <label>Choose Gram Panchyat</label>
                             <select  name="gram_panchyat_id" class="form-control select-search" data-fouc required>
-                                <option disabled>Select Gram Panchyat</option>
-                                @foreach(App\Models\GramPanchyat::all() as $gram_panchyat)
+                                <option value="">Select Gram Panchyat</option>
+                                @foreach(App\Models\GramPanchyat::where('block_id',$respondent_master->block_id)->get() as $gram_panchyat)
                                 <option {{$respondent_master->gram_panchyat_id == $gram_panchyat->id?'selected':''}} value="{{$gram_panchyat->id}}">{{$gram_panchyat->name}}</option>
                                 @endforeach
                             </select>
@@ -63,8 +63,8 @@
                         <div class="form-group col-md-4">
                             <label>Choose Village</label>
                             <select  name="village_id" class="form-control select-search" data-fouc required>
-                                <option disabled>Select Village</option>
-                                @foreach(App\Models\Village::all() as $village)
+                                <option value="">Select Village</option>
+                                @foreach(App\Models\Village::where('gram_panchyat_id',$respondent_master->gram_panchyat_id)->get() as $village)
                                 <option {{$respondent_master->village_id == $village->id?'selected':''}} value="{{$village->id}}">{{$village->name}}</option>
                                 @endforeach
                             </select>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Age</label>
-                            <input name="age" type="number" value="{{$respondent_master->age}}" class="form-control" placeholder="Enter Age" required>
+                            <input name="age" type="number" step="0.01" value="{{$respondent_master->age}}" class="form-control" placeholder="Enter Age" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label>Choose Education</label>
@@ -95,7 +95,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Number Family Members</label>
-                            <input name="number_family_member" value="{{$respondent_master->number_family_member}}" type="number" class="form-control" placeholder="Enter Number Family Member" required>
+                            <input name="number_family_member" value="{{$respondent_master->number_family_member}}" type="number" step="0.01" class="form-control" placeholder="Enter Number Family Member" required>
                         </div>
                         <div class="form-group col-md-4">
                             <label>Choose Caste</label>
@@ -134,4 +134,74 @@
 @endsection
 
 @section('scripts')
+
+@section('scripts')
+<script>
+    $(document).ready(function(){
+        $('#district_id').change(function(){
+            let district_id = $(this).val();
+            $.ajax({
+                url: "{{route('field_staff.monthly_farming_report.get_blocks')}}",
+                method: 'post',
+                data: {
+                    district_id: district_id,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(response){
+                    blocks = response.blocks;
+                    $('#block_id').empty();
+                    $('#block_id').append('<option disabled>Select Blocks</option>');
+                    for (i=0;i<blocks.length;i++){
+                        $('#block_id').append('<option value="'+blocks[i].id+'">'+blocks[i].name+'</option>');
+                    }
+                }
+            });
+        });
+        $('#block_id').change(function(){
+            let block_id = $(this).val();
+            $.ajax({
+                url: "{{route('field_staff.monthly_farming_report.get_gram_panchyats')}}",
+                method: 'post',
+                data: {
+                    block_id: block_id,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(response){
+                    gram_panchyats = response.gram_panchyats;
+                    $('#gram_panchyat_id').empty();
+                    $('#gram_panchyat_id').append('<option disabled>Select Gram Panchyat</option>');
+                    for (i=0;i<gram_panchyats.length;i++){
+                        $('#gram_panchyat_id').append('<option value="'+gram_panchyats[i].id+'">'+gram_panchyats[i].name+'</option>');
+                    }
+                }
+            });
+        });
+        $('#gram_panchyat_id').change(function(){
+            let gram_panchyat_id = $(this).val();
+            $.ajax({
+                url: "{{route('field_staff.monthly_farming_report.get_villages')}}",
+                method: 'post',
+                data: {
+                    gram_panchyat_id: gram_panchyat_id,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(response){
+                    villages = response.villages;
+                    $('#village_id').empty();
+                    $('#village_id').append('<option disabled>Select Village</option>');
+                    for (i=0;i<villages.length;i++){
+                        $('#village_id').append('<option value="'+villages[i].id+'">'+villages[i].name+'</option>');
+                    }
+                }
+            });
+        });
+    });
+</script>
+@endsection
 @endsection
