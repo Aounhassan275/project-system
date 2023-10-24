@@ -238,7 +238,7 @@
                             </div>
                         </div>
                         <div class="form-group col-md-3">
-                            <label>Have you done meeting regularly ? </label>
+                            <label>Have you done neeting regularly ? </label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
                                 <input type="radio" name="have_meeting_regularly" value="1" class=""> Yes 
                                 <input type="radio" name="have_meeting_regularly" value="0" class=""> No 
