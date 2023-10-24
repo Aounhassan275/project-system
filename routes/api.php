@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\BlockController;
 use App\Http\Controllers\Api\DistrictController;
 use App\Http\Controllers\Api\FarmingProfileController;
 use App\Http\Controllers\Api\GramPanchyatController;
+use App\Http\Controllers\Api\MonthlyFarmingReportController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\RespondentMasterController;
 use App\Http\Controllers\Api\TrainingReportController;
