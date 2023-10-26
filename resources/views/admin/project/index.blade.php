@@ -26,7 +26,7 @@
                     <th>Project Name</th>
                     <th>Project Duration</th>
                     <th>Project State Name</th>
-                    <th>Project District Name</th>
+                    {{-- <th>Project District Name</th> --}}
                     <th>Action</th>
                     <th>Action</th>
                 </tr>
@@ -38,7 +38,7 @@
                     <td>{{$project->name}}</td>
                     <td>{{$project->duration}}</td>
                     <td>{{$project->state->name}}</td>
-                    <td>{{$project->district->name}}</td>
+                    {{-- <td>{{$project->district->name}}</td> --}}
                     <td>
                         <a href="{{route('admin.project.edit',$project->id)}}" class="btn btn-primary btn-sm">Edit</a>
                         {{-- <button data-toggle="modal" data-target="#edit_modal" name="{{$project->name}}" 
