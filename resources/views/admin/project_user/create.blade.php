@@ -34,7 +34,7 @@
                             </select>
                         </div>
                         <div class="form-group col-md-6">
-                            <label>Choose User</label>
+                            <label>Choose Project Manager</label>
                             <select  name="user_id"  class="form-control select-search" data-fouc required>
                                 <option selected disabled>Select User</option>
                                 @foreach(App\Models\User::where('role_id',2)->get() as $user)
