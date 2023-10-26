@@ -45,7 +45,6 @@ class ProjectController extends Controller
             $this->validate($request,[
                 'name' => 'required',
                 'state_id' => 'required',
-                'district_id' => 'required',
                 'duration' => 'required',
             ]);
             $project = Project::create($request->all());
