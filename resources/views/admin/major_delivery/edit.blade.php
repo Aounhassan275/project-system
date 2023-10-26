@@ -39,7 +39,7 @@
                             <input type="text" value="{{$major_delivery->deliverable}}" name="deliverable" class="form-control" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <label>Date</label>
+                            <label>Due Date</label>
                             <input type="date" name="date" value="{{$major_delivery->date?$major_delivery->date->format('Y-m-d'):''}}" class="form-control" required>
                         </div>
                     </div>
