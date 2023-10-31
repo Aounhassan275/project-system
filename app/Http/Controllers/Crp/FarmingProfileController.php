@@ -19,7 +19,6 @@ class FarmingProfileController extends Controller
      */
     public function index()
     {
-        dd(Auth::user());
         return view('crp.farming_profile.index');
     }
 
