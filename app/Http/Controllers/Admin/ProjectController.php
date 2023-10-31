@@ -62,20 +62,7 @@ class ProjectController extends Controller
                     'project_id' => $project->id
                 ]);
             }
-            foreach($request->gram_panchyat_ids as $gram_panchyat_id)
-            {
-                ProjectGramPanchyat::create([
-                    'gram_panchyat_id' => $gram_panchyat_id,
-                    'project_id' => $project->id
-                ]);
-            }
-            foreach($request->village_ids as $village_id)
-            {
-                ProjectVillage::create([
-                    'village_id' => $village_id,
-                    'project_id' => $project->id
-                ]);
-            }
+
             toastr()->success('Project Added Successfully');
             return redirect()->back();
         }catch (Exception $e)
@@ -106,10 +93,8 @@ class ProjectController extends Controller
     {
         $project = Project::find($id);
         $project_blocks = ProjectBlock::where('project_id',$project->id)->get()->pluck('block_id')->toArray();
-        $project_gram_panchyats = ProjectGramPanchyat::where('project_id',$project->id)->get()->pluck('gram_panchyat_id')->toArray();
-        $project_villages = ProjectVillage::where('project_id',$project->id)->get()->pluck('village_id')->toArray();
         $project_districts = ProjectDistrict::where('project_id',$project->id)->get()->pluck('district_id')->toArray();
-        return view('admin.project.edit',compact('project','project_blocks','project_gram_panchyats','project_villages','project_districts'));
+        return view('admin.project.edit',compact('project','project_blocks','project_districts'));
     }
 
     /**
@@ -147,30 +132,7 @@ class ProjectController extends Controller
                 ]);
             }
         }
-        ProjectGramPanchyat::whereNotIn('gram_panchyat_id',$request->gram_panchyat_ids)->where('project_id',$project->id)->delete();
-        foreach($request->gram_panchyat_ids as $gram_panchyat_id)
-        {
-            $gram_panchyat = ProjectGramPanchyat::where('gram_panchyat_id',$gram_panchyat_id)->where('project_id',$project->id)->first();
-            if(!$gram_panchyat)
-            {
-                ProjectGramPanchyat::create([
-                    'gram_panchyat_id' => $gram_panchyat_id,
-                    'project_id' => $project->id
-                ]);
-            }
-        }
-        ProjectVillage::whereNotIn('village_id',$request->village_ids)->where('project_id',$project->id)->delete();
-        foreach($request->village_ids as $village_id)
-        {
-            $village = ProjectVillage::where('village_id',$village_id)->where('project_id',$project->id)->first();
-            if(!$village)
-            {
-                ProjectVillage::create([
-                    'village_id' => $village_id,
-                    'project_id' => $project->id
-                ]);
-            }
-        }
+        
         toastr()->success('Project Updated successfully');
         return redirect()->back(); 
     }

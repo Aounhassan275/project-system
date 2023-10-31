@@ -87,24 +87,6 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="form-group col-md-6">
-                            <label>Choose Gram Panchyat</label>
-                            <select  name="gram_panchyat_ids[]" multiple class="form-control select-search" data-fouc required>
-                                <option disabled>Select Gram Panchyat</option>
-                                @foreach(App\Models\GramPanchyat::all() as $gram_panchyat)
-                                <option value="{{$gram_panchyat->id}}">{{$gram_panchyat->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Choose Village</label>
-                            <select  name="village_ids[]" multiple class="form-control select-search" data-fouc required>
-                                <option disabled>Select Village</option>
-                                @foreach(App\Models\Village::all() as $village)
-                                <option value="{{$village->id}}">{{$village->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
                     </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Create <i class="icon-paperplane ml-2"></i></button>
