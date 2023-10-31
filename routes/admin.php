@@ -25,7 +25,16 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','middleware' => 'auth:user'], 
         Route::view('dashboard','admin.dashboard.index')->name('dashboard.index');
         /*******************DASHBOARD ROUTE END*************/       
         /*******************USER ROUTE START*************/       
-        Route::view('user/project_manager','admin.user.project_manager')->name('user.project_manager');
+        Route::view('user/create_project_manager','admin.user.project_manager.create')->name('user.create_project_manager');
+        Route::view('user/project_manager','admin.user.project_manager.index')->name('user.project_manager');
+        Route::view('user/create_admin','admin.user.admin.create')->name('user.create_admin');
+        Route::view('user/admin','admin.user.admin.index')->name('user.admin');
+        Route::view('user/create_field_staff','admin.user.field_staff.create')->name('user.create_field_staff');
+        Route::view('user/field_staff','admin.user.field_staff.index')->name('user.field_staff');
+        Route::view('user/create_executive','admin.user.executive.create')->name('user.create_executive');
+        Route::view('user/executive','admin.user.executive.index')->name('user.executive');
+        Route::view('user/create_crp','admin.user.crp.create')->name('user.create_crp');
+        Route::view('user/crp','admin.user.crp.index')->name('user.crp');
         Route::get('user/verified/{id}',[UserController::class,'verified'])->name('user.verified');
         Route::get('user/revert_verification/{id}',[UserController::class,'revert_verification'])->name('user.revert_verification');
         Route::get('user/active/{id}',[UserController::class,'active'])->name('user.active');

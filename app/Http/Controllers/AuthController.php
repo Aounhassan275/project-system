@@ -24,6 +24,11 @@ class AuthController extends Controller
             toastr()->error('User is Not Registered.');
             return redirect()->back();
         }
+        if($user && !$user->is_verified || !$user->is_active)
+        {
+            toastr()->error('User is Not Active or verified by admin please contact.');
+            return redirect()->back();
+        }
         //Checking User Registeration Code End
         //User Authentication Code Start
         if(Auth::guard('user')->attempt($creds))

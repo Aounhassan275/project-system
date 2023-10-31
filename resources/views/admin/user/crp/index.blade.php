@@ -1,7 +1,7 @@
 @extends('admin.layout.index')
 
 @section('title')
-Project Managers
+CRP(s)
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@ Project Managers
 <div class="card">
     
     <div class="card-header header-elements-inline">
-        <h5 class="card-title">Manage Project Managers</h5>
+        <h5 class="card-title">Manage CRP(s)</h5>
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>
@@ -18,6 +18,11 @@ Project Managers
         </div>
     </div>
     <div class="card-body">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{route('admin.user.create_crp')}}" class="btn btn-sm btn-primary float-right">Create CRP</a>
+            </div>
+        </div>
         <div class="table-responsive">
             <table class="table datatable-save-state">
                 <thead>
@@ -26,6 +31,7 @@ Project Managers
                         <th>Profile Image</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Executive</th>
                         <th>Verified</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -33,7 +39,7 @@ Project Managers
                 </thead>
                 <tbody>
                     
-                    @foreach (App\Models\User::where('role_id',2)->get()  as $key => $user)
+                    @foreach (App\Models\User::where('role_id',5)->get()  as $key => $user)
                     <tr>
                         <td>{{$key+1}}</td>
                         <td>
@@ -43,6 +49,7 @@ Project Managers
                         </td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
+                        <td>{{@$user->executive ? @$user->executive->name : ''}}</td>
                         <td>
                             @if($user->is_verified)
                                 <span class="badge badge-success">Verified</span>

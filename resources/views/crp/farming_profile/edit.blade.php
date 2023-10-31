@@ -29,7 +29,7 @@
                             <label>Choose Farmer</label>
                             <select  name="respondent_master_id"  class="form-control select-search" data-fouc required>
                                 <option selected disabled>Select Farmer</option>
-                                @foreach(App\Models\RespondentMaster::all() as $respondent_master)
+                                @foreach(App\Models\RespondentMaster::where('user_id',Auth::user()->id)->where('is_validate',1)->get() as $respondent_master)
                                 <option @if($farming_profile->respondent_master_id == $respondent_master->id) selected @endif value="{{$respondent_master->id}}">{{$respondent_master->name}} ({{$respondent_master->farmer_id}})</option>
                                 @endforeach
                             </select>
