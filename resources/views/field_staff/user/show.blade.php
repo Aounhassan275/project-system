@@ -1,7 +1,7 @@
 @extends('field_staff.layout.index')
 
 @section('title')
-    {{$user->name}} Executive User
+    {{$user->name}} CRP User
 @endsection
 
 @section('content')

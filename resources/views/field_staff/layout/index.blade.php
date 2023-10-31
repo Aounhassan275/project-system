@@ -170,11 +170,11 @@
 							</ul>
 						</li>
 						<li class="nav-item nav-item-submenu {{Request::is('field_staff/user*')?'nav-item-open':''}}">
-							<a href="#" class="nav-link"><i class="icon-cart-remove"></i> <span>Executive Users</span></a>
+							<a href="#" class="nav-link"><i class="icon-cart-remove"></i> <span>CRP Users</span></a>
 
 							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('field_staff/user*') ?'display:block':''}}">
-								<li class="nav-item"><a href="{{route('field_staff.user.create')}}" class="nav-link {{Request::is('field_staff/user/create')?'active':''}}">Create Executive</a></li>
-								<li class="nav-item"><a href="{{route('field_staff.user.index')}}" class="nav-link {{Request::is('field_staff/user')?'active':''}}">All Executives</a></li>
+								<li class="nav-item"><a href="{{route('field_staff.user.create')}}" class="nav-link {{Request::is('field_staff/user/create')?'active':''}}">Create CRP</a></li>
+								<li class="nav-item"><a href="{{route('field_staff.user.index')}}" class="nav-link {{Request::is('field_staff/user')?'active':''}}">All CRP(s)</a></li>
 							</ul>
 						</li>
 						<li class="nav-item">

@@ -1,7 +1,7 @@
 @extends('executive.layout.index')
 
 @section('title')
-    {{$user->name}} Crp User
+    {{$user->name}} Field Staff User
 @endsection
 
 @section('content')

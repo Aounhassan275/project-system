@@ -1,7 +1,7 @@
 @extends('executive.layout.index')
 
 @section('title')
-    All Users
+    All Field Staffs
 @endsection
 
 @section('content')
@@ -9,7 +9,7 @@
 <div class="card">
     
     <div class="card-header header-elements-inline">
-        <h5 class="card-title">All Users</h5>
+        <h5 class="card-title">All Field Staffs</h5>
         <div class="header-elements">
             <div class="list-icons">
                 <a class="list-icons-item" data-action="collapse"></a>

@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>{{Auth::user()->name}} Field Staff Panel | SDS MIS</title>
+	<title>{{Auth::user()->name}} Executive Panel | SDS MIS</title>
 
 	<!-- Global stylesheets -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
@@ -60,7 +60,7 @@
 	<div class="navbar navbar-expand-md navbar-dark">
 		<div class="navbar-brand">
 			<a href="{{url('/')}}" class="text-light">
-				<h3 class="m-0"><b>Field Staff Panel Menu</b></h3>
+				<h3 class="m-0"><b>Executive Panel Menu</b></h3>
 			</a>
 		</div>
 
@@ -162,11 +162,11 @@
 							</a>
 						</li>	
 						<li class="nav-item nav-item-submenu {{Request::is('executive/user*')?'nav-item-open':''}}">
-							<a href="#" class="nav-link"><i class="icon-cart-remove"></i> <span>CRP Users</span></a>
+							<a href="#" class="nav-link"><i class="icon-cart-remove"></i> <span>Field Staff Users</span></a>
 
 							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('executive/user*') ?'display:block':''}}">
-								<li class="nav-item"><a href="{{route('executive.user.create')}}" class="nav-link {{Request::is('executive/user/create')?'active':''}}">Create Crp</a></li>
-								<li class="nav-item"><a href="{{route('executive.user.index')}}" class="nav-link {{Request::is('executive/user')?'active':''}}">All Crps</a></li>
+								<li class="nav-item"><a href="{{route('executive.user.create')}}" class="nav-link {{Request::is('executive/user/create')?'active':''}}">Create Field Staff</a></li>
+								<li class="nav-item"><a href="{{route('executive.user.index')}}" class="nav-link {{Request::is('executive/user')?'active':''}}">All Field Staffs</a></li>
 							</ul>
 						</li>
 					</ul>

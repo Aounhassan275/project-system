@@ -1,7 +1,7 @@
 @extends('executive.layout.index')
 
 @section('title')
-    Add Crp Users
+    Add Field Staff Users
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header header-elements-inline">
-                <h5 class="card-title">Add New Crp Users</h5>
+                <h5 class="card-title">Add New Field Staff Users</h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
