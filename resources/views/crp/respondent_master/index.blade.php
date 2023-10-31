@@ -50,7 +50,7 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('crp.respondent_master.edit',$respondent_master->id)}}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{{route('crp.respondent_master.edit',$respondent_master->id)}}" class="btn btn-primary btn-sm">{{$respondent_master->is_validate ? 'View' : 'Edit'}}</a>
                     </td>
                 </tr>
                 @endforeach

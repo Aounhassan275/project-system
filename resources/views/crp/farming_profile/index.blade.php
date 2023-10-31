@@ -47,7 +47,7 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('crp.farming_profile.edit',$farming_profile->id)}}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{{route('crp.farming_profile.edit',$farming_profile->id)}}" class="btn btn-primary btn-sm">{{$farming_profile->is_validate ? 'View' : 'Edit'}}</a>
                     </td>
                 </tr>
                 @endforeach

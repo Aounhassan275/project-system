@@ -51,7 +51,7 @@
                         @endif
                     </td>
                     <td>
-                        <a href="{{route('crp.training_report.edit',$training_report->id)}}" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="{{route('crp.training_report.edit',$training_report->id)}}" class="btn btn-primary btn-sm">{{$training_report->is_validate ? 'View' : 'Edit'}}</a>
                     </td>
                 </tr>
                 @endforeach

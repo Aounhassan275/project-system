@@ -119,9 +119,11 @@
                             </select>
                         </div>
                     </div>
+                    @if(!$respondent_master->is_validate)
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Edit <i class="icon-paperplane ml-2"></i></button>
                     </div>
+                    @endif
                     
                 </form>
             </div>

@@ -142,10 +142,11 @@
                             <input type="file" name="image"  class="form-control mt-2">
                         </div>
                     </div>
+                    @if(!$training_report->is_validate)
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Create <i class="icon-paperplane ml-2"></i></button>
                     </div>
-                    
+                    @endif
                 </form>
             </div>
         </div>
