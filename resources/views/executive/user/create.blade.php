@@ -24,7 +24,7 @@
                 <form action="{{route('executive.user.store')}}" method="post" enctype="multipart/form-data" >
                 @csrf
                 <input type="hidden" name="executive_id" value="{{Auth::user()->id}}">
-                <input type="hidden" name="role_id" value="{{App\Models\Role::where('name','Crp')->first()->id}}">
+                <input type="hidden" name="role_id" value="{{App\Models\Role::where('name','Field Staff')->first()->id}}">
                     <div class="row">
                         <div class="col-md-4">
                             <label>Name</label>

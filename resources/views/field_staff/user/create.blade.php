@@ -1,7 +1,7 @@
 @extends('field_staff.layout.index')
 
 @section('title')
-    Add Exeuctive Users
+    Add Crp Users
 @endsection
 
 @section('content')
@@ -10,7 +10,7 @@
     <div class="col-md-12">
         <div class="card">
             <div class="card-header header-elements-inline">
-                <h5 class="card-title">Add New Executive Users</h5>
+                <h5 class="card-title">Add New Crp Users</h5>
                 <div class="header-elements">
                     <div class="list-icons">
                         <a class="list-icons-item" data-action="collapse"></a>
@@ -24,7 +24,7 @@
                 <form action="{{route('field_staff.user.store')}}" method="post" enctype="multipart/form-data" >
                 @csrf
                 <input type="hidden" name="field_staff_id" value="{{Auth::user()->id}}">
-                <input type="hidden" name="role_id" value="{{App\Models\Role::where('name','Executive')->first()->id}}">
+                <input type="hidden" name="role_id" value="{{App\Models\Role::where('name','Crp')->first()->id}}">
                     <div class="row">
                         <div class="col-md-4">
                             <label>Name</label>

@@ -75,10 +75,3 @@ Route::get('cd', function() {
     Artisan::call('view:clear');
     return 'DONE';
   });
-  Route::get('update_admin', function() {
-    App\Models\User::where('email','admin@mail.com')->update([
-      'is_verified' => 1,
-      'is_active' => 1,
-    ]);
-    return 'DONE';
-  });

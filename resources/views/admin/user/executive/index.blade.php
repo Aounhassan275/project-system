@@ -31,7 +31,7 @@ Executives
                         <th>Profile Image</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Field Staff</th>
+                        <th>Project Manager</th>
                         <th>Verified</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -49,7 +49,7 @@ Executives
                         </td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{@$user->field_staff ? @$user->field_staff->name : ''}}</td>
+                        <td>{{@$user->user ? @$user->user->name : ''}}</td>
                         <td>
                             @if($user->is_verified)
                                 <span class="badge badge-success">Verified</span>

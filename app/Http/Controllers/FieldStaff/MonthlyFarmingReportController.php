@@ -22,8 +22,7 @@ class MonthlyFarmingReportController extends Controller
      */
     public function index()
     {
-        $exeuctiveIds = User::where('field_staff_id',Auth::user()->id)->pluck('id')->toArray();
-        $crpIds = User::whereIn('executive_id',$exeuctiveIds)->pluck('id')->toArray();
+        $crpIds = User::where('field_staff_id',Auth::user()->id)->pluck('id')->toArray();
         $monthlyFarmingReports = MonthlyFarmingReport::whereIn('user_id',$crpIds)->get();
         return view('field_staff.monthly_farming_report.index',compact('monthlyFarmingReports'));
     }

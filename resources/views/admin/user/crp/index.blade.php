@@ -31,7 +31,7 @@ CRP(s)
                         <th>Profile Image</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Executive</th>
+                        <th>Field Staff Name</th>
                         <th>Verified</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -49,7 +49,7 @@ CRP(s)
                         </td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{@$user->executive ? @$user->executive->name : ''}}</td>
+                        <td>{{@$user->field_staff ? @$user->field_staff->name : ''}}</td>
                         <td>
                             @if($user->is_verified)
                                 <span class="badge badge-success">Verified</span>

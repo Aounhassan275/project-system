@@ -76,11 +76,11 @@
                         </div>
                         <input type="hidden" name="role_id" value="5">
                         <div class="col-md-4">
-                            <label>Executive</label>
+                            <label>Field Staff</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <select name="executive_id" class="form-control select-search" id="executive_id" required>
+                                <select name="field_staff_id" class="form-control select-search" id="field_staff_id" required>
                                     <option>Select</option>
-                                    @foreach(App\Models\User::where('role_id',3)->where('is_verified',1)->where('is_active',1)->get() as $user)
+                                    @foreach(App\Models\User::where('role_id',4)->where('is_verified',1)->where('is_active',1)->get() as $user)
                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                     @endforeach
                                 </select>

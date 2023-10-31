@@ -32,6 +32,7 @@ Field Staffs
                         <th>Profile Image</th>
                         <th>Name</th>
                         <th>Email</th>
+                        <th>Executive Name</th>
                         <th>Verified</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -49,6 +50,7 @@ Field Staffs
                         </td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
+                        <td>{{@$user->executive ? @$user->executive->name : ''}}</td>
                         <td>
                             @if($user->is_verified)
                                 <span class="badge badge-success">Verified</span>

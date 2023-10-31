@@ -18,8 +18,7 @@ class RespondentMasterController extends Controller
      */
     public function index()
     {
-        $exeuctiveIds = User::where('field_staff_id',Auth::user()->id)->pluck('id')->toArray();
-        $crpIds = User::whereIn('executive_id',$exeuctiveIds)->pluck('id')->toArray();
+        $crpIds = User::where('field_staff_id',Auth::user()->id)->pluck('id')->toArray();
         $respondentMasters = RespondentMaster::whereIn('user_id',$crpIds)->get();
         return view('field_staff.respondent_master.index',compact('respondentMasters'));
     }
