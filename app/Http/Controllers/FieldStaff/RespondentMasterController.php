@@ -4,8 +4,10 @@ namespace App\Http\Controllers\FieldStaff;
 
 use App\Http\Controllers\Controller;
 use App\Models\RespondentMaster;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RespondentMasterController extends Controller
 {
@@ -16,7 +18,10 @@ class RespondentMasterController extends Controller
      */
     public function index()
     {
-        return view('field_staff.respondent_master.index');
+        $exeuctiveIds = User::where('field_staff_id',Auth::user()->id)->pluck('id')->toArray();
+        $crpIds = User::whereIn('executive_id',$exeuctiveIds)->pluck('id')->toArray();
+        $respondentMasters = RespondentMaster::whereIn('user_id',$crpIds)->get();
+        return view('field_staff.respondent_master.index',compact('respondentMasters'));
     }
 
     /**
@@ -106,6 +111,24 @@ class RespondentMasterController extends Controller
         $respondentMaster = RespondentMaster::find($id);
         $respondentMaster->delete();
         toastr()->success('Respondent Master Deleted successfully');
+        return redirect()->back();
+    }
+    public function validateReport($id)
+    {
+        $respondentMaster = RespondentMaster::find($id);
+        $respondentMaster->update([
+            'is_validate' => true
+        ]);
+        toastr()->success('Respondent Master Validated successfully');
+        return redirect()->back();
+    }
+    public function un_validate($id)
+    {
+        $respondentMaster = RespondentMaster::find($id);
+        $respondentMaster->update([
+            'is_validate' => false
+        ]);
+        toastr()->success('Responden Master Unvalidated successfully');
         return redirect()->back();
     }
 }

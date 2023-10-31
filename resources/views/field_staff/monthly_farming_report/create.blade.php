@@ -338,9 +338,9 @@
                             <input type="text" readonly name="fish_amount" id="fish_amount" class="form-control">
                         </div>
                     </div>
-                    <div class="text-right">
+                    {{-- <div class="text-right">
                         <button type="submit" class="btn btn-primary">Create <i class="icon-paperplane ml-2"></i></button>
-                    </div>
+                    </div> --}}
                     
                 </form>
             </div>

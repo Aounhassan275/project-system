@@ -12,41 +12,59 @@
         <h5 class="card-title">Manage Respondent Master Form</h5>
         <div class="header-elements">
             <div class="list-icons">
-                <a href="{{route('field_staff.respondent_master.create')}}" class="btn btn-primary text-right">Add New Respondent Master Form</a>
+                {{-- <a href="{{route('field_staff.respondent_master.create')}}" class="btn btn-primary text-right">Add New Respondent Master Form</a> --}}
                 <a class="list-icons-item" data-action="collapse"></a>
                 <a class="list-icons-item" data-action="remove"></a>
             </div>
         </div>
     </div>
     <div class="card-body">
-        <table class="table datatable-save-state">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Block Name</th>
-                    <th>District Name</th>
-                    <th>Gram Panchyat Name</th>
-                    <th>Village Name</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (Auth::user()->respondentMasters  as $key => $respondent_master)
-                <tr>
-                    <td>{{@$respondent_master->farmer_id}}</td>
-                    <td>{{$respondent_master->name}}</td>
-                    <td>{{@$respondent_master->block->name}}</td>
-                    <td>{{@$respondent_master->district->name}}</td>
-                    <td>{{@$respondent_master->gram_panchyat->name}}</td>
-                    <td>{{@$respondent_master->village->name}}</td>
-                    <td>
-                        <a href="{{route('field_staff.respondent_master.edit',$respondent_master->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table datatable-save-state">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Block Name</th>
+                        <th>District Name</th>
+                        <th>Gram Panchyat Name</th>
+                        <th>Village Name</th>
+                        <th>Is Validate</th>
+                        <th>Action</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($respondentMasters  as $key => $respondent_master)
+                    <tr>
+                        <td>{{@$respondent_master->farmer_id}}</td>
+                        <td>{{$respondent_master->name}}</td>
+                        <td>{{@$respondent_master->block->name}}</td>
+                        <td>{{@$respondent_master->district->name}}</td>
+                        <td>{{@$respondent_master->gram_panchyat->name}}</td>
+                        <td>{{@$respondent_master->village->name}}</td>
+                        <td>
+                            @if($respondent_master->is_validate)
+                            <span class="badge badge-success">Yes</span>
+                            @else 
+                            <span class="badge badge-danger">No</span>
+                            @endif
+                        </td>
+                        <td>
+                            @if($respondent_master->is_validate)
+                            <a href="{{route('field_staff.respondent_master.un_validate',$respondent_master->id)}}" class="btn btn-xs btn-danger">Un-validate</a>
+                            @else 
+                            <a href="{{route('field_staff.respondent_master.validate',$respondent_master->id)}}" class="btn btn-xs btn-success">Validate</a>
+                            @endif
+                        </td>
+                        <td>
+                            <a href="{{route('field_staff.respondent_master.edit',$respondent_master->id)}}" class="btn btn-primary btn-sm">View</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 
     </div>
 </div>

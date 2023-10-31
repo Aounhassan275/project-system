@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\FarmingIncome;
 use App\Models\FarmingProfile;
 use App\Models\FarmingYearling;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use SebastianBergmann\Type\FalseType;
 
 class FarmingProfileController extends Controller
 {
@@ -18,7 +21,10 @@ class FarmingProfileController extends Controller
      */
     public function index()
     {
-        return view('field_staff.farming_profile.index');
+        $exeuctiveIds = User::where('field_staff_id',Auth::user()->id)->pluck('id')->toArray();
+        $crpIds = User::whereIn('executive_id',$exeuctiveIds)->pluck('id')->toArray();
+        $farmingProfiles = FarmingProfile::whereIn('user_id',$crpIds)->get();
+        return view('field_staff.farming_profile.index',compact('farmingProfiles'));
     }
 
     /**
@@ -155,6 +161,24 @@ class FarmingProfileController extends Controller
         $farmingProfile = FarmingProfile::find($id);
         $farmingProfile->delete();
         toastr()->success('Farming Profile Deleted successfully');
+        return redirect()->back();
+    }
+    public function validateReport($id)
+    {
+        $farmingProfile = FarmingProfile::find($id);
+        $farmingProfile->update([
+            'is_validate' => true
+        ]);
+        toastr()->success('Farming Profile Validated successfully');
+        return redirect()->back();
+    }
+    public function un_validate($id)
+    {
+        $farmingProfile = FarmingProfile::find($id);
+        $farmingProfile->update([
+            'is_validate' => false
+        ]);
+        toastr()->success('Farming Profile Unvalidated successfully');
         return redirect()->back();
     }
 }

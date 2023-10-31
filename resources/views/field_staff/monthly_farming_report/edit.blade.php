@@ -21,9 +21,18 @@
             </div>
 
             <div class="card-body">
-                <form action="{{route('field_staff.monthly_farming_report.update',$monthly_farming_report->id)}}" method="post" enctype="multipart/form-data" >
+                {{-- <form action="{{route('field_staff.monthly_farming_report.update',$monthly_farming_report->id)}}" method="post" enctype="multipart/form-data" >
                     @method('PUT')
-                    @csrf
+                    @csrf --}}
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if($monthly_farming_report->is_validate)
+                            <a href="{{route('field_staff.monthly_farming_report.un_validate',$monthly_farming_report->id)}}" class="btn btn-sm btn-danger float-right">Un-validate</a>
+                            @else 
+                            <a href="{{route('field_staff.monthly_farming_report.validate',$monthly_farming_report->id)}}" class="btn btn-sm btn-success float-right">Validate</a>
+                            @endif
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="form-group col-md-3">
                             <label>Choose Farmer</label>
@@ -344,11 +353,11 @@
                             <input type="text" readonly name="fish_amount" id="fish_amount" value="{{$monthly_farming_report->fish_amount}}" class="form-control">
                         </div>
                     </div>
-                    <div class="text-right">
+                    {{-- <div class="text-right">
                         <button type="submit" class="btn btn-primary">Update <i class="icon-paperplane ml-2"></i></button>
                     </div>
                     
-                </form>
+                </form> --}}
             </div>
         </div>
         <!-- /basic layout -->

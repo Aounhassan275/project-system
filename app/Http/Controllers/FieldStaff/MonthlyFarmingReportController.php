@@ -7,9 +7,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Block;
 use App\Models\GramPanchyat;
 use App\Models\MonthlyFarmingReport;
+use App\Models\User;
 use App\Models\Village;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MonthlyFarmingReportController extends Controller
 {
@@ -20,7 +22,10 @@ class MonthlyFarmingReportController extends Controller
      */
     public function index()
     {
-        return view('field_staff.monthly_farming_report.index');
+        $exeuctiveIds = User::where('field_staff_id',Auth::user()->id)->pluck('id')->toArray();
+        $crpIds = User::whereIn('executive_id',$exeuctiveIds)->pluck('id')->toArray();
+        $monthlyFarmingReports = MonthlyFarmingReport::whereIn('user_id',$crpIds)->get();
+        return view('field_staff.monthly_farming_report.index',compact('monthlyFarmingReports'));
     }
 
     /**
@@ -157,5 +162,23 @@ class MonthlyFarmingReportController extends Controller
         return response()->json([
             'villages' => $villages,
         ]);
+    }
+    public function validateReport($id)
+    {
+        $monthly_farming_report = MonthlyFarmingReport::find($id);
+        $monthly_farming_report->update([
+            'is_validate' => true
+        ]);
+        toastr()->success('Monthly Farming Report Validated successfully');
+        return redirect()->back();
+    }
+    public function un_validate($id)
+    {
+        $monthly_farming_report = MonthlyFarmingReport::find($id);
+        $monthly_farming_report->update([
+            'is_validate' => false
+        ]);
+        toastr()->success('Monthly Farming Report Unvalidated successfully');
+        return redirect()->back();
     }
 }

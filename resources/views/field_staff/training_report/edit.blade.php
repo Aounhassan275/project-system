@@ -21,9 +21,19 @@
             </div>
 
             <div class="card-body">
-                <form action="{{route('field_staff.training_report.update',$training_report->id)}}" method="post" enctype="multipart/form-data" >
+                {{-- <form action="{{route('field_staff.training_report.update',$training_report->id)}}" method="post" enctype="multipart/form-data" >
                     @method('PUT')
-                    @csrf<div class="row">
+                    @csrf --}}
+                    <div class="row">
+                        <div class="col-md-12 ">
+                            @if($training_report->is_validate)
+                            <a href="{{route('field_staff.training_report.un_validate',$training_report->id)}}" class="btn btn-sm btn-danger float-right">Un-validate</a>
+                            @else 
+                            <a href="{{route('field_staff.training_report.validate',$training_report->id)}}" class="btn btn-sm btn-success float-right">Validate</a>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="form-group col-md-4">
                             <label>Date of Event</label>
                             <input type="date" name="date_of_event" value="{{$training_report->date_of_event}}" class="form-control" required>
@@ -139,14 +149,14 @@
                         <div class="form-group col-md-4">
                             <label>Photograph</label><br>
                             <img src="{{asset($training_report->image)}}" height="150" width="150" alt="">
-                            <input type="file" name="image"  class="form-control mt-2">
+                            {{-- <input type="file" name="image"  class="form-control mt-2"> --}}
                         </div>
                     </div>
-                    <div class="text-right">
+                    {{-- <div class="text-right">
                         <button type="submit" class="btn btn-primary">Create <i class="icon-paperplane ml-2"></i></button>
                     </div>
                     
-                </form>
+                </form> --}}
             </div>
         </div>
         <!-- /basic layout -->

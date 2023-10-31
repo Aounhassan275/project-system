@@ -65,7 +65,8 @@ class MonthlyFarmingReport extends Model
         'is_fyk_applied',
         'fyk_expenditure',
         'is_disease_indentified',
-        'user_id'
+        'user_id',
+        'is_validate'
     ];
     
     protected $casts = [

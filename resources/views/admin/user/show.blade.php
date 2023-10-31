@@ -37,6 +37,7 @@
 
 						    		<h6 class="font-weight-semibold mb-0">{{$user->name}}</h6>
 						    		<span class="d-block opacity-75">{{$user->email}}</span>
+						    		<span class="d-block opacity-75">{{$user->role ? $user->role->name : ''}}</span>
 									
 									@if($user->is_verified)
 										<span class="badge badge-success">Verified</span>

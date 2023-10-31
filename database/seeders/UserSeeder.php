@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
             [ 'id' => 2 ,'name' => 'Project Manager', 'created_at' => Carbon::now()],
             [ 'id' => 3 ,'name' => 'Executive', 'created_at' => Carbon::now()],
             [ 'id' => 4 ,'name' => 'Field Staff', 'created_at' => Carbon::now()],
+            [ 'id' => 5 ,'name' => 'Crp', 'created_at' => Carbon::now()],
         ]);
         DB::table('users')->insert([
             [ 

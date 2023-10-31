@@ -6,7 +6,7 @@
 
 @section('content')
 
-<div class="row">
+{{-- <div class="row">
     <div class="col-md-12">
         <!-- Basic layout-->
         <div class="card">
@@ -291,7 +291,7 @@
         <!-- /basic layout -->
 
     </div>
-</div>
+</div> --}}
 
 @endsection
 

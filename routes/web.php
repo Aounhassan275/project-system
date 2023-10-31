@@ -46,6 +46,14 @@ include __DIR__ . '/project.php';
 /*******************FIELD STAFF ROUTE START*************/       
 include __DIR__ . '/field_staff.php';
 /*******************FIELD STAFF ROUTE END*************/     
+
+/*******************CRP ROUTE START*************/       
+include __DIR__ . '/crp.php';
+/*******************CRP ROUTE END*************/    
+ 
+/*******************EXECUTIVE ROUTE START*************/       
+include __DIR__ . '/executive.php';
+/*******************EXECUTIVE ROUTE END*************/     
      
 /******************FUNCTIONALITY ROUTES****************/
 Route::get('cd', function() {

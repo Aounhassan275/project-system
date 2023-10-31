@@ -20,10 +20,11 @@ class Admin
             return redirect()->to(url('/'));
 
         $user_role = Auth::user()->getRole();
-        if($user_role == 'Admin')
+        if($user_role == 'Super Admin')
         {
             return $next($request);
         }else{
+            toastr()->error("Unauthorized!");
             return redirect()->to(url('/'));
         }
     }

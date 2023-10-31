@@ -24,6 +24,7 @@ class FieldStaff
         {
             return $next($request);
         }else{
+            toastr()->error("Unauthorized!");
             return redirect()->to(url('/'));
         }
     }

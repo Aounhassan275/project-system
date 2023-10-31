@@ -18,7 +18,7 @@ class FarmingProfile extends Model
         'have_applied_lime','have_apply_cow_dung','have_regularly_apply_lime','have_regularly_apply_cow_dung',
         'type_of_feed_used','done_feeding_regularly','have_water_ph_regularly','have_meeting_regularly',
         'attend_training_programme','exposure_good_practics','shg_member_name','fish_pb_member_name','project_id',
-        'respondent_master_api_id','user_id'
+        'respondent_master_api_id','user_id','is_validate'
     ];
 
     public function respondent_master()

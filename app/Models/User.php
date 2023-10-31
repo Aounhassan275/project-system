@@ -33,7 +33,9 @@ class User extends Authenticatable
         'district_id',
         'block_id',
         'employee_code',
-        'phone'
+        'phone',
+        'field_staff_id',
+        'executive_id'
     ];
 
     /**

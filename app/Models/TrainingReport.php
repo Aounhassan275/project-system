@@ -30,6 +30,7 @@ class TrainingReport extends Model
         'number_of_male',
         'number_of_female',
         'image',
+        'is_validate'
     ];
 
     public function user()

@@ -36,10 +36,21 @@ class AuthController extends Controller
             {
                 toastr()->success('You Login Successfully');
                 return redirect()->intended(route('project.dashboard.index'));
-            }else if($user->role->name == 'Field Staff')
+            }
+            else if($user->role->name == 'Field Staff')
             {
                 toastr()->success('You Login Successfully');
                 return redirect()->intended(route('field_staff.dashboard.index'));
+            }
+            else if($user->role->name == 'Crp')
+            {
+                toastr()->success('You Login Successfully');
+                return redirect()->intended(route('crp.dashboard.index'));
+            }
+            else if($user->role->name == 'Executive')
+            {
+                toastr()->success('You Login Successfully');
+                return redirect()->intended(route('executive.dashboard.index'));
             }
             else{
                 Auth::logout();

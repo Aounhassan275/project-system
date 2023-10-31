@@ -4,8 +4,10 @@ namespace App\Http\Controllers\FieldStaff;
 
 use App\Http\Controllers\Controller;
 use App\Models\TrainingReport;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TrainingReportController extends Controller
 {
@@ -16,7 +18,10 @@ class TrainingReportController extends Controller
      */
     public function index()
     {
-        return view('field_staff.training_report.index');
+        $exeuctiveIds = User::where('field_staff_id',Auth::user()->id)->pluck('id')->toArray();
+        $crpIds = User::whereIn('executive_id',$exeuctiveIds)->pluck('id')->toArray();
+        $trainingReports   = TrainingReport::whereIn('user_id',$crpIds)->get();
+        return view('field_staff.training_report.index',compact('trainingReports'));
     }
 
     /**
@@ -114,5 +119,23 @@ class TrainingReportController extends Controller
             toastr()->error($e->getMessage());
             return redirect()->back();
         }
+    }
+    public function validateReport($id)
+    {
+        $trainingReport = TrainingReport::find($id);
+        $trainingReport->update([
+            'is_validate' => true
+        ]);
+        toastr()->success('Training Report Validated successfully');
+        return redirect()->back();
+    }
+    public function un_validate($id)
+    {
+        $trainingReport = TrainingReport::find($id);
+        $trainingReport->update([
+            'is_validate' => false
+        ]);
+        toastr()->success('Training Report Unvalidated successfully');
+        return redirect()->back();
     }
 }
