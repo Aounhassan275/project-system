@@ -7,9 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Block;
 use App\Models\GramPanchyat;
 use App\Models\MonthlyFarmingReport;
+use App\Models\UserBlock;
+use App\Models\UserGramPanchyat;
+use App\Models\UserVillage;
 use App\Models\Village;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MonthlyFarmingReportController extends Controller
 {
@@ -139,21 +143,24 @@ class MonthlyFarmingReportController extends Controller
     }
     public function getBlocks(Request $request)
     {
-        $blocks = Block::where('district_id',$request->district_id)->get();
+        $user_blocks= UserBlock::where('user_id',Auth::user()->id)->get()->pluck('block_id')->toArray();
+        $blocks = Block::whereIn('id',$user_blocks)->where('district_id',$request->district_id)->get();
         return response()->json([
             'blocks' => $blocks,
         ]);
     }
     public function getGramPanchyats(Request $request)
     {
-        $gram_panchyats = GramPanchyat::where('block_id',$request->block_id)->get();
+        $user_gram_panchyats = UserGramPanchyat::where('user_id',Auth::user()->id)->get()->pluck('gram_panchyat_id')->toArray();        
+        $gram_panchyats = GramPanchyat::whereIn('id',$user_gram_panchyats)->where('block_id',$request->block_id)->get();
         return response()->json([
             'gram_panchyats' => $gram_panchyats,
         ]);
     }
     public function getVillages(Request $request)
     {
-        $villages = Village::where('gram_panchyat_id',$request->gram_panchyat_id)->get();
+        $user_villages = UserVillage::where('user_id',Auth::user()->id)->get()->pluck('village_id')->toArray();
+        $villages = Village::whereIn('id',$user_villages)->where('gram_panchyat_id',$request->gram_panchyat_id)->get();
         return response()->json([
             'villages' => $villages,
         ]);

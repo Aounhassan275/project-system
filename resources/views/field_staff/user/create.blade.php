@@ -76,6 +76,51 @@
                                 <span id="confirmmsg"></span>
                             </div>
                         </div>
+                        <div class="form-group col-md-4">
+                            <label>Choose State</label>
+                            <select  name="state_id"  class="form-control select-search" >
+                                <option selected disabled>Select State</option>
+                                @foreach(App\Models\State::all() as $state)
+                                <option value="{{$state->id}}">{{$state->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4" >
+                            <label>Choose District</label>
+                            <select  name="district_id"  class="form-control select-search" >
+                                <option selected disabled>Select District</option>
+                                @foreach(App\Models\District::all() as $district)
+                                <option value="{{$district->id}}">{{$district->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4 ">
+                            <label>Choose Blocks</label>
+                            <select  name="block_id"  class="form-control select-search" required>
+                                <option disabled>Select Gram Panchyat</option>
+                                @foreach(App\Models\Block::all() as $block)
+                                <option value="{{$block->id}}">{{$block->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4 " >
+                            <label>Choose Gram Panchyat</label>
+                            <select  name="gram_panchyat_id" class="form-control select-search" >
+                                <option disabled>Select Gram Panchyat</option>
+                                @foreach(App\Models\GramPanchyat::all() as $gram_panchyat)
+                                <option value="{{$gram_panchyat->id}}">{{$gram_panchyat->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label>Choose Village</label>
+                            <select  name="village_ids[]" multiple class="form-control select-search" >
+                                <option disabled>Select Village</option>
+                                @foreach(App\Models\Village::all() as $village)
+                                <option value="{{$village->id}}">{{$village->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
 
                     </div>
                     <div class="text-right">

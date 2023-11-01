@@ -82,7 +82,7 @@ class UserController extends Controller
                     ]);
                 }
             }
-            if($request->gram_panchyat_ids)
+            if($request->village_ids)
             {
                 foreach($request->village_ids as $village_id)
                 {

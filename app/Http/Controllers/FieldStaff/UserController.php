@@ -4,6 +4,9 @@ namespace App\Http\Controllers\FieldStaff;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\UserBlock;
+use App\Models\UserGramPanchyat;
+use App\Models\UserVillage;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +61,31 @@ class UserController extends Controller
                 toastr()->error('Email already exists');
                 return redirect()->back();
             }
-            User::create($request->all());
+            $user = User::create($request->all());
+            if($request->gram_panchyat_id)
+            {
+                UserGramPanchyat::create([
+                    'gram_panchyat_id' => $request->gram_panchyat_id,
+                    'user_id' => $user->id
+                ]);
+            }
+            if($request->block_id)
+            {
+                UserBlock::create([
+                    'block_id' => $request->block_id,
+                    'user_id' => $user->id
+                ]);
+            }
+            if($request->village_ids)
+            {
+                foreach($request->village_ids as $village_id)
+                {
+                    UserVillage::create([
+                        'village_id' => $village_id,
+                        'user_id' => $user->id
+                    ]);
+                }
+            }
             toastr()->success('User Added Successfully');
             return redirect()->back();
         }catch (Exception $e)
@@ -77,7 +104,12 @@ class UserController extends Controller
     public function show(Request $request,$id)
     {
         $user = User::find($id);
-        return view('field_staff.user.show',compact('user'));
+        
+        $user_gram_panchyats = UserGramPanchyat::where('user_id',$user->id)->get()->pluck('gram_panchyat_id')->toArray();
+        $user_villages = UserVillage::where('user_id',$user->id)->get()->pluck('village_id')->toArray();
+        $user_blocks= UserBlock::where('user_id',$user->id)->get()->pluck('block_id')->toArray();
+      
+        return view('field_staff.user.show',compact('user','user_gram_panchyats','user_villages','user_blocks'));
     }
 
     /**

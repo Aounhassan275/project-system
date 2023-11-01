@@ -146,7 +146,55 @@
 												</div>
 											</div>
 										</div>
-
+										<div class="form-group">
+											<div class="row">
+												<div class="col-md-6">
+													<label>Choose State</label>
+													<select  name="state_id"  class="form-control select-search" >
+														<option selected disabled>Select State</option>
+														@foreach(App\Models\State::all() as $state)
+														<option  @if($user->state_id == $state->id) selected @endif value="{{$state->id}}">{{$state->name}}</option>
+														@endforeach
+													</select>
+												</div>
+												<div class="col-md-6">
+													<label>Choose District</label>
+													<select  name="district_id"  class="form-control select-search" >
+														<option selected disabled>Select District</option>
+														@foreach(App\Models\District::all() as $district)
+														<option @if($user->district_id == $district->id) selected @endif value="{{$district->id}}">{{$district->name}}</option>
+														@endforeach
+													</select>
+												</div>
+												<div class="col-md-6">
+													<label>Choose Block</label>
+													<select  name="block_id"  class="form-control select-search" >
+														<option disabled>Select Block</option>
+														@foreach(App\Models\Block::all() as $block)
+														<option @if(in_array($block->id,$user_blocks)) selected @endif  value="{{$block->id}}">{{$block->name}}</option>
+														@endforeach
+													</select>
+												</div>
+												<div class="col-md-6">
+													<label>Choose Gram Panchyat</label>
+													<select  name="gram_panchyat_id"  class="form-control select-search" >
+														<option disabled>Select Gram Panchyat</option>
+														@foreach(App\Models\GramPanchyat::all() as $gram_panchyat)
+														<option @if(in_array($gram_panchyat->id,$user_gram_panchyats)) selected @endif value="{{$gram_panchyat->id}}">{{$gram_panchyat->name}}</option>
+														@endforeach
+													</select>
+												</div>
+												<div class="col-md-6">
+													<label>Choose Village</label>
+													<select  name="village_ids[]" multiple class="form-control select-search" >
+														<option disabled>Select Village</option>
+														@foreach(App\Models\Village::all() as $village)
+														<option @if(in_array($village->id,$user_gram_panchyats)) selected @endif value="{{$village->id}}">{{$village->name}}</option>
+														@endforeach
+													</select>
+												</div>
+											</div>
+										</div>
 				                        <div class="text-right">
 				                        	<button type="submit" class="btn btn-primary">Save changes</button>
 				                        </div>
