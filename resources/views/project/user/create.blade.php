@@ -24,7 +24,7 @@
                 <form action="{{route('project.user.store')}}" method="post" enctype="multipart/form-data" >
                 @csrf
                     <div class="row">
-
+                        <input type="hidden" value="{{Auth::user()->id}}">
                         <div class="col-md-4">
                             <label>Name</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
@@ -105,7 +105,7 @@
                         <div class="col-md-4 project_select" style="display:none;">
                             <label>Project Manager</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <select name="user_id" class="form-control select-search" id="user_id">
+                                <select name="project_manager_id" class="form-control select-search" id="project_manager_id">
                                     <option value="">Select</option>
                                     @foreach(App\Models\User::where('role_id',2)->where('is_verified',1)->where('is_active',1)->get() as $user)
                                     <option value="{{$user->id}}">{{$user->name}}</option>
@@ -272,7 +272,7 @@
                 $('.staff_fields').hide();
                 $('.executive_select').hide();
                 $('.fieldstaff_select').hide();
-                $('#user_id').attr('required',true);
+                $('#project_manager_id').attr('required',true);
                 $('#field_staff_id').attr('required',false);
                 $('#executive_id').attr('required',false);
             }else if(role_id == 4)
@@ -281,7 +281,7 @@
                 $('.executive_select').show();
                 $('#executive_id').attr('required',true);
                 $('#field_staff_id').attr('required',false);
-                $('#user_id').attr('required',false);
+                $('#project_manager_id').attr('required',false);
                 $('.project_select').hide();
                 $('.fieldstaff_select').hide();
                 $('.staff_fields').show();
@@ -291,7 +291,7 @@
                 $('.staff_fields').show();
                 $('.executive_select').hide();
                 $('#executive_id').attr('required',false);
-                $('#user_id').attr('required',false);
+                $('#project_manager_id').attr('required',false);
                 $('.project_select').hide();
                 $('.fieldstaff_select').show();
                 $('#field_staff_id').attr('required',true);

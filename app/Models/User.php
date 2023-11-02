@@ -35,7 +35,8 @@ class User extends Authenticatable
         'employee_code',
         'phone',
         'field_staff_id',
-        'executive_id'
+        'executive_id',
+        'project_manager_id'
     ];
 
     /**
@@ -72,6 +73,10 @@ class User extends Authenticatable
     public function user()
     {
         return $this->belongsTo(User::class,'user_id');
+    }
+    public function project_manager()
+    {
+        return $this->belongsTo(User::class,'project_manager_id');
     }
     public function projects()
     {

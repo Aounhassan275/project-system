@@ -78,7 +78,7 @@
                         <div class="col-md-4">
                             <label>Project Manager</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <select name="user_id" class="form-control select-search" id="user_id" required>
+                                <select name="project_manager_id" class="form-control select-search" id="user_id" required>
                                     <option>Select</option>
                                     @foreach(App\Models\User::where('role_id',2)->where('is_verified',1)->where('is_active',1)->get() as $user)
                                     <option value="{{$user->id}}">{{$user->name}}</option>

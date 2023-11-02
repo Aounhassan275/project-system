@@ -49,7 +49,7 @@ Executives
                         </td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{@$user->user ? @$user->user->name : ''}}</td>
+                        <td>{{@$user->project_manager ? @$user->project_manager->name : ''}}</td>
                         <td>
                             @if($user->is_verified)
                                 <span class="badge badge-success">Verified</span>

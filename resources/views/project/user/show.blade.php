@@ -49,6 +49,20 @@
 									@else
 										<span class="badge badge-danger">Pending</span>
 									@endif
+									<br>
+					    			<div class="list-icons list-icons-extended mt-3">
+										
+										@if($user->is_verified)
+											<a href="{{route('project.user.revert_verification',$user->id)}}" class="btn btn-danger btn-sm">Revert Verification</a>
+										@else 
+											<a href="{{route('project.user.verified',$user->id)}}" class="btn btn-info btn-sm">Verify</a>
+										@endif
+										@if($user->is_active)
+											<a href="{{route('project.user.in_active',$user->id)}}" class="btn btn-warning btn-sm">In Active</a>
+										@else 
+											<a href="{{route('project.user.active',$user->id)}}" class="btn btn-success btn-sm">Active</a>
+										@endif
+									</div>
 						    	</div>
 
 								<div class="card-body p-0">
@@ -134,6 +148,39 @@
 													<label>Upload profile image</label>
 				                                    <input type="file" class="form-input-styled" name="image" data-fouc>
 												</div>
+												<div class="col-md-4 project_select" @if($user->role_id != 3) style="display:none;" @endif>
+													<label>Project Manager</label>
+													<div class="form-group form-group-feedback form-group-feedback-left">
+														<select name="project_manager_id" class="form-control select-search" id="project_manager_id">
+															<option value="">Select</option>
+															@foreach(App\Models\User::where('role_id',2)->where('is_verified',1)->where('is_active',1)->get() as $project_manager)
+															<option {{$user->project_manager_id == $project_manager->id ? 'selected' : ''}} value="{{$project_manager->id}}">{{$project_manager->name}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+												<div class="col-md-4 executive_select" @if($user->role_id != 4)  style="display:none;" @endif>
+													<label>Executive</label>
+													<div class="form-group form-group-feedback form-group-feedback-left">
+														<select name="executive_id" class="form-control select-search" id="executive_id">
+															<option value="">Select</option>
+															@foreach(App\Models\User::where('role_id',3)->where('is_verified',1)->where('is_active',1)->get() as $executive)
+															<option {{$user->executive_id == $executive->id ? 'selected' : ''}} value="{{$executive->id}}">{{$executive->name}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
+												<div class="col-md-4 fieldstaff_select" @if($user->role_id != 5) style="display:none;" @endif>
+													<label>Field Staff</label>
+													<div class="form-group form-group-feedback form-group-feedback-left">
+														<select name="field_staff_id" class="form-control select-search" id="field_staff_id">
+															<option value="">Select</option>
+															@foreach(App\Models\User::where('role_id',4)->where('is_verified',1)->where('is_active',1)->get() as $field_staff)
+															<option  {{$user->field_staff_id == $field_staff->id ? 'selected' : ''}}  value="{{$field_staff->id}}">{{$field_staff->name}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
 												<div class="form-group col-md-4 district_fields">
 													<label>Choose State</label>
 													<select  name="state_id"  class="form-control select-search" >
@@ -161,7 +208,7 @@
 														@endforeach
 													</select>
 												</div>
-												<div class="form-group col-md-4 staff_fields" @if($user->role_id == 3) style="display:none;" @endif>
+												<div class="form-group col-md-4 staff_fields" @if($user->role_id != 3 || $user->role_id != 5 ) style="display:none;" @endif>
 													<label>Choose Gram Panchyat</label>
 													<select  name="gram_panchyat_ids[]" multiple class="form-control select-search" >
 														<option disabled>Select Gram Panchyat</option>
@@ -170,7 +217,7 @@
 														@endforeach
 													</select>
 												</div>
-												<div class="form-group col-md-4 staff_fields" @if($user->role_id == 3) style="display:none;" @endif>
+												<div class="form-group col-md-4 staff_fields" @if($user->role_id != 3 || $user->role_id != 5 ) style="display:none;" @endif>
 													<label>Choose Village</label>
 													<select  name="village_ids[]" multiple class="form-control select-search" >
 														<option disabled>Select Village</option>

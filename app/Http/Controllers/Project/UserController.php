@@ -212,4 +212,41 @@ class UserController extends Controller
         //
     }
 
+
+    public function verified($id)
+    {
+        $user = User::find($id);
+        $user->update([
+            'is_verified' => true
+        ]);
+        toastr()->success('User Verified Successfully');
+        return redirect()->back();
+    }
+    public function revert_verification($id)
+    {
+        $user = User::find($id);
+        $user->update([
+            'is_verified' => false
+        ]);
+        toastr()->success('User is Not Verified Now!');
+        return redirect()->back();
+    }
+    public function active($id)
+    {
+        $user = User::find($id);
+        $user->update([
+            'is_active' => true
+        ]);
+        toastr()->success('User Active Successfully');
+        return redirect()->back();
+    }
+    public function in_active($id)
+    {
+        $user = User::find($id);
+        $user->update([
+            'is_active' => false
+        ]);
+        toastr()->success('User is In Active Now!');
+        return redirect()->back();
+    }
 }
