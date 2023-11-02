@@ -61,6 +61,7 @@ class UserController extends Controller
                 toastr()->error('Email already exists');
                 return redirect()->back();
             }
+            dd($request);
             $user = User::create($request->all());
             if($request->gram_panchyat_ids)
             {
@@ -97,7 +98,7 @@ class UserController extends Controller
         }catch (Exception $e)
         {
             toastr()->error($e->getMessage());
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
     }
 

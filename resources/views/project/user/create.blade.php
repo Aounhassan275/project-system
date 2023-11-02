@@ -116,8 +116,8 @@
                         <div class="col-md-4 executive_select" style="display:none;">
                             <label>Executive</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <select name="executive_id" class="form-control select-search" id="executive_id" required>
-                                    <option>Select</option>
+                                <select name="executive_id" class="form-control select-search" id="executive_id">
+                                    <option value="">Select</option>
                                     @foreach(App\Models\User::where('role_id',3)->where('is_verified',1)->where('is_active',1)->get() as $user)
                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                     @endforeach
@@ -127,8 +127,8 @@
                         <div class="col-md-4 fieldstaff_select" style="display:none;">
                             <label>Field Staff</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
-                                <select name="field_staff_id" class="form-control select-search" id="field_staff_id" required>
-                                    <option>Select</option>
+                                <select name="field_staff_id" class="form-control select-search" id="field_staff_id">
+                                    <option value="">Select</option>
                                     @foreach(App\Models\User::where('role_id',4)->where('is_verified',1)->where('is_active',1)->get() as $user)
                                     <option value="{{$user->id}}">{{$user->name}}</option>
                                     @endforeach
@@ -270,19 +270,28 @@
                 $('.district_fields').show();
                 $('.project_select').show();
                 $('.staff_fields').hide();
+                $('.executive_select').hide();
+                $('.fieldstaff_select').hide();
+                $('#field_staff_id').attr('required',false);
+                $('#executive_id').attr('required',false);
             }else if(role_id == 4)
             {
                 $('.district_fields').show();
                 $('.executive_select').show();
+                $('#executive_id').attr('required',true);
+                $('#field_staff_id').attr('required',false);
                 $('.project_select').hide();
+                $('.fieldstaff_select').hide();
                 $('.staff_fields').show();
             }else if(role_id == 5)
             {
                 $('.district_fields').show();
                 $('.staff_fields').show();
                 $('.executive_select').hide();
+                $('#executive_id').attr('required',false);
                 $('.project_select').hide();
                 $('.fieldstaff_select').show();
+                $('#field_staff_id').attr('required',true);
             }
         });
     });
