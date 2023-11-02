@@ -96,7 +96,7 @@
                             <div class="form-group form-group-feedback form-group-feedback-left">
                                 <select name="role_id" class="form-control select-search" id="role_id" required>
                                     <option>Select</option>
-                                    @foreach(App\Models\Role::whereIn('name',['Executive','Field Staff'])->get() as $role)
+                                    @foreach(App\Models\Role::whereIn('name',['Executive','Field Staff','Crp'])->get() as $role)
                                     <option value="{{$role->id}}">{{$role->name}}</option>
                                     @endforeach
                                 </select>
@@ -237,6 +237,10 @@
                 $('.district_fields').show();
                 $('.staff_fields').hide();
             }else if(role_id == 4)
+            {
+                $('.district_fields').show();
+                $('.staff_fields').show();
+            }else if(role_id == 5)
             {
                 $('.district_fields').show();
                 $('.staff_fields').show();
