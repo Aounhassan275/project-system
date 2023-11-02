@@ -165,7 +165,6 @@
 							<a href="#" class="nav-link"><i class="icon-cart-remove"></i> <span>Field Staff Users</span></a>
 
 							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('executive/user*') ?'display:block':''}}">
-								<li class="nav-item"><a href="{{route('executive.user.create')}}" class="nav-link {{Request::is('executive/user/create')?'active':''}}">Create Field Staff</a></li>
 								<li class="nav-item"><a href="{{route('executive.user.index')}}" class="nav-link {{Request::is('executive/user')?'active':''}}">All Field Staffs</a></li>
 							</ul>
 						</li>
