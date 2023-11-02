@@ -167,8 +167,8 @@
 							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('admin/user*') ?'display:block':''}}">
 								<li class="nav-item"><a href="{{route('admin.user.admin')}}" class="nav-link {{Request::is('admin/user/admin') || Request::is('admin/user/create_admin') ?'active':''}}">Admin</a></li>
 								<li class="nav-item"><a href="{{route('admin.user.project_manager')}}" class="nav-link {{Request::is('admin/user/project_manager') || Request::is('admin/user/create_project_manager') ?'active':''}}">Project Manager</a></li>
-								<li class="nav-item"><a href="{{route('admin.user.field_staff')}}" class="nav-link {{Request::is('admin/user/field_staff') || Request::is('admin/user/create_field_staff') ?'active':''}}">Field Staff</a></li>
 								<li class="nav-item"><a href="{{route('admin.user.executive')}}" class="nav-link {{Request::is('admin/user/executive') || Request::is('admin/user/create_executive') ?'active':''}}">Executive</a></li>
+								<li class="nav-item"><a href="{{route('admin.user.field_staff')}}" class="nav-link {{Request::is('admin/user/field_staff') || Request::is('admin/user/create_field_staff') ?'active':''}}">Field Staff</a></li>
 								<li class="nav-item"><a href="{{route('admin.user.crp')}}" class="nav-link {{Request::is('admin/user/crp') || Request::is('admin/user/create_crp') ?'active':''}}">CRP</a></li>
 							</ul>
 						</li>
