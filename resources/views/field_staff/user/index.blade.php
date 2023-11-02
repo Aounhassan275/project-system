@@ -21,15 +21,14 @@
         <div class="table-responsive">
             <table class="table datatable-save-state">
                 <thead>
-                    <tr>
+                                        <tr>
                         <th>#</th>
                         <th>Profile Image</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>Role</th>
-                        <th>Verified</th>
+                        <th>Mobile No</th>
+                        <th>Villages</th>
                         <th>Status</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -44,23 +43,13 @@
                         </td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
-                        <td>{{$user->role ? $user->role->name : ''}}</td>
-                        <td>
-                            @if($user->is_verified)
-                                <span class="badge badge-success">Verified</span>
-                            @else
-                                <span class="badge badge-danger">Not Verified</span>
-                            @endif
-                        </td>
+                        <td>{{$user->phone}}</td>
                         <td>
                             @if($user->is_active)
                                 <span class="badge badge-success">Active</span>
                             @else
                                 <span class="badge badge-danger">Pending</span>
                             @endif
-                        </td>
-                        <td>
-                            <a href="{{route('field_staff.user.show',$user->id)}}" class="btn btn-primary btn-sm">Show</a>
                         </td>
                     </tr>
                     @endforeach
