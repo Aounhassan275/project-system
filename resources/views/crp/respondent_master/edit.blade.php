@@ -82,7 +82,7 @@
                             <input name="age" type="number" step="0.01" value="{{$respondent_master->age}}" class="form-control" placeholder="Enter Age" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Education</label>
+                            <label>Education</label>
                             <select  name="education" class="form-control select-search" data-fouc required>
                                 <option disabled>Select Education</option>
                                 <option {{$respondent_master->education == 'Illiterate'?'selected':''}} value="Illiterate">Illiterate</option>
