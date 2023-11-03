@@ -23,7 +23,7 @@
     </div>
     <div class="col-sm-4 col-xl-4">
         <a href="{{route('field_staff.respondent_master.index')}}">
-            <div class="card card-body bg-orange-400 has-bg-image">
+            <div class="card card-body bg-green-400 has-bg-image">
                 <div class="media">
                     <div class="media-body">
                         <h3 class="mb-0">{{Auth::user()->respondentMasters->count()}}</h3>
