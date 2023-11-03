@@ -71,19 +71,6 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Gram Panchyat</label>
-                            <select name="gram_panchyat_id" id="gram_panchyat_id" class="form-control select-search" data-fouc required>
-                                <option selected disabled>Select Gram Panchyat</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Choose Village</label>
-                            <select name="village_id" id="village_id" class="form-control select-search" data-fouc required>
-                                <option selected disabled>Select Village</option>
-                                
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
                             <label>Choose Gender</label>
                             <select  name="gender" class="form-control select-search" data-fouc required>
                                 <option disabled>Select Gender</option>
