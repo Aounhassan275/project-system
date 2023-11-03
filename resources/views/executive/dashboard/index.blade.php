@@ -23,24 +23,7 @@
 </div>
 
 <div class="row">
-    
-    <div class="col-sm-4 col-xl-4">
-        <a href="{{route('executive.user.index')}}">
-            <div class="card card-body bg-blue-400 has-bg-image">
-                <div class="media">
-
-                    <div class="mr-3 align-self-center">
-                        <i class="icon-user2 icon-3x opacity-75"></i>
-                    </div>
-                    <div class="media-body text-right">
-                    <h3 class="mb-0">{{App\Models\User::where('executive_id',Auth::user()->id)->count()}}</h3>
-                        <span class="text-uppercase font-size-xs">Total Field Staff</span>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
-        <div class="col-sm-4 col-xl-4">
+   <div class="col-sm-4 col-xl-4">
         <a href="#">
             <div class="card card-body bg-danger-400 has-bg-image">
                 <div class="media">
@@ -50,6 +33,21 @@
                     <div class="media-body text-right">
                     <h3 class="mb-0">{{Auth::user()->projects->count()}}</h3>
                         <span class="text-uppercase font-size-xs">Total Projects Assigned</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-4 col-xl-4">
+        <a href="#">
+            <div class="card card-body bg-danger-400 has-bg-image">
+                <div class="media">
+                    <div class="mr-3 align-self-center">
+                        <i class="icon-stack-picture icon-3x opacity-75"></i>
+                    </div>
+                    <div class="media-body text-right">
+                    <h3 class="mb-0">{{Auth::user()->projects->count()}}</h3>
+                        <span class="text-uppercase font-size-xs">My Task</span>
                     </div>
                 </div>
             </div>
