@@ -22,6 +22,22 @@
         </a>
     </div>
     <div class="col-sm-4 col-xl-4">
+        <a href="{{route('field_staff.respondent_master.index')}}">
+            <div class="card card-body bg-orange-400 has-bg-image">
+                <div class="media">
+                    <div class="media-body">
+                        <h3 class="mb-0">{{Auth::user()->respondentMasters->count()}}</h3>
+                        <span class="text-uppercase font-size-xs">Total Respondent Master</span>
+                    </div>
+
+                    <div class="ml-3 align-self-center">
+                        <i class="icon-blog icon-3x opacity-75"></i>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-4 col-xl-4">
         <a href="{{route('field_staff.farming_profile.index')}}">
             <div class="card card-body bg-blue-400 has-bg-image">
                 <div class="media">
@@ -52,22 +68,7 @@
             </div>
         </a>
     </div>
-    <div class="col-sm-4 col-xl-4">
-        <a href="{{route('field_staff.respondent_master.index')}}">
-            <div class="card card-body bg-orange-400 has-bg-image">
-                <div class="media">
-                    <div class="media-body">
-                        <h3 class="mb-0">{{Auth::user()->respondentMasters->count()}}</h3>
-                        <span class="text-uppercase font-size-xs">Total Respondent Master</span>
-                    </div>
 
-                    <div class="ml-3 align-self-center">
-                        <i class="icon-blog icon-3x opacity-75"></i>
-                    </div>
-                </div>
-            </div>
-        </a>
-    </div>
     <div class="col-sm-4 col-xl-4">
         <a href="{{route('field_staff.training_report.index')}}">
             <div class="card card-body bg-teal-400 has-bg-image">
