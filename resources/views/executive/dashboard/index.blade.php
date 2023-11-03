@@ -34,7 +34,7 @@
                     </div>
                     <div class="media-body text-right">
                     <h3 class="mb-0">{{App\Models\User::where('executive_id',Auth::user()->id)->count()}}</h3>
-                        <span class="text-uppercase font-size-xs">Total CRP Users</span>
+                        <span class="text-uppercase font-size-xs">Total Field Staff</span>
                     </div>
                 </div>
             </div>
