@@ -86,7 +86,7 @@
     </div>
     <div class="col-sm-4 col-xl-4">
         <a href="{{route('field_staff.training_report.index')}}">
-            <div class="card card-body bg-teal-400 has-bg-image">
+            <div class="card card-body bg-orange-400 has-bg-image">
                 <div class="media">
                     <div class="mr-3 align-self-center">
                         <i class="icon-question4 icon-3x opacity-75"></i>
