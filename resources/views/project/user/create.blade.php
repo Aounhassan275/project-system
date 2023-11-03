@@ -6,7 +6,6 @@
 
 @section('content')
 
-<div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header header-elements-inline">
@@ -24,7 +23,7 @@
                 <form action="{{route('project.user.store')}}" method="post" enctype="multipart/form-data" >
                 @csrf
                     <div class="row">
-                        <input type="hidden" value="{{Auth::user()->id}}">
+                        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                         <div class="col-md-4">
                             <label>Name</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
