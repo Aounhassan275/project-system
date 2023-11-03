@@ -44,6 +44,7 @@
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->phone}}</td>
+                        <td>{{$user->getVillagesName()}}</td>
                         <td>
                             @if($user->is_active)
                                 <span class="badge badge-success">Active</span>

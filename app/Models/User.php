@@ -115,4 +115,11 @@ class User extends Authenticatable
     public function setImageAttribute($value){
         $this->attributes['image'] = ImageHelper::saveImage($value,'/uploaded_images/profiles/');
     }
+    public function getVillagesName()
+    {
+        $user_villages = UserVillage::query()->select('villages.name as name')
+                        ->join('villages','user_villages.village_id','villages.id')
+                        ->where('user_villages.user_id',$this->id)->get()->pluck('name')->toArray();
+        return implode(',', $user_villages);
+    }
 }

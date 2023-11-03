@@ -8,6 +8,7 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RespondentMasterController extends Controller
 {
@@ -18,8 +19,10 @@ class RespondentMasterController extends Controller
      */
     public function index()
     {
-        $crpIds = User::where('field_staff_id',Auth::user()->id)->pluck('id')->toArray();
-        $respondentMasters = RespondentMaster::whereIn('user_id',$crpIds)->get();
+        $respondentMasters = User::query()->join('respondent_masters', 'users.id', '=', 'respondent_masters.user_id')
+                            ->where('users.field_staff_id', '=', Auth::user()->id)
+                            ->select('respondent_masters.*')
+                            ->get();
         return view('field_staff.respondent_master.index',compact('respondentMasters'));
     }
 

@@ -21,8 +21,10 @@ class FarmingProfileController extends Controller
      */
     public function index()
     {
-        $crpIds = User::where('field_staff_id',Auth::user()->id)->pluck('id')->toArray();
-        $farmingProfiles = FarmingProfile::whereIn('user_id',$crpIds)->get();
+        $farmingProfiles = User::query()->join('farming_profiles', 'users.id', '=', 'farming_profiles.user_id')
+                            ->where('users.field_staff_id', '=', Auth::user()->id)
+                            ->select('farming_profiles.*')
+                            ->get();
         return view('field_staff.farming_profile.index',compact('farmingProfiles'));
     }
 

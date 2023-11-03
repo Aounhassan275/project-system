@@ -33,7 +33,11 @@
                 @foreach (Auth::user()->projects  as $key => $project_user)
                 <tr>
                     <td>{{$key+1}}</td>
-                    <td>{{$project_user->project->name}}</td>
+                    <td>
+                        <a href="{{route('project.dashboard.index')}}">
+                            {{$project_user->project->name}}
+                        </a>
+                    </td>
                     <td>{{$project_user->project->duration}}</td>
                     <td>{{@$project_user->project->state->name}}</td>
                     {{-- <td>{{@$project_user->project->district->name}}</td> --}}

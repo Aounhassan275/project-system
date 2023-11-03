@@ -33,7 +33,7 @@
                         <i class="icon-unlink2 icon-3x opacity-75"></i>
                     </div>
                     <div class="media-body text-right">
-                    <h3 class="mb-0">{{Auth::user()->farmingProfiles->count()}}</h3>
+                    <h3 class="mb-0">{{@$farmingProfiles}}</h3>
                         <span class="text-uppercase font-size-xs">Total Farming Profile</span>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         <i class="icon-stack-picture icon-3x opacity-75"></i>
                     </div>
                     <div class="media-body text-right">
-                        <h3 class="mb-0">{{Auth::user()->monthlyFarmingReports->count()}}</h3>
+                        <h3 class="mb-0">{{@$monthlyFarmingReports}}</h3>
                         <span class="text-uppercase font-size-xs">Total Monthly Farming Report</span>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
             <div class="card card-body bg-orange-400 has-bg-image">
                 <div class="media">
                     <div class="media-body">
-                        <h3 class="mb-0">{{Auth::user()->respondentMasters->count()}}</h3>
+                        <h3 class="mb-0">{{@$total_respondent_masters}}</h3>
                         <span class="text-uppercase font-size-xs">Total Respondent Master</span>
                     </div>
 
@@ -79,7 +79,7 @@
                         <i class="icon-question4 icon-3x opacity-75"></i>
                     </div>
                     <div class="media-body text-right"> 
-                        <h3 class="mb-0">{{Auth::user()->trainingReports->count()}}</h3>
+                        <h3 class="mb-0">{{@$trainingReports}}</h3>
                         <span class="text-uppercase font-size-xs">Total Training Report</span>
                     </div>
 

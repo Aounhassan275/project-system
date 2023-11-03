@@ -1,6 +1,7 @@
 <?php 
 /****************** ADMIN MIDDLEWARE PAGES ROUTES START****************/
 
+use App\Http\Controllers\FieldStaff\DashboardController;
 use App\Http\Controllers\FieldStaff\FarmingProfileController;
 use App\Http\Controllers\FieldStaff\MonthlyFarmingReportController;
 use App\Http\Controllers\FieldStaff\RespondentMasterController;
@@ -11,7 +12,7 @@ Route::group(['prefix' => 'field_staff', 'as'=>'field_staff.','middleware' => 'a
     Route::group(['middleware' => 'field_staff'], function () { 
 
         /*******************DASHBOARD ROUTE START*************/       
-        Route::view('dashboard','field_staff.dashboard.index')->name('dashboard.index');
+        Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.index');
         /*******************DASHBOARD ROUTE END*************/       
         /*******************TRAINING REPORT ROUTE START*************/    
         Route::get('training_report/un_validate/{id}',[TrainingReportController::class,'un_validate'])->name('training_report.un_validate');   
