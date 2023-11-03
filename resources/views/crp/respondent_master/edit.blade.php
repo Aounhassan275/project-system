@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Choose District</label>
-                            <select  name="district_id"  class="form-control select-search" data-fouc required>
+                            <select  disabled name="district_id"  class="form-control select-search" data-fouc required>
                                 <option selected disabled>Select District</option>
                                 @foreach(App\Models\District::all() as $district)
                                 <option {{$respondent_master->district_id == $district->id?'selected':''}} value="{{$district->id}}">{{$district->name}}</option>
@@ -44,7 +44,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Choose Block</label>
-                            <select  name="block_id"  class="form-control select-search" data-fouc required>
+                            <select  disabled name="block_id"  class="form-control select-search" data-fouc required>
                                 <option value="">Select Block</option>
                                 @foreach(App\Models\Block::where('district_id',$respondent_master->district_id)->get() as $block)
                                 <option {{$respondent_master->block_id == $block->id?'selected':''}} value="{{$block->id}}">{{$block->name}}</option>
@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Choose Gram Panchyat</label>
-                            <select  name="gram_panchyat_id" class="form-control select-search" data-fouc required>
+                            <select  disabled name="gram_panchyat_id" class="form-control select-search" data-fouc required>
                                 <option value="">Select Gram Panchyat</option>
                                 @foreach(App\Models\GramPanchyat::where('block_id',$respondent_master->block_id)->get() as $gram_panchyat)
                                 <option {{$respondent_master->gram_panchyat_id == $gram_panchyat->id?'selected':''}} value="{{$gram_panchyat->id}}">{{$gram_panchyat->name}}</option>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Choose Village</label>
-                            <select  name="village_id" class="form-control select-search" data-fouc required>
+                            <select  disabled name="village_id" class="form-control select-search" data-fouc required>
                                 <option value="">Select Village</option>
                                 @foreach(App\Models\Village::where('gram_panchyat_id',$respondent_master->gram_panchyat_id)->get() as $village)
                                 <option {{$respondent_master->village_id == $village->id?'selected':''}} value="{{$village->id}}">{{$village->name}}</option>
