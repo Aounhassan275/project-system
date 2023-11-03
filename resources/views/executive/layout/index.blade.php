@@ -60,7 +60,7 @@
 	<div class="navbar navbar-expand-md navbar-dark">
 		<div class="navbar-brand">
 			<a href="{{url('/')}}" class="text-light">
-				<h3 class="m-0"><b>Executive Panel Menu</b></h3>
+				<h3 class="m-0"><b>Executive Panel</b></h3>
 			</a>
 		</div>
 
@@ -154,7 +154,6 @@
 				<div class="card card-sidebar-mobile">
 					<ul class="nav nav-sidebar" data-nav-type="accordion">
 							<!-- Main -->
-						<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Field Staff Panel</div> <i class="icon-menu" title="Main"></i></li>
 						<li class="nav-item">
 							<a href="{{route('executive.dashboard.index')}}" class="nav-link {{Request::is('executive/dashboard')?'active':''}}">
 								<i class="icon-home4"></i>
@@ -162,7 +161,7 @@
 							</a>
 						</li>	
 						<li class="nav-item nav-item-submenu {{Request::is('executive/user*')?'nav-item-open':''}}">
-							<a href="#" class="nav-link"><i class="icon-cart-remove"></i> <span>Field Staff Users</span></a>
+							<a href="#" class="nav-link"><i class="icon-cart-remove"></i> <span>Field Staffs</span></a>
 
 							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('executive/user*') ?'display:block':''}}">
 								<li class="nav-item"><a href="{{route('executive.user.index')}}" class="nav-link {{Request::is('executive/user')?'active':''}}">All Field Staffs</a></li>
