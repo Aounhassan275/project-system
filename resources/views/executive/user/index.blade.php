@@ -27,7 +27,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>Mobile No</th>
-                        <th>Villages</th>
+                        <th>GP</th>
                         <th>Status</th>
                     </tr>
                 </thead>
@@ -44,6 +44,7 @@
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->phone}}</td>
+                        <td>{{$user->gp}}</td>
                         <td>
                             @if($user->is_active)
                                 <span class="badge badge-success">Active</span>

@@ -34,8 +34,8 @@
                             <input name="image" type="file" class="form-control" placeholder="Enter Name" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose District</label>
-                            <select  name="district_id"  class="form-control select-search" data-fouc required>
+                            <label>District</label>
+                            <select  disabled name="district_id"  class="form-control select-search" data-fouc required>
                                 <option selected disabled>Select District</option>
                                 @foreach(App\Models\District::all() as $district)
                                 <option {{$respondent_master->district_id == $district->id?'selected':''}} value="{{$district->id}}">{{$district->name}}</option>
@@ -43,8 +43,8 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Block</label>
-                            <select  name="block_id"  class="form-control select-search" data-fouc required>
+                            <label>Block</label>
+                            <select  disabled name="block_id"  class="form-control select-search" data-fouc required>
                                 <option value="">Select Block</option>
                                 @foreach(App\Models\Block::where('district_id',$respondent_master->district_id)->get() as $block)
                                 <option {{$respondent_master->block_id == $block->id?'selected':''}} value="{{$block->id}}">{{$block->name}}</option>
@@ -52,8 +52,8 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Gram Panchyat</label>
-                            <select  name="gram_panchyat_id" class="form-control select-search" data-fouc required>
+                            <label>Gram Panchyat</label>
+                            <select  disabled name="gram_panchyat_id" class="form-control select-search" data-fouc required>
                                 <option value="">Select Gram Panchyat</option>
                                 @foreach(App\Models\GramPanchyat::where('block_id',$respondent_master->block_id)->get() as $gram_panchyat)
                                 <option {{$respondent_master->gram_panchyat_id == $gram_panchyat->id?'selected':''}} value="{{$gram_panchyat->id}}">{{$gram_panchyat->name}}</option>
@@ -61,8 +61,8 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Village</label>
-                            <select  name="village_id" class="form-control select-search" data-fouc required>
+                            <label>Village</label>
+                            <select  disabled name="village_id" class="form-control select-search" data-fouc required>
                                 <option value="">Select Village</option>
                                 @foreach(App\Models\Village::where('gram_panchyat_id',$respondent_master->gram_panchyat_id)->get() as $village)
                                 <option {{$respondent_master->village_id == $village->id?'selected':''}} value="{{$village->id}}">{{$village->name}}</option>
@@ -70,7 +70,7 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Gender</label>
+                            <label>Gender</label>
                             <select  name="gender" class="form-control select-search" data-fouc required>
                                 <option disabled>Select Gender</option>
                                 <option {{$respondent_master->gender == 'Male'?'selected':''}} value="Male">Male</option>
@@ -82,7 +82,7 @@
                             <input name="age" type="number" step="0.01" value="{{$respondent_master->age}}" class="form-control" placeholder="Enter Age" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Education</label>
+                            <label>Education</label>
                             <select  name="education" class="form-control select-search" data-fouc required>
                                 <option disabled>Select Education</option>
                                 <option {{$respondent_master->education == 'Illiterate'?'selected':''}} value="Illiterate">Illiterate</option>
@@ -98,7 +98,7 @@
                             <input name="number_family_member" value="{{$respondent_master->number_family_member}}" type="number" step="0.01" class="form-control" placeholder="Enter Number Family Member" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Caste</label>
+                            <label>Caste</label>
                             <select  name="caste" class="form-control select-search" data-fouc required>
                                 <option disabled>Select Caste</option>
                                 <option {{$respondent_master->caste == 'ST'?'selected':''}} value="ST">ST</option>
@@ -108,7 +108,7 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Religion</label>
+                            <label>Religion</label>
                             <select  name="religion" class="form-control select-search" data-fouc required>
                                 <option disabled>Select Religion</option>
                                 <option {{$respondent_master->religion == 'Hindu'?'selected':''}} value="Hindu">Hindu</option>

@@ -34,7 +34,7 @@
                             <input name="image" type="file" class="form-control" placeholder="Enter Name" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose District</label>
+                            <label>District</label>
                             <select name="district_id" id="district_id" readonly  class="form-control select-search" data-fouc required>
                                 <option disabled>Select District</option>
                                 <option selected value="{{Auth::user()->district_id}}">{{Auth::user()->district ? Auth::user()->district->name : ''}}</option>
@@ -44,7 +44,7 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4" >
-                            <label>Choose Blocks</label>
+                            <label>Blocks</label>
                             <select  name="block_id" class="form-control select-search" required>
                                 <option  disabled>Select Block</option>
                                 @foreach(App\Models\Block::whereIn('id',$user_block_ids)->get() as  $block_index =>  $block)
@@ -53,7 +53,7 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Gram Panchyat</label>
+                            <label>Gram Panchyat</label>
                             <select  name="gram_panchyat_id" class="form-control select-search" required>
                                 <option disabled>Select Gram Panchyat</option>
                                 @foreach(App\Models\GramPanchyat::whereIn('id',$user_gram_panchyat_ids)->get() as $gram_panchyat_index => $gram_panchyat)
@@ -62,7 +62,7 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Village</label>
+                            <label>Village</label>
                             <select  name="village_id" class="form-control select-search" required>
                                 <option selected disabled>Select Village</option>
                                 @foreach(App\Models\Village::whereIn('id',$user_villages_ids)->get() as $village_index =>  $village)
@@ -71,20 +71,7 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Gram Panchyat</label>
-                            <select name="gram_panchyat_id" id="gram_panchyat_id" class="form-control select-search" data-fouc required>
-                                <option selected disabled>Select Gram Panchyat</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Choose Village</label>
-                            <select name="village_id" id="village_id" class="form-control select-search" data-fouc required>
-                                <option selected disabled>Select Village</option>
-                                
-                            </select>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Choose Gender</label>
+                            <label>Gender</label>
                             <select  name="gender" class="form-control select-search" data-fouc required>
                                 <option disabled>Select Gender</option>
                                 <option value="Male">Male</option>
@@ -96,7 +83,7 @@
                             <input name="age" type="number" step="0.01" class="form-control" placeholder="Enter Age" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Education</label>
+                            <label>Education</label>
                             <select  name="education" class="form-control select-search" data-fouc required>
                                 <option disabled>Select Education</option>
                                 <option value="Illiterate">Illiterate</option>
@@ -112,7 +99,7 @@
                             <input name="number_family_member" type="number" step="0.01" class="form-control" placeholder="Enter Number Family Member" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Caste</label>
+                            <label>Caste</label>
                             <select  name="caste" class="form-control select-search" data-fouc required>
                                 <option disabled>Select Caste</option>
                                 <option value="ST">ST</option>
@@ -122,7 +109,7 @@
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Choose Religion</label>
+                            <label>Religion</label>
                             <select  name="religion" class="form-control select-search" data-fouc required>
                                 <option disabled>Select Religion</option>
                                 <option value="Hindu">Hindu</option>

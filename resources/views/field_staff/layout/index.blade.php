@@ -60,7 +60,7 @@
 	<div class="navbar navbar-expand-md navbar-dark">
 		<div class="navbar-brand">
 			<a href="{{url('/')}}" class="text-light">
-				<h3 class="m-0"><b>Field Staff Panel Menu</b></h3>
+				<h3 class="m-0"><b>Field Staff Panel</b></h3>
 			</a>
 		</div>
 
@@ -154,7 +154,6 @@
 				<div class="card card-sidebar-mobile">
 					<ul class="nav nav-sidebar" data-nav-type="accordion">
 							<!-- Main -->
-						<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Field Staff Panel</div> <i class="icon-menu" title="Main"></i></li>
 						<li class="nav-item">
 							<a href="{{route('field_staff.dashboard.index')}}" class="nav-link {{Request::is('field_staff/dashboard')?'active':''}}">
 								<i class="icon-home4"></i>
@@ -219,7 +218,7 @@
 			<div class="page-header page-header-light">
 				<div class="page-header-content header-elements-md-inline">
 					<div class="page-title d-flex">
-						<h4><a href="{{route('project.dashboard.index')}}"><i class="icon-arrow-left52 mr-2"></i></a><span class="font-weight-semibold">@yield('title')</span></h4>
+						<h4><a href="{{route('field_staff.dashboard.index')}}"><i class="icon-arrow-left52 mr-2"></i></a><span class="font-weight-semibold">@yield('title')</span></h4>
 						<a href="#" class="header-elements-toggle text-default d-md-none"><i class="icon-more"></i></a>
 					</div>
 
