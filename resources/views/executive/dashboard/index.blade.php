@@ -25,7 +25,7 @@
 <div class="row">
    <div class="col-sm-4 col-xl-4">
         <a href="#">
-            <div class="card card-body bg-danger-400 has-bg-image">
+            <div class="card card-body bg-blue-400 has-bg-image">
                 <div class="media">
                     <div class="mr-3 align-self-center">
                         <i class="icon-stack-picture icon-3x opacity-75"></i>
