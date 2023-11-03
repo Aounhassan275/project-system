@@ -74,6 +74,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(User::class,'user_id');
     }
+    public function district()
+    {
+        return $this->belongsTo(District::class,'district_id');
+    }
     public function project_manager()
     {
         return $this->belongsTo(User::class,'project_manager_id');

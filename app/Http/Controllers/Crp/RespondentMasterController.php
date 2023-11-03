@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Crp;
 
 use App\Http\Controllers\Controller;
 use App\Models\RespondentMaster;
+use App\Models\UserBlock;
+use App\Models\UserGramPanchyat;
+use App\Models\UserVillage;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RespondentMasterController extends Controller
 {
@@ -26,7 +30,11 @@ class RespondentMasterController extends Controller
      */
     public function create()
     {
-        return view('crp.respondent_master.create');
+        
+        $user_block_ids = UserBlock::where('user_id',Auth::user()->id)->get()->pluck('block_id')->toArray();
+        $user_gram_panchyat_ids = UserGramPanchyat::where('user_id',Auth::user()->id)->get()->pluck('gram_panchyat_id')->toArray();        
+        $user_villages_ids = UserVillage::where('user_id',Auth::user()->id)->get()->pluck('village_id')->toArray();
+        return view('crp.respondent_master.create',compact('user_block_ids','user_gram_panchyat_ids','user_villages_ids'));   
     }
 
     /**
