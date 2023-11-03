@@ -68,7 +68,6 @@
             </div>
         </a>
     </div>
-
     <div class="col-sm-4 col-xl-4">
         <a href="{{route('field_staff.training_report.index')}}">
             <div class="card card-body bg-teal-400 has-bg-image">
@@ -79,6 +78,22 @@
                     <div class="media-body text-right"> 
                         <h3 class="mb-0">{{Auth::user()->trainingReports->count()}}</h3>
                         <span class="text-uppercase font-size-xs">Total Training Report</span>
+                    </div>
+
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-4 col-xl-4">
+        <a href="{{route('field_staff.training_report.index')}}">
+            <div class="card card-body bg-teal-400 has-bg-image">
+                <div class="media">
+                    <div class="mr-3 align-self-center">
+                        <i class="icon-question4 icon-3x opacity-75"></i>
+                    </div>
+                    <div class="media-body text-right"> 
+                        <h3 class="mb-0">{{Auth::user()->trainingReports->count()}}</h3>
+                        <span class="text-uppercase font-size-xs">My Task</span>
                     </div>
 
                 </div>
