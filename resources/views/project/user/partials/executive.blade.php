@@ -7,7 +7,7 @@
                 <th>Profile Image</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Verified</th>
+                <th>Phone</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -24,13 +24,7 @@
                 </td>
                 <td>{{$executive->name}}</td>
                 <td>{{$executive->email}}</td>
-                <td>
-                    @if($executive->is_verified)
-                        <span class="badge badge-success">Verified</span>
-                    @else
-                        <span class="badge badge-danger">Not Verified</span>
-                    @endif
-                </td>
+                <td>{{$executive->phone}}</td>
                 <td>
                     @if($executive->is_active)
                         <span class="badge badge-success">Active</span>
