@@ -26,12 +26,11 @@
             <div class="card card-body bg-green-400 has-bg-image">
                 <div class="media">
                     <div class="media-body">
-                        <h3 class="mb-0">{{Auth::user()->respondentMasters->count()}}</h3>
+                        <h3 class="mb-0">{{@$total_respondent_masters}}</h3>
                         <span class="text-uppercase font-size-xs">Total Respondent Master</span>
                     </div>
-
-                    <div class="ml-3 align-self-center">
-                        <i class="icon-blog icon-3x opacity-75"></i>
+                    <div class="mr-3 align-self-center">
+                        <i class="icon-question4 icon-3x opacity-75"></i>
                     </div>
                 </div>
             </div>
@@ -73,7 +72,7 @@
             <div class="card card-body bg-teal-400 has-bg-image">
                 <div class="media">
                     <div class="media-body">
-                        <h3 class="mb-0">{{@$total_respondent_masters}}</h3>
+                        <h3 class="mb-0">{{@$trainingReports}}</h3>
                         <span class="text-uppercase font-size-xs">Total Respondent Master</span>
                     </div>
                     <div class="mr-3 align-self-center">
