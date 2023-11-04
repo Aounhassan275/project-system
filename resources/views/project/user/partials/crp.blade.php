@@ -7,7 +7,7 @@
                 <th>Profile Image</th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>Verified</th>
+                <th>Phone</th>
                 <th>Status</th>
                 <th>Action</th>
             </tr>
@@ -24,13 +24,7 @@
                 </td>
                 <td>{{$crp->name}}</td>
                 <td>{{$crp->email}}</td>
-                <td>
-                    @if($crp->is_verified)
-                        <span class="badge badge-success">Verified</span>
-                    @else
-                        <span class="badge badge-danger">Not Verified</span>
-                    @endif
-                </td>
+                <td>{{$crp->phone}}</td>
                 <td>
                     @if($crp->is_active)
                         <span class="badge badge-success">Active</span>
@@ -39,7 +33,7 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{route('project.user.show',$crp->id)}}" class="btn btn-primary btn-sm">Show</a>
+                    <a href="{{route('project.user.show',$crp->id)}}" class="btn btn-primary btn-sm">Update</a>
                 </td>
             </tr>
             @endforeach

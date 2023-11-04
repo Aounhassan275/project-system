@@ -2,6 +2,7 @@
 /****************** ADMIN MIDDLEWARE PAGES ROUTES START****************/
 
 use App\Http\Controllers\Project\DashboardController;
+use App\Http\Controllers\Project\ProjectDashboardController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Project\UserController;
 
@@ -9,6 +10,7 @@ Route::group(['prefix' => 'project', 'as'=>'project.','middleware' => 'auth:user
     Route::group(['middleware' => 'project'], function () { 
         /*******************DASHBOARD ROUTE START*************/       
         Route::get('dashboard',[DashboardController::class,'index'])->name('dashboard.index');
+        Route::get('project_dashboard',[ProjectDashboardController::class,'index'])->name('project_dashboard.index');
         /*******************DASHBOARD ROUTE END*************/       
         /*******************Project ROUTE START*************/       
         Route::resource('project',ProjectController::class);
