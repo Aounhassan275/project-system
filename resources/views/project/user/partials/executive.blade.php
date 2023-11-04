@@ -33,7 +33,7 @@
                     @endif
                 </td>
                 <td>
-                    <a href="{{route('project.user.show',$executive->id)}}" class="btn btn-primary btn-sm">Show</a>
+                    <a href="{{route('project.user.show',$executive->id)}}" class="btn btn-primary btn-sm">Update Data</a>
                 </td>
             </tr>
             @endforeach
