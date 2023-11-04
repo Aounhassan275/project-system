@@ -2,6 +2,7 @@
 /****************** ADMIN MIDDLEWARE PAGES ROUTES START****************/
 
 use App\Http\Controllers\Project\DashboardController;
+use App\Http\Controllers\Project\ProjectDashboardController;
 use App\Http\Controllers\Project\ProjectController;
 use App\Http\Controllers\Project\UserController;
 
