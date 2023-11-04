@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Models\FarmingIncome;
 use App\Models\FarmingProfile;
 use App\Models\FarmingYearling;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class FarmingProfileController extends Controller
 {
@@ -20,12 +22,13 @@ class FarmingProfileController extends Controller
     {
         try {
             $farmingProfiles = FarmingProfile::select('farming_profiles.*')
-            ->with(
-                'respondent_master',
-                'project',
-                'farming_income',
-                'farming_yearling'
-                )->get();
+                ->where('user_id',Auth::user()->id)
+                ->with(
+                    'respondent_master',
+                    'project',
+                    'farming_income',
+                    'farming_yearling'
+                    )->get();
 
             return response([
                 "farmingProfiles" => $farmingProfiles,
@@ -131,5 +134,21 @@ class FarmingProfileController extends Controller
     public function destroy(FarmingProfile $farmingProfile)
     {
         //
+    }
+    
+    public function getFieldStaffIndex()
+    {
+        try {
+            $farmingProfiles = User::query()->join('farming_profiles', 'users.id', '=', 'farming_profiles.user_id')
+                ->where('users.field_staff_id', '=', Auth::user()->id)
+                ->select('farming_profiles.*')->get();
+            return response([
+                "farmingProfiles" => $farmingProfiles,
+            ], 200);
+        } catch (\Exception $e) {
+            return response([
+                "error" => $e->getMessage()
+            ], 500);
+        }
     }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\GramPanchyat;
+use App\Models\UserGramPanchyat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GramPanchyatController extends Controller
 {
@@ -16,7 +18,8 @@ class GramPanchyatController extends Controller
     public function index()
     {
         try {
-            $gram_panchyats = GramPanchyat::all();
+            $user_gram_panchyat_ids = UserGramPanchyat::where('user_id',Auth::user()->id)->get()->pluck('gram_panchyat_id')->toArray();        
+            $gram_panchyats = GramPanchyat::whereIn('id',$user_gram_panchyat_ids)->get();
             return response([
                 "gram_panchyats" => $gram_panchyats,
             ], 200);

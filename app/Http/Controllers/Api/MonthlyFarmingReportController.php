@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\MonthlyFarmingReport;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MonthlyFarmingReportController extends Controller
 {
@@ -18,6 +20,7 @@ class MonthlyFarmingReportController extends Controller
     {
         try {
             $monthlyFarmingReports = MonthlyFarmingReport::select('monthly_farming_reports.*')
+            ->where('user_id',Auth::user()->id)
             ->with(
                 'respondent_master',
                 'user'
@@ -111,5 +114,21 @@ class MonthlyFarmingReportController extends Controller
     public function destroy(MonthlyFarmingReport $monthlyFarmingReport)
     {
         //
+    }
+    
+    public function getFieldStaffIndex()
+    {
+        try {
+            $monthlyFarmingReports = User::query()->join('monthly_farming_reports', 'users.id', '=', 'monthly_farming_reports.user_id')
+                    ->where('users.field_staff_id', '=', Auth::user()->id)
+                    ->select('monthly_farming_reports.*')->get();
+            return response([
+                "monthlyFarmingReports" => $monthlyFarmingReports,
+            ], 200);
+        } catch (\Exception $e) {
+            return response([
+                "error" => $e->getMessage()
+            ], 500);
+        }
     }
 }

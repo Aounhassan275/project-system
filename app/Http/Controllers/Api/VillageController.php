@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserVillage;
 use App\Models\Village;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VillageController extends Controller
 {
@@ -13,10 +15,11 @@ class VillageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $villages = Village::all();
+            $user_villages_ids = UserVillage::where('user_id',Auth::user()->id)->get()->pluck('village_id')->toArray();
+            $villages = Village::where('id',$user_villages_ids)->get();
             return response([
                 "villages" => $villages,
             ], 200);

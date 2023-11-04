@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\RespondentMaster;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RespondentMasterController extends Controller
 {
@@ -16,7 +18,9 @@ class RespondentMasterController extends Controller
     public function index()
     {
         try {
-            $respondent_masters = RespondentMaster::select('respondent_masters.*')->with(
+            $respondent_masters = RespondentMaster::select('respondent_masters.*')
+            ->where('user_id',Auth::user()->id)
+            ->with(
                 'block',
                 'district',
                 'gram_panchyat',
@@ -119,5 +123,21 @@ class RespondentMasterController extends Controller
     public function destroy(RespondentMaster $respondentMaster)
     {
         //
+    }
+    public function getFieldStaffIndex()
+    {
+        try {
+            $respondent_masters = User::query()->join('respondent_masters', 'users.id', '=', 'respondent_masters.user_id')
+                ->where('users.field_staff_id', '=', Auth::user()->id)
+                ->select('respondent_masters.*')
+                ->get();
+            return response([
+                "respondent_masters" => $respondent_masters,
+            ], 200);
+        } catch (\Exception $e) {
+            return response([
+                "error" => $e->getMessage()
+            ], 500);
+        }
     }
 }

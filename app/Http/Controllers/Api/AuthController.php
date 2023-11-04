@@ -31,7 +31,7 @@ class AuthController extends Controller
                 'message' => 'Wrong Password'
             ], 401);
         }
-        if($user->getRole() == 'Field Staff')
+        if($user->getRole() == 'Crp' || $user->getRole() == 'Field Staff' )
         {
             $token = $user->createToken('myapptoken')->plainTextToken;
     

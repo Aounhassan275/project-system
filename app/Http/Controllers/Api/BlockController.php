@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Block;
+use App\Models\UserBlock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlockController extends Controller
 {
@@ -16,7 +18,8 @@ class BlockController extends Controller
     public function index()
     {
         try {
-            $blocks = Block::all();
+            $user_block_ids = UserBlock::where('user_id',Auth::user()->id)->get()->pluck('block_id')->toArray();       
+            $blocks = Block::whereIn('id',$user_block_ids)->get();
             return response([
                 "blocks" => $blocks,
             ], 200);

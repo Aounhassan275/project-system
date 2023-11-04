@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\TrainingReport;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TrainingReportController extends Controller
 {
@@ -17,6 +19,7 @@ class TrainingReportController extends Controller
     {
         try {
             $training_reports = TrainingReport::select('training_reports.*')
+            ->where('user_id',Auth::user()->id)
             ->with(
                 'user',
                 'state',
@@ -114,5 +117,20 @@ class TrainingReportController extends Controller
     public function destroy(TrainingReport $trainingReport)
     {
         //
+    }
+    public function getFieldStaffIndex()
+    {
+        try {
+            $training_reports = User::query()->join('training_reports', 'users.id', '=', 'training_reports.user_id')
+                            ->where('users.field_staff_id', '=', Auth::user()->id)
+                            ->select('training_reports.*')->get();
+            return response([
+                "training_reports" => $training_reports,
+            ], 200);
+        } catch (\Exception $e) {
+            return response([
+                "error" => $e->getMessage()
+            ], 500);
+        }
     }
 }
