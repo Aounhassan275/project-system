@@ -73,7 +73,7 @@
                 <div class="media">
                     <div class="media-body">
                         <h3 class="mb-0">{{@$trainingReports}}</h3>
-                        <span class="text-uppercase font-size-xs">Total Respondent Master</span>
+                        <span class="text-uppercase font-size-xs">Trainings</span>
                     </div>
                     <div class="mr-3 align-self-center">
                         <i class="icon-question4 icon-3x opacity-75"></i>
