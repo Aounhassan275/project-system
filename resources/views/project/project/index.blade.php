@@ -34,7 +34,7 @@
                 <tr>
                     <td>{{$key+1}}</td>
                     <td>
-                        <a href="{{route('project.dashboard.index')}}">
+                        <a href="{{route('project.project_dashboard.index')}}">
                             {{$project_user->project->name}}
                         </a>
                     </td>
