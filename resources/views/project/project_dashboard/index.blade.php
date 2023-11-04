@@ -16,6 +16,7 @@
                         <h3 class="font-weight-semibold mb-0 text-center">
                             {{$project_user->project->name}}
                         </h3>
+                         @endforeach
                     </div>
                 </div>
             </div>
