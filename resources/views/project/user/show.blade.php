@@ -148,6 +148,17 @@
 													<label>Upload profile image</label>
 				                                    <input type="file" class="form-input-styled" name="image" data-fouc>
 												</div>
+												<div class="col-md-4">
+													<label>Role</label>
+													<div class="form-group form-group-feedback form-group-feedback-left">
+														<select name="role_id" class="form-control select-search" id="role_id" required>
+															<option>Select</option>
+															@foreach(App\Models\Role::whereIn('name',['Executive','Field Staff','Crp'])->get() as $role)
+															<option @if($user->role_id == $role->id) selected @endif value="{{$role->id}}">{{$role->name}}</option>
+															@endforeach
+														</select>
+													</div>
+												</div>
 												<div class="col-md-4 project_select" @if($user->role_id != 3) style="display:none;" @endif>
 													<label>Project Manager</label>
 													<div class="form-group form-group-feedback form-group-feedback-left">
@@ -251,11 +262,33 @@
             if(role_id == 3)
             {
                 $('.district_fields').show();
+                $('.project_select').show();
                 $('.staff_fields').hide();
+                $('.executive_select').hide();
+                $('.fieldstaff_select').hide();
+                $('#project_manager_id').attr('required',true);
+                $('#field_staff_id').attr('required',false);
+                $('#executive_id').attr('required',false);
             }else if(role_id == 4)
             {
                 $('.district_fields').show();
+                $('.executive_select').show();
+                $('#executive_id').attr('required',true);
+                $('#field_staff_id').attr('required',false);
+                $('#project_manager_id').attr('required',false);
+                $('.project_select').hide();
+                $('.fieldstaff_select').hide();
                 $('.staff_fields').show();
+            }else if(role_id == 5)
+            {
+                $('.district_fields').show();
+                $('.staff_fields').show();
+                $('.executive_select').hide();
+                $('#executive_id').attr('required',false);
+                $('#project_manager_id').attr('required',false);
+                $('.project_select').hide();
+                $('.fieldstaff_select').show();
+                $('#field_staff_id').attr('required',true);
             }
         });
     });

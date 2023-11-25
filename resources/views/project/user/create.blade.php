@@ -89,7 +89,7 @@
                                 <span id="confirmmsg"></span>
                             </div>
                         </div>
-                        <input type="hidden" name="role_id" value="3">
+                        {{-- <input type="hidden" name="role_id" value="3"> --}}
                         <div class="col-md-4">
                             <label>Role</label>
                             <div class="form-group form-group-feedback form-group-feedback-left">
