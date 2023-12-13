@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::resource('monthly_farming_report',MonthlyFarmingReportController::class);
         Route::post('training_report/store', [TrainingReportController::class,'store']);
         Route::resource('training_report',TrainingReportController::class);
+        Route::resource('project', ProjectController::class);
         // Route::post('logout',[AuthController::class,'logout'])->name('logout');;
     });
     Route::group(['prefix' => 'field_staff','middleware' => 'field_staff'], function () { 
@@ -49,7 +50,6 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('farming-profile', [FarmingProfileController::class,'getFieldStaffIndex']);
         Route::get('monthly_farming_report', [MonthlyFarmingReportController::class,'getFieldStaffIndex']);
         Route::get('training_report', [TrainingReportController::class,'getFieldStaffIndex']);
-        Route::resource('project', ProjectController::class);
         // Route::post('logout',[AuthController::class,'logout'])->name('logout');;
     });
 });
