@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\District;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DistrictController extends Controller
 {
@@ -16,7 +17,7 @@ class DistrictController extends Controller
     public function index()
     {
         try {
-            $districts = District::all();
+            $districts = District::where('id',Auth::user()->district_id)->get();
             return response([
                 "districts" => $districts,
             ], 200);
