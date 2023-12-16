@@ -23,6 +23,7 @@ class FarmingProfileController extends Controller
         try {
             $farmingProfiles = FarmingProfile::select('farming_profiles.*')
                 ->where('user_id',Auth::user()->id)
+                ->where('is_validate',1)
                 ->with(
                     'respondent_master',
                     'project',

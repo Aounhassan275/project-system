@@ -20,6 +20,7 @@ class RespondentMasterController extends Controller
         try {
             $respondent_masters = RespondentMaster::select('respondent_masters.*')
             ->where('user_id',Auth::user()->id)
+            ->where('is_validate',1)
             ->with(
                 'block',
                 'district',

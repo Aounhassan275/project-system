@@ -20,6 +20,7 @@ class TrainingReportController extends Controller
         try {
             $training_reports = TrainingReport::select('training_reports.*')
             ->where('user_id',Auth::user()->id)
+            ->where('is_validate',1)
             ->with(
                 'user',
                 'state',

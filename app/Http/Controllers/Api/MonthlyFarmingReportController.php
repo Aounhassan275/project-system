@@ -21,6 +21,7 @@ class MonthlyFarmingReportController extends Controller
         try {
             $monthlyFarmingReports = MonthlyFarmingReport::select('monthly_farming_reports.*')
             ->where('user_id',Auth::user()->id)
+            ->where('is_validate',1)
             ->with(
                 'respondent_master',
                 'user'
