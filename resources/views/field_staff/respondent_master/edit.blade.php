@@ -21,9 +21,9 @@
             </div>
 
             <div class="card-body">
-                {{-- <form action="{{route('field_staff.respondent_master.update',$respondent_master->id)}}" method="post" enctype="multipart/form-data" >
+                <form action="{{route('field_staff.respondent_master.update',$respondent_master->id)}}" method="post" enctype="multipart/form-data" >
                     @method('PUT')
-                    @csrf --}}
+                    @csrf
                     <div class="row">
                         <div class="col-md-12">
                             @if($respondent_master->is_validate)
@@ -40,7 +40,7 @@
                         </div>
                         <div class="form-group col-md-4">
                             <label>Image @if($respondent_master->image) <a href="{{asset($respondent_master->image)}}" target="_blank"> ( Show Image )</a>@endif</label>
-                            <input name="image" type="file" class="form-control" placeholder="Enter Name" required>
+                            <input name="image" type="file" class="form-control" placeholder="Enter Name">
                         </div>
                         <div class="form-group col-md-4">
                             <label>Choose District</label>
@@ -128,11 +128,11 @@
                             </select>
                         </div>
                     </div>
-                    {{-- <div class="text-right">
-                        <button type="submit" class="btn btn-primary">Edit <i class="icon-paperplane ml-2"></i></button>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">Update <i class="icon-paperplane ml-2"></i></button>
                     </div>
                     
-                </form> --}}
+                </form>
             </div>
         </div>
         <!-- /basic layout -->

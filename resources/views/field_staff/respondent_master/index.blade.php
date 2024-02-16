@@ -39,10 +39,10 @@
                     <tr>
                         <td>{{@$respondent_master->farmer_id}}</td>
                         <td>{{$respondent_master->name}}</td>
-                        <td>{{@$respondent_master->block->name}}</td>
+                        <td>{{App\Helpers\Helpers::getBlockName(@$respondent_master->block_id)}}</td>
                         <td>{{@$respondent_master->district->name}}</td>
-                        <td>{{@$respondent_master->gram_panchyat->name}}</td>
-                        <td>{{@$respondent_master->village->name}}</td>
+                        <td>{{App\Helpers\Helpers::getGPName(@$respondent_master->gram_panchyat_id)}}</td>
+                        <td>{{App\Helpers\Helpers::getVillageName(@$respondent_master->village_id)}}</td>
                         <td>
                             @if($respondent_master->is_validate)
                             <span class="badge badge-success">Yes</span>
