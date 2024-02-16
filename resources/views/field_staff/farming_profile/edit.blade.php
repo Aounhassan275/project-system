@@ -21,9 +21,9 @@
             </div>
 
             <div class="card-body">
-                {{-- <form action="{{route('field_staff.farming_profile.update',$farming_profile->id)}}" method="post" enctype="multipart/form-data" >
+                <form action="{{route('field_staff.farming_profile.update',$farming_profile->id)}}" method="post" enctype="multipart/form-data" >
                     @method('PUT')
-                    @csrf --}}
+                    @csrf
                     <div class="row">
                         <div class="col-md-12 float-right">
                             @if($farming_profile->is_validate)
@@ -292,11 +292,11 @@
                             </div>
                         </div>
                     </div>
-                    {{-- <div class="text-right">
+                    <div class="text-right">
                         <button type="submit" class="btn btn-primary">Create <i class="icon-paperplane ml-2"></i></button>
                     </div>
                     
-                </form> --}}
+                </form>
             </div>
         </div>
         <!-- /basic layout -->
