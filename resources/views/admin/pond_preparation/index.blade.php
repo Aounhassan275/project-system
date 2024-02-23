@@ -36,8 +36,8 @@
                 <tr>
                     <td>{{$key+1}}</td>
                     <td>{{@$pond_preparation->respondent_master->name .'('.@$pond_preparation->respondent_master->farmer_id.')'}}</td>
-                    <td>{{@$pond_preparation->date_of_update?$pond_preparation->date_of_update->format('d M,Y'):''}}</td>
-                    <td>{{@$pond_preparation->date_of_update?$pond_preparation->date_of_update->format('H i A'):''}}</td>
+                    <td>{{@$pond_preparation->date_of_update?\Carbon\Carbon::parse($pond_preparation->date_of_update)->format('d M,Y'):''}}</td>
+                    <td>{{@$pond_preparation->date_of_update?\Carbon\Carbon::parse($pond_preparation->date_of_update)->format('H i A'):''}}</td>
                     <td>{{@$pond_preparation->location}}</td>
                     <td>
                         <a href="{{route('admin.pond_preparation.edit',$pond_preparation->id)}}" class="btn btn-primary btn-sm">Edit</a>
