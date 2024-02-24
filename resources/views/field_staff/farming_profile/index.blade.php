@@ -27,7 +27,7 @@
                         <th>SL No</th>
                         <th>Farmer ID</th>
                         <th>Farmer Name</th>
-                        <th>Created By</th>
+                        <th>CRP</th>
                         <th>date & Time of Update</th>
                         <th>Is Validate</th>
                         <th>Action</th>
