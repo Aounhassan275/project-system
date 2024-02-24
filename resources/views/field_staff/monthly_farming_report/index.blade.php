@@ -26,7 +26,7 @@
                         <th>#</th>
                         <th>Month</th>
                         <th>Farmer Name</th>
-                        <th>Date & Time Of Update</th>>
+                        <th>Date & Time Of Update</th>
                         <th>Location</th>
                         <th>Is Validate</th>
                         <th>Action</th>
