@@ -24,7 +24,7 @@
                 <tr>
                     <th>#</th>
                     <th>Month</th>
-                    <th>Farmer Name</th>
+                    <th>Farmer ID</th>
                     <th>Farmer Name</th>
                     <th>Date & Time Of Update</th>
                     <th>Location</th>
