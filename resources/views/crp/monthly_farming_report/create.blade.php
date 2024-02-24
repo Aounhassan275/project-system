@@ -1,5 +1,4 @@
 @extends('crp.layout.index')
-
 @section('title')
     Add New Monthly Farming Report
 @endsection
