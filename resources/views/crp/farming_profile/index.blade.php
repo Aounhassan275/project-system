@@ -22,24 +22,25 @@
         <table class="table datatable-save-state">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>Farmer Name</th>
-                    <th>SHG Member</th>
-                    <th>Total Annual Income</th>
-                    <th>Annual Income From Fishery</th>
-                    <th>Is Validate</th>
-                    <th>Action</th>
+                        <th>SL No</th>
+                        <th>Farmer ID</th>
+                        <th>Farmer Name</th>
+                        <th>CRP</th>
+                        <th>Date & Time of Update</th>
+                        <th>Validated</th>
+                        <th>Action</th>
+                        <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (Auth::user()->farmingProfiles  as $key => $farming_profile)
                 <tr>
-                    <td>{{$key+1}}</td>
-                    <td>{{@$farming_profile->respondent_master->name .'('.@$farming_profile->respondent_master->farmer_id.')'}}</td>
-                    <td>{{$farming_profile->shg_member?'Yes':'No'}}</td>
-                    <td>{{$farming_profile->total_annual_income}}</td>
-                    <td>{{$farming_profile->total_annual_income_from_fishery}}</td>
-                    <td>
+                         <td>{{$key+1}}</td>
+                        <td>{{@$farming_profile->respondent_master->farmer_id}}</td>
+                        <td>{{@$farming_profile->respondent_master->name}}</td>
+                        <td>{{@$farming_profile->user->name}}</td>
+                        <td>{{@$farming_profile->updated_at}}</td>
+                        <td>
                         @if($farming_profile->is_validate)
                         <span class="badge badge-success">Yes</span>
                         @else 
