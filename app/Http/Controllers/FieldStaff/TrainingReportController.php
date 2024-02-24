@@ -18,10 +18,11 @@ class TrainingReportController extends Controller
      */
     public function index()
     {
-        $trainingReports = User::query()->join('training_reports', 'users.id', '=', 'training_reports.user_id')
+        $trainingReportsIds = User::query()->join('training_reports', 'users.id', '=', 'training_reports.user_id')
                             ->where('users.field_staff_id', '=', Auth::user()->id)
                             ->select('training_reports.*')
-                            ->get();
+                            ->get()->pluck('id')->toArray();
+        $trainingReports = TrainingReport::whereIn('id',$trainingReportsIds)->get();
         return view('field_staff.training_report.index',compact('trainingReports'));
     }
 

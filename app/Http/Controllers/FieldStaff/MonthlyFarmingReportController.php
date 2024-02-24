@@ -22,10 +22,11 @@ class MonthlyFarmingReportController extends Controller
      */
     public function index()
     {
-        $monthlyFarmingReports = User::query()->join('monthly_farming_reports', 'users.id', '=', 'monthly_farming_reports.user_id')
+        $monthlyFarmingReportsIds = User::query()->join('monthly_farming_reports', 'users.id', '=', 'monthly_farming_reports.user_id')
                             ->where('users.field_staff_id', '=', Auth::user()->id)
                             ->select('monthly_farming_reports.*')
-                            ->get();
+                            ->get()->pluck('id')->toArray();
+        $monthlyFarmingReports = MonthlyFarmingReport::whereIn('id',$monthlyFarmingReportsIds)->get();
         return view('field_staff.monthly_farming_report.index',compact('monthlyFarmingReports'));
     }
 
