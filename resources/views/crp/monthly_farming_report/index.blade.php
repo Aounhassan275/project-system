@@ -25,6 +25,7 @@
                     <th>#</th>
                     <th>Month</th>
                     <th>Farmer Name</th>
+                    <th>Farmer Name</th>
                     <th>Date & Time Of Update</th>
                     <th>Location</th>
                     <th>Is Validate</th>
@@ -35,6 +36,7 @@
                 <tr>
                     <td>{{$key+1}}</td>
                     <td>{{$monthly_farming_report->month}}</td>
+                    <td>{{@$monthly_farming_report->respondent_master->farmer_id}}</td>
                     <td>{{@$monthly_farming_report->respondent_master->name .'('.@$monthly_farming_report->respondent_master->farmer_id.')'}}</td>
                     <td>{{@$monthly_farming_report->date_of_update}}</td>
                     <td>{{@$monthly_farming_report->location}}</td>
