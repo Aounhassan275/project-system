@@ -24,14 +24,11 @@
             <table class="table datatable-save-state">
                 <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Farmer Name</th>
+                        <th>SL No</th>
                         <th>Farmer ID</th>
+                        <th>Farmer Name</th>
                         <th>Created By</th>
-                        <th>Updated At</th>
-                        <th>SHG Member</th>
-                        <th>Total Annual Income</th>
-                        <th>Annual Income From Fishery</th>
+                        <th>date & Time of Update</th>
                         <th>Is Validate</th>
                         <th>Action</th>
                         <th>Action</th>
@@ -41,13 +38,10 @@
                     @foreach ($farmingProfiles  as $key => $farming_profile)
                     <tr>
                         <td>{{$key+1}}</td>
-                        <td>{{@$farming_profile->respondent_master->name}}</td>
                         <td>{{@$farming_profile->respondent_master->farmer_id}}</td>
+                        <td>{{@$farming_profile->respondent_master->name}}</td>
                         <td>{{@$farming_profile->user->name}}</td>
                         <td>{{@$farming_profile->updated_at}}</td>
-                        <td>{{$farming_profile->shg_member?'Yes':'No'}}</td>
-                        <td>{{$farming_profile->total_annual_income}}</td>
-                        <td>{{$farming_profile->total_annual_income_from_fishery}}</td>
                         <td>
                             @if($farming_profile->is_validate)
                             <span class="badge badge-success">Yes</span>
