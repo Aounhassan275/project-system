@@ -28,8 +28,8 @@
                         <th>Farmer ID</th>
                         <th>Farmer Name</th>
                         <th>CRP</th>
-                        <th>date & Time of Update</th>
-                        <th>Is Validate</th>
+                        <th>Date & Time of Update</th>
+                        <th>Validated</th>
                         <th>Action</th>
                         <th>Action</th>
                     </tr>
@@ -53,7 +53,7 @@
                             @if($farming_profile->is_validate)
                             <a href="{{route('field_staff.farming_profile.un_validate',$farming_profile->id)}}" class="btn btn-sm btn-danger float-right">Un-validate</a>
                             @else 
-                            <a href="{{route('field_staff.farming_profile.validate',$farming_profile->id)}}" class="btn btn-sm btn-success float-right">Validated</a>
+                            <a href="{{route('field_staff.farming_profile.validate',$farming_profile->id)}}" class="btn btn-sm btn-success float-right">Validate</a>
                             @endif
                         </td>
                         <td>
