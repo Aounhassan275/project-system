@@ -39,7 +39,7 @@
                         <td>{{$key+1}}</td>
                         <td>{{$key+1}}</td>
                         <td>{{@$farming_profile->respondent_master->name .'('.@$farming_profile->respondent_master->farmer_id.')'}}</td>
-                        <td>{{@$monthly_farming_report->date_of_update}}</td>
+                        <td>{{@$monthly_farming_report->updated_at}}</td>
                         <td>
                             @if($farming_profile->is_validate)
                             <span class="badge badge-success">Yes</span>
