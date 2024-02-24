@@ -39,7 +39,7 @@
                     <td>{{@$monthly_farming_report->respondent_master->farmer_id}}</td>
                     <td>{{@$monthly_farming_report->respondent_master->name .'('.@$monthly_farming_report->respondent_master->farmer_id.')'}}</td>
                     <td>{{@$monthly_farming_report->date_of_update}}</td>
-                    <td><a href="https://maps.google.com/?q={{@$monthly_farming_report->location}}"></a></td>
+                    <td><a href="https://maps.google.com/?q=/"{{@$monthly_farming_report->location}}></a></td>
                     <td>
                         @if($monthly_farming_report->is_validate)
                         <span class="badge badge-success">Yes</span>
