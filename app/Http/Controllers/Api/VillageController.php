@@ -19,7 +19,7 @@ class VillageController extends Controller
     {
         try {
             $user_villages_ids = UserVillage::where('user_id',Auth::user()->id)->get()->pluck('village_id')->toArray();
-            $villages = Village::where('id',$user_villages_ids)->get();
+            $villages = Village::whereIn('id',$user_villages_ids)->get();
             return response([
                 "villages" => $villages,
             ], 200);
