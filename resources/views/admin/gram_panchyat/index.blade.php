@@ -58,6 +58,9 @@ Manage Gram Panchyats
                 <th>#</th>
                 <th>Name</th>
                 <th>Block Name</th>
+                <th>Total Executive</th>
+                <th>Total Field Staff</th>
+                <th>Total Crp</th>
                 <th>Action</th>
                 <th>Action</th>
             </tr>
@@ -68,6 +71,9 @@ Manage Gram Panchyats
                 <td>{{$key+1}}</td>
                 <td>{{$gram_panchyat->name}}</td>
                 <td>{{@$gram_panchyat->block->name}}</td>
+                <td>{{$gram_panchyat->getUserCount('3')}}</td>
+                <td>{{$gram_panchyat->getUserCount('4')}}</td>
+                <td>{{$gram_panchyat->getUserCount('5')}}</td>
                 <td>
                     <button data-toggle="modal" data-target="#edit_modal" name="{{$gram_panchyat->name}}" 
                         block_id="{{$gram_panchyat->block_id}}" id="{{$gram_panchyat->id}}" class="edit-btn btn btn-primary">Edit</button>

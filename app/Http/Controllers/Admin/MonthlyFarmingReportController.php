@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Block;
+use App\Models\District;
 use App\Models\GramPanchyat;
 use App\Models\MonthlyFarmingReport;
 use App\Models\Village;
@@ -135,6 +136,13 @@ class MonthlyFarmingReportController extends Controller
         }
         return response()->json([
             'available_months' => $available_months,
+        ]);
+    }
+    public function getDistricts(Request $request)
+    {
+        $districts = District::where('state_id',$request->state_id)->get();
+        return response()->json([
+            'districts' => $districts,
         ]);
     }
     public function getBlocks(Request $request)

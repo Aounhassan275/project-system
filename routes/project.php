@@ -19,7 +19,11 @@ Route::group(['prefix' => 'project', 'as'=>'project.','middleware' => 'auth:user
         Route::get('user/verified/{id}',[UserController::class,'verified'])->name('user.verified');
         Route::get('user/revert_verification/{id}',[UserController::class,'revert_verification'])->name('user.revert_verification');
         Route::get('user/active/{id}',[UserController::class,'active'])->name('user.active');
-        Route::get('user/in_active/{id}',[UserController::class,'in_active'])->name('user.in_active');    
+        Route::get('user/in_active/{id}',[UserController::class,'in_active'])->name('user.in_active');
+        Route::post('get_districts',[UserController::class,'getDistricts'])->name('user.get_districts');
+        Route::post('get_blocks',[UserController::class,'getBlocks'])->name('user.get_blocks');
+        Route::post('get_gram_panchyats',[UserController::class,'getGramPanchyats'])->name('user.get_gram_panchyats');
+        Route::post('get_villages',[UserController::class,'getVillages'])->name('user.get_villages');    
         Route::resource('user',UserController::class);
         /*******************USER ROUTE END*************/  
     });        

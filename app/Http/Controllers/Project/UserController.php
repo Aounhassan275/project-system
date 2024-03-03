@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Project;
 
 use App\Http\Controllers\Controller;
+use App\Models\Block;
+use App\Models\District;
+use App\Models\GramPanchyat;
 use App\Models\User;
 use App\Models\UserBlock;
 use App\Models\UserGramPanchyat;
 use App\Models\UserVillage;
+use App\Models\Village;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -248,5 +252,40 @@ class UserController extends Controller
         ]);
         toastr()->success('User is In Active Now!');
         return redirect()->back();
+    }
+    public function getDistricts(Request $request)
+    {
+        $districts = District::where('state_id',$request->state_id)->get();
+        return response()->json([
+            'districts' => $districts,
+        ]);
+    }
+    public function getBlocks(Request $request)
+    {
+        $blocks = Block::where('district_id',$request->district_id)->get();
+        return response()->json([
+            'blocks' => $blocks,
+        ]);
+    }
+    public function getGramPanchyats(Request $request)
+    {
+        if($request->block_ids)
+        {
+            $gram_panchyats = GramPanchyat::whereIn('block_id',$request->block_ids)->get();
+            return response()->json([
+                'gram_panchyats' => $gram_panchyats,
+            ]);
+        }else{
+            return response()->json([
+                'gram_panchyats' => [],
+            ]);
+        }
+    }
+    public function getVillages(Request $request)
+    {
+        $villages = Village::whereIn('gram_panchyat_id',$request->gram_panchyat_ids)->get();
+        return response()->json([
+            'villages' => $villages,
+        ]);
     }
 }

@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\PoliceStationController;
 use App\Http\Controllers\Admin\PondPreparationController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\ProjectUserController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\RespondentMasterController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\Admin\TrainingReportController;
@@ -60,6 +61,7 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','middleware' => 'auth:user'], 
         Route::resource('block',BlockController::class);
         /*******************Block ROUTE END*************/    
         /*******************Gram Panchyat ROUTE START*************/       
+        Route::get('location/report',[ReportController::class,'getLocationReport'])->name('location.report');
         Route::resource('gram_panchyat',GramPanchyatController::class);
         /*******************Gram Panchyat ROUTE END*************/     
         /*******************Village ROUTE START*************/       
@@ -85,6 +87,7 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','middleware' => 'auth:user'], 
         /*******************Pond Preparation ROUTE END*************/   
         /*******************Monthly Farming Report ROUTE START*************/       
         Route::post('get_months',[MonthlyFarmingReportController::class,'getMonths'])->name('monthly_farming_report.getMonths');
+        Route::post('get_districts',[MonthlyFarmingReportController::class,'getDistricts'])->name('monthly_farming_report.get_districts');
         Route::post('get_blocks',[MonthlyFarmingReportController::class,'getBlocks'])->name('monthly_farming_report.get_blocks');
         Route::post('get_gram_panchyats',[MonthlyFarmingReportController::class,'getGramPanchyats'])->name('monthly_farming_report.get_gram_panchyats');
         Route::post('get_villages',[MonthlyFarmingReportController::class,'getVillages'])->name('monthly_farming_report.get_villages');

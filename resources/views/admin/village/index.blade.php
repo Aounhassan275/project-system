@@ -58,6 +58,9 @@ Manage Villages
                 <th>#</th>
                 <th>Name</th>
                 <th>Gram Panchyat Name</th>
+                <th>Total Executive</th>
+                <th>Total Field Staff</th>
+                <th>Total Crp</th>
                 <th>Action</th>
                 <th>Action</th>
             </tr>
@@ -68,6 +71,9 @@ Manage Villages
                 <td>{{$key+1}}</td>
                 <td>{{$village->name}}</td>
                 <td>{{@$village->gram_panchyat->name}}</td>
+                <td>{{$village->getUserCount('3')}}</td>
+                <td>{{$village->getUserCount('4')}}</td>
+                <td>{{$village->getUserCount('5')}}</td>
                 <td>
                     <button data-toggle="modal" data-target="#edit_modal" name="{{$village->name}}" 
                         gram_panchyat_id="{{$village->gram_panchyat_id}}" id="{{$village->id}}" class="edit-btn btn btn-primary">Edit</button>

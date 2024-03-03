@@ -58,6 +58,9 @@ Manage Block
                 <th>#</th>
                 <th>Name</th>
                 <th>District Name</th>
+                <th>Total Executive</th>
+                <th>Total Field Staff</th>
+                <th>Total Crp</th>
                 <th>Action</th>
                 <th>Action</th>
             </tr>
@@ -68,6 +71,9 @@ Manage Block
                 <td>{{$key+1}}</td>
                 <td>{{$block->name}}</td>
                 <td>{{@$block->district->name}}</td>
+                <td>{{$block->getUserCount('3')}}</td>
+                <td>{{$block->getUserCount('4')}}</td>
+                <td>{{$block->getUserCount('5')}}</td>
                 <td>
                     <button data-toggle="modal" data-target="#edit_modal" name="{{$block->name}}" 
                         district_id="{{$block->district_id}}" id="{{$block->id}}" class="edit-btn btn btn-primary">Edit</button>

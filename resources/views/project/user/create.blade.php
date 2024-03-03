@@ -20,7 +20,7 @@
 
             <div class="card-body">
             
-                <form action="{{route('project.user.store')}}" method="post" enctype="multipart/form-data" >
+                <form action="{{route('project.user.store')}}" id="userCreateForm" method="post" enctype="multipart/form-data" >
                 @csrf
                     <div class="row">
                         <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
@@ -136,7 +136,7 @@
                         </div>
                         <div class="form-group col-md-4 district_fields" style="display:none;">
                             <label>Choose State</label>
-                            <select  name="state_id"  class="form-control select-search" >
+                            <select  name="state_id" id="state_id"  class="form-control select-search" >
                                 <option selected disabled>Select State</option>
                                 @foreach(App\Models\State::all() as $state)
                                 <option value="{{$state->id}}">{{$state->name}}</option>
@@ -145,38 +145,26 @@
                         </div>
                         <div class="form-group col-md-4 district_fields" style="display:none;">
                             <label>Choose District</label>
-                            <select  name="district_id"  class="form-control select-search" >
-                                <option selected disabled>Select District</option>
-                                @foreach(App\Models\District::all() as $district)
-                                <option value="{{$district->id}}">{{$district->name}}</option>
-                                @endforeach
+                            <select  name="district_id" id="district_id"  class="form-control select-search" >
+                                <option selected disabled>Select District</option>                    
                             </select>
                         </div>
                         <div class="form-group col-md-4 district_fields" style="display:none;">
                             <label>Choose Blocks</label>
-                            <select  name="block_ids[]" multiple class="form-control select-search" >
-                                <option disabled>Select Gram Panchyat</option>
-                                @foreach(App\Models\Block::all() as $block)
-                                <option value="{{$block->id}}">{{$block->name}}</option>
-                                @endforeach
+                            <select  name="block_ids[]" id="block_id" multiple class="form-control select-search" >
+                                <option disabled>Select Block</option>
                             </select>
                         </div>
                         <div class="form-group col-md-4 staff_fields" style="display:none;">
                             <label>Choose Gram Panchyat</label>
-                            <select  name="gram_panchyat_ids[]" multiple class="form-control select-search" >
+                            <select  name="gram_panchyat_ids[]" id="gram_panchyat_id" multiple class="form-control select-search" >
                                 <option disabled>Select Gram Panchyat</option>
-                                @foreach(App\Models\GramPanchyat::all() as $gram_panchyat)
-                                <option value="{{$gram_panchyat->id}}">{{$gram_panchyat->name}}</option>
-                                @endforeach
                             </select>
                         </div>
                         <div class="form-group col-md-4 staff_fields" style="display:none;">
                             <label>Choose Village</label>
-                            <select  name="village_ids[]" multiple class="form-control select-search" >
+                            <select  name="village_ids[]" id="village_id" multiple class="form-control select-search" >
                                 <option disabled>Select Village</option>
-                                @foreach(App\Models\Village::all() as $village)
-                                <option value="{{$village->id}}">{{$village->name}}</option>
-                                @endforeach
                             </select>
                         </div>
 
@@ -259,7 +247,96 @@
     }
     
 </script>
-
+<script>
+    
+    $(document).ready(function(){
+        $('#state_id').change(function(){
+            let state_id = $(this).val();
+            $.ajax({
+                url: "{{route('project.user.get_districts')}}",
+                method: 'post',
+                data: {
+                    state_id: state_id,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(response){
+                    districts = response.districts;
+                    $('#district_id').empty();
+                    $('#block_id').empty();
+                    $('#village_id').empty();
+                    $('#gram_panchyat_id').empty();
+                    $('#district_id').append('<option disabled>Select District</option>');
+                    for (i=0;i<districts.length;i++){
+                        $('#district_id').append('<option value="'+districts[i].id+'">'+districts[i].name+'</option>');
+                    }
+                }
+            });
+        });
+        $('#district_id').change(function(){
+            let district_id = $(this).val();
+            $.ajax({
+                url: "{{route('project.user.get_blocks')}}",
+                method: 'post',
+                data: {
+                    district_id: district_id,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(response){
+                    blocks = response.blocks;
+                    $('#block_id').empty();
+                    $('#village_id').empty();
+                    $('#gram_panchyat_id').empty();
+                    $('#block_id').append('<option disabled>Select Blocks</option>');
+                    for (i=0;i<blocks.length;i++){
+                        $('#block_id').append('<option value="'+blocks[i].id+'">'+blocks[i].name+'</option>');
+                    }
+                }
+            });
+        });
+        $('#block_id').change(function(){
+            let data = $('#userCreateForm').serialize();
+            $.ajax({
+                url: "{{route('project.user.get_gram_panchyats')}}",
+                method: 'post',
+                data: data,
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(response){
+                    gram_panchyats = response.gram_panchyats;
+                    $('#gram_panchyat_id').empty();
+                    $('#village_id').empty();
+                    $('#gram_panchyat_id').append('<option disabled>Select Gram Panchyat</option>');
+                    for (i=0;i<gram_panchyats.length;i++){
+                        $('#gram_panchyat_id').append('<option value="'+gram_panchyats[i].id+'">'+gram_panchyats[i].name+'</option>');
+                    }
+                }
+            });
+        });
+        $('#gram_panchyat_id').change(function(){
+            $.ajax({
+                url: "{{route('project.user.get_villages')}}",
+                method: 'post',
+                data: $('#userCreateForm').serialize(),
+                headers: {
+                    'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                },
+                success: function(response){
+                    villages = response.villages;
+                    $('#village_id').empty();
+                    $('#village_id').append('<option disabled>Select Village</option>');
+                    for (i=0;i<villages.length;i++){
+                        $('#village_id').append('<option value="'+villages[i].id+'">'+villages[i].name+'</option>');
+                    }
+                }
+            });
+        });
+    });
+</script>
 <script>
     $(document).ready(function(){
         $('#role_id').change(function(){
