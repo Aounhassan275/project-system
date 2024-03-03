@@ -61,6 +61,7 @@ Route::group(['prefix' => 'admin', 'as'=>'admin.','middleware' => 'auth:user'], 
         Route::resource('block',BlockController::class);
         /*******************Block ROUTE END*************/    
         /*******************Gram Panchyat ROUTE START*************/       
+        Route::post('location/get_village_data',[ReportController::class,'getVillagesData'])->name('location.get_village_data');
         Route::get('location/report',[ReportController::class,'getLocationReport'])->name('location.report');
         Route::resource('gram_panchyat',GramPanchyatController::class);
         /*******************Gram Panchyat ROUTE END*************/     
