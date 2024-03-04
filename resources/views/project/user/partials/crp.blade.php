@@ -6,6 +6,7 @@
                 {{-- <th>#</th> --}}
                 <th>Profile Image</th>
                 <th>Name</th>
+                <th>Village Names</th>
                 <th>Email</th>
                 <th>Phone</th>
                 <th>Status</th>
@@ -23,6 +24,7 @@
                     @endif
                 </td>
                 <td>{{$crp->name}}</td>
+                <td>{{App\Helpers\Helpers::getUserVillages($crp->id)}}</td>
                 <td>{{$crp->email}}</td>
                 <td>{{$crp->phone}}</td>
                 <td>

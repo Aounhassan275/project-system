@@ -5,6 +5,7 @@ namespace App\Helpers;
 use App\Models\Block;
 use App\Models\GramPanchyat;
 use App\Models\User;
+use App\Models\UserVillage;
 use App\Models\Village;
 
 class Helpers
@@ -26,6 +27,17 @@ class Helpers
     public static function getVillageName($id)
     {
         return Village::find($id)->name ?? null;
+    } 
+
+    public static function getUserVillages($id)
+    {
+        $user_villages = UserVillage::where('user_id',$id)->get()->pluck('village_id')->toArray();
+        if(count($user_villages) > 0)
+        {
+            $villages = Village::whereIn('id',$user_villages)->get()->pluck('name')->toArray();
+            return implode(',',$villages);
+        }
+        return null;
     } 
 
     public static function getMonths()
