@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\FarmingIncome;
 use App\Models\FarmingProfile;
 use App\Models\FarmingYearling;
+use App\Models\RespondentMaster;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -145,6 +146,52 @@ class FarmingProfileController extends Controller
                 ->select('farming_profiles.*')->get();
             return response([
                 "farmingProfiles" => $farmingProfiles,
+            ], 200);
+        } catch (\Exception $e) {
+            return response([
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+    public function getRPForFP()
+    {
+        try {
+            $respondent_masters = RespondentMaster::where('user_id',Auth::user()->id)
+                                ->where('is_validate',1)->get();
+            $ids = [];
+            foreach($respondent_masters as $respondent_master)
+            {
+                if($respondent_master->farming_profile->count() == 0)
+                {
+                    $ids[] = $respondent_master->id;
+                }
+            }
+            $respondentMasters = RespondentMaster::whereIn('id',$ids)->get();
+            return response([
+                "respondentMasters" => $respondentMasters,
+            ], 200);
+        } catch (\Exception $e) {
+            return response([
+                "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+    public function getRPForMFR()
+    {
+        try {
+            $respondent_masters = RespondentMaster::where('user_id',Auth::user()->id)
+                                ->where('is_validate',1)->get();
+            $ids = [];
+            foreach($respondent_masters as $respondent_master)
+            {
+                if($respondent_master->farming_profile->count() > 0)
+                {
+                    $ids[] = $respondent_master->id;
+                }
+            }
+            $respondentMasters = RespondentMaster::whereIn('id',$ids)->get();
+            return response([
+                "respondentMasters" => $respondentMasters,
             ], 200);
         } catch (\Exception $e) {
             return response([

@@ -40,7 +40,7 @@ class RespondentMaster extends Model
     }
     public function farming_profile()
     {
-        return $this->hasMany(FarmingProfile::class,'respondent_master_id')->orWhere('respondent_master_api_id',$this->api_id);
+        return $this->hasMany(FarmingProfile::class,'respondent_master_id');
     }
     
 

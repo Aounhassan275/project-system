@@ -23,11 +23,7 @@ class FarmingProfile extends Model
 
     public function respondent_master()
     {
-        if ($this->respondent_master_api_id) {
-            return $this->belongsTo(RespondentMaster::class, 'respondent_master_api_id', 'api_id');
-        } else {
-            return $this->belongsTo(RespondentMaster::class, 'respondent_master_id');
-        }
+        return $this->belongsTo(RespondentMaster::class, 'respondent_master_id');
     }
 
     public function user()

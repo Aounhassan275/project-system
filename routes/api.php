@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::resource('district', DistrictController::class);
         Route::resource('gram-panchyat', GramPanchyatController::class);
         Route::resource('farming-profile', FarmingProfileController::class);
+        Route::get('get_respondent_master_for_farming_profile', [FarmingProfileController::class,'getRPForFP']);
+        Route::get('get_respondent_master_for_monthly_farming', [FarmingProfileController::class,'getRPForMFR']);
         Route::post('farming-profile/store', [FarmingProfileController::class,'store']);
         Route::post('monthly_farming_report/store', [MonthlyFarmingReportController::class,'store']);
         Route::resource('monthly_farming_report',MonthlyFarmingReportController::class);
