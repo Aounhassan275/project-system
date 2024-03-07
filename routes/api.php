@@ -41,6 +41,8 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
         Route::get('get_respondent_master_for_monthly_farming', [FarmingProfileController::class,'getRPForMFR']);
         Route::post('farming-profile/store', [FarmingProfileController::class,'store']);
         Route::post('monthly_farming_report/store', [MonthlyFarmingReportController::class,'store']);
+        Route::post('get_months',[MonthlyFarmingReportController::class,'getMonths']);
+        Route::post('monthly_farming_report/store', [MonthlyFarmingReportController::class,'store']);
         Route::resource('monthly_farming_report',MonthlyFarmingReportController::class);
         Route::post('training_report/store', [TrainingReportController::class,'store']);
         Route::resource('training_report',TrainingReportController::class);

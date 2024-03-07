@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\MonthlyFarmingReport;
 use App\Models\User;
@@ -129,6 +130,33 @@ class MonthlyFarmingReportController extends Controller
         } catch (\Exception $e) {
             return response([
                 "error" => $e->getMessage()
+            ], 500);
+        }
+    }
+    public function getMonths(Request $request)
+    {
+        try{
+            $this->validate($request,[
+                'respondent_master_id' => 'required',
+            ]);
+            $have_months = MonthlyFarmingReport::where('respondent_master_id',$request->respondent_master_id)->pluck('month')->toArray();
+            $months = Helpers::getMonths();
+            $available_months = [];
+            foreach($months as $month)
+            {
+                if(!in_array($month,$have_months))
+                {
+                    $available_months[] = $month;
+                }
+            }
+            return response([
+                "available_months" => $available_months,
+            ], 200);
+        }catch (Exception $e)
+        {
+            return response([
+                "success" => false,
+                "message" => $e->getMessage(),
             ], 500);
         }
     }
