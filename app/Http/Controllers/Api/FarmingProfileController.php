@@ -184,7 +184,7 @@ class FarmingProfileController extends Controller
             $ids = [];
             foreach($respondent_masters as $respondent_master)
             {
-                if($respondent_master->farming_profile->count() > 0)
+                if($respondent_master->farming_profile->where('is_validate',1)->count() > 0)
                 {
                     $ids[] = $respondent_master->id;
                 }
