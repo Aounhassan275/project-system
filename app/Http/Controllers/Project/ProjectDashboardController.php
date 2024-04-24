@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Project;
 
 use App\Http\Controllers\Controller;
+use App\Models\GramPanchyat;
 use App\Models\User;
+use App\Models\UserGramPanchyat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,12 +32,16 @@ class ProjectDashboardController extends Controller
             ->whereIn('users.field_staff_id', $field_staff_ids)
             ->select('training_reports.*')
             ->count();
-
+        $crpUserIds = User::whereIn('field_staff_id', $field_staff_ids)->get()->pluck('id')->toArray();
+        $userGramPanchyatIds = UserGramPanchyat::whereIn('user_id',$crpUserIds)->get()->pluck('gram_panchyat_id')->toArray();
+        $gramPanchyats = GramPanchyat::whereIn('id',$userGramPanchyatIds)->get();
         return view('project.project_dashboard.index',compact(
             'total_respondent_masters',
             'farmingProfiles',
             'trainingReports',
             'monthlyFarmingReports',
+            'gramPanchyats',
+            'crpUserIds',
         ));
     }
 }

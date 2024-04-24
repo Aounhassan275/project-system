@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Helpers\ImageHelper;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -121,5 +122,77 @@ class User extends Authenticatable
                         ->join('villages','user_villages.village_id','villages.id')
                         ->where('user_villages.user_id',$this->id)->get()->pluck('name')->toArray();
         return implode(',', $user_villages);
+    }
+    public function getFisheringFarmer($gp_id,$userIds)
+    {
+        
+        $users = User::query()
+            ->join('user_gram_panchyats', 'users.id', '=', 'user_gram_panchyats.user_id')
+            ->whereIn('users.id', $userIds)
+            ->where('user_gram_panchyats.gram_panchyat_id', $gp_id)
+            ->select('users.id as id')
+            ->get()->pluck('id')->toArray();
+        $nurseryFarmers =   FarmingProfile::whereIn('user_id', $users)
+                                ->where('involvement_in_fishery','=' ,'Nursery Farmer')->count();
+        $growerFarmers =   FarmingProfile::whereIn('user_id', $users)
+                                ->where('involvement_in_fishery','=' ,'Grower')->count();
+        $bothFarmers =   FarmingProfile::whereIn('user_id', $users)
+                                ->where('involvement_in_fishery','=' ,'Both')->count();
+        $totalWaterBody =   FarmingProfile::whereIn('user_id', $users)->sum('total_water_body');
+        $total_annual_income =   FarmingProfile::whereIn('user_id', $users)->sum('total_annual_income');
+        $total_annual_income_from_fishery =   FarmingProfile::whereIn('user_id', $users)->sum('total_annual_income_from_fishery');
+        return [
+            'nurseryFarmers' => $nurseryFarmers,
+            'growerFarmers' => $growerFarmers,
+            'bothFarmers' => $bothFarmers,
+            'totalWaterBody' => $totalWaterBody,
+            'total_annual_income' => $total_annual_income,
+            'total_annual_income_from_fishery' => $total_annual_income_from_fishery,
+        ];
+    }
+    public function getFarmingDetailByMonth($month,$users)
+    {
+        $m = Carbon::parse($month)->format('M');
+        
+        $users = [];
+        // if($this->role_id == 3)
+        // {
+        //  $users = User::query()
+        //                 ->join('user_gram_panchyats', 'users.id', '=', 'user_gram_panchyats.user_id')
+        //                 ->where('users.executive_id', $this->id)
+        //                 ->select('users.id as id')
+        //                 ->get()->pluck('id')->toArray();
+        // }
+        $currentMonthFarmingProfiles = FarmingProfile::whereIn('user_id', $users)
+                                ->whereMonth('created_at',$m)->count();
+        $currentMonthFarmingReports = MonthlyFarmingReport::whereIn('user_id', $users)
+                                ->whereMonth('created_at',$m)->count();
+
+        return [
+            'currentMonthFarmingProfiles' => $currentMonthFarmingProfiles,
+            'currentMonthFarmingReports' => $currentMonthFarmingReports,
+        ];
+    }
+    public function getTrainingDetailByMonth($month,$users)
+    {
+        $m = Carbon::parse($month)->format('M');
+        // $users = [];
+        // if($this->role_id == 3)
+        // {
+        //     $users = User::query()
+        //             ->join('user_gram_panchyats', 'users.id', '=', 'user_gram_panchyats.user_id')
+        //             ->where('users.executive_id', $this->id)
+        //             ->select('users.id as id')
+        //             ->get()->pluck('id')->toArray();
+        // }
+        $currentMonthTraingReport = TrainingReport::whereIn('user_id', $users)
+                                ->whereMonth('created_at',$m)->count();
+        $number_of_participants = TrainingReport::whereIn('user_id', $users)
+                                ->whereMonth('created_at',$m)->sum('number_of_participants');
+
+        return [
+            'number_of_participants' => $number_of_participants,
+            'currentMonthTraingReport' => $currentMonthTraingReport,
+        ];
     }
 }

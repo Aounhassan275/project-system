@@ -90,6 +90,23 @@
     </div>
 
 </div>
+<div class="row">
+    <div class="col-md-12">
+        @include('project.project_dashboard.partials.report_basic_farmer_profile')
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @include('project.project_dashboard.partials.monthly_progress_report')
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        @include('project.project_dashboard.partials.monthly_training_report')
+        
+    </div>
+</div>
 @endsection
 @section('scripts')
 @endsection

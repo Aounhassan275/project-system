@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\FieldStaff;
 
 use App\Http\Controllers\Controller;
+use App\Models\GramPanchyat;
 use App\Models\User;
+use App\Models\UserGramPanchyat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,11 +30,16 @@ class DashboardController extends Controller
                         ->where('users.field_staff_id', '=', Auth::user()->id)
                         ->select('training_reports.*')
                         ->count();
+        $crpUserIds = User::where('field_staff_id', Auth::user()->id)->get()->pluck('id')->toArray();
+        $userGramPanchyatIds = UserGramPanchyat::whereIn('user_id',$crpUserIds)->get()->pluck('gram_panchyat_id')->toArray();
+        $gramPanchyats = GramPanchyat::whereIn('id',$userGramPanchyatIds)->get();
         return view('field_staff.dashboard.index',compact(
             'total_respondent_masters',
             'farmingProfiles',
             'trainingReports',
             'monthlyFarmingReports',
+            'crpUserIds',
+            'gramPanchyats',
         ));
     }
 }

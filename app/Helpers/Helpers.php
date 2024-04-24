@@ -7,6 +7,7 @@ use App\Models\GramPanchyat;
 use App\Models\User;
 use App\Models\UserVillage;
 use App\Models\Village;
+use Carbon\Carbon;
 
 class Helpers
 {
@@ -56,6 +57,25 @@ class Helpers
           'Nov',  
           'Dec',  
         ];
+    } 
+    public static function getCurrentYear()
+    {
+        $months = [];
+        for ($i = 0; $i < 12; $i++) {
+            array_push($months, Carbon::now()->addMonth($i)->format('M Y'));
+        };
+        return $months;
+    } 
+    public static function yearRange()
+    {
+        $currentYear = Carbon::now()->format('Y');
+        $nextYear = Carbon::now()->addMonth(12)->format('Y');
+        if($currentYear == $nextYear)
+        {
+            return $currentYear;
+        }else{
+            return $currentYear .'-'. $nextYear;
+        }
     } 
 
 }
