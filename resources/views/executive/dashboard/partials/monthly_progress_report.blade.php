@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="card-body">
-        <table class="table datatable-save-state">
+        <table class="table ">
             <thead>
                 <tr>
                     <th class="text-center">Month</th>

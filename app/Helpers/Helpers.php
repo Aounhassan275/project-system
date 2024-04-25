@@ -62,19 +62,19 @@ class Helpers
     {
         $months = [];
         for ($i = 0; $i < 12; $i++) {
-            array_push($months, Carbon::now()->addMonth($i)->format('M Y'));
+            array_push($months, Carbon::now()->subMonth($i)->format('M Y'));
         };
         return $months;
     } 
     public static function yearRange()
     {
         $currentYear = Carbon::now()->format('Y');
-        $nextYear = Carbon::now()->addMonth(12)->format('Y');
-        if($currentYear == $nextYear)
+        $pastYear = Carbon::now()->subMonth(12)->format('Y');
+        if($currentYear == $pastYear)
         {
             return $currentYear;
         }else{
-            return $currentYear .'-'. $nextYear;
+            return $pastYear .'-'. $currentYear;
         }
     } 
 
