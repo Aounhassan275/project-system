@@ -167,6 +167,15 @@
 								<li class="nav-item"><a href="{{route('executive.user.index')}}" class="nav-link {{Request::is('executive/user')?'active':''}}">All Field Staffs</a></li>
 							</ul>
 						</li>
+						<li class="nav-item nav-item-submenu {{Request::is('executive/report*') ?'nav-item-open':''}}">
+							<a href="#" class="nav-link"><i class="icon-home4"></i> <span>Reports</span></a>
+
+							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('executive/report*')   ?'display:block':''}}">
+								<li class="nav-item"><a href="{{route('executive.report.monthly-progress')}}" class="nav-link {{Request::is('executive/report/monthly-progress') ?'active':''}}">Monthly Progress</a></li>
+								<li class="nav-item"><a href="{{route('executive.report.monthly-training')}}" class="nav-link {{Request::is('executive/report/monthly-training') ?'active':''}}">Monthly Training</a></li>
+								<li class="nav-item"><a href="{{route('executive.report.basic-farmer-profile')}}" class="nav-link {{Request::is('executive/report/basic-farmer-profile') ?'active':''}}">Basic Farmer Profile</a></li>
+							</ul>
+						</li>
 					</ul>
 				</div>
 				<!-- /main navigation -->

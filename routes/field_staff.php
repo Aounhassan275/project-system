@@ -4,6 +4,7 @@
 use App\Http\Controllers\FieldStaff\DashboardController;
 use App\Http\Controllers\FieldStaff\FarmingProfileController;
 use App\Http\Controllers\FieldStaff\MonthlyFarmingReportController;
+use App\Http\Controllers\FieldStaff\ReportController;
 use App\Http\Controllers\FieldStaff\RespondentMasterController;
 use App\Http\Controllers\FieldStaff\TrainingReportController;
 use App\Http\Controllers\FieldStaff\UserController;
@@ -46,7 +47,10 @@ Route::group(['prefix' => 'field_staff', 'as'=>'field_staff.','middleware' => 'a
         Route::get('user/active/{id}',[UserController::class,'active'])->name('user.active');
         Route::get('user/in_active/{id}',[UserController::class,'in_active'])->name('user.in_active');
         Route::resource('user',UserController::class);
-        /*******************USER ROUTE END*************/       
+        /*******************USER ROUTE END*************/            
+        Route::get('report/monthly-progress',[ReportController::class,'monthlyProgress'])->name('report.monthly-progress');
+        Route::get('report/monthly-training',[ReportController::class,'monthlyTraining'])->name('report.monthly-training');
+        Route::get('report/basic-farmer-profile',[ReportController::class,'basicFarmerProfile'])->name('report.basic-farmer-profile');
     });        
 });        
 /****************** ADMIN MIDDLEWARE PAGES ROUTES END****************/

@@ -4,6 +4,7 @@
 use App\Http\Controllers\Project\DashboardController;
 use App\Http\Controllers\Project\ProjectDashboardController;
 use App\Http\Controllers\Project\ProjectController;
+use App\Http\Controllers\Project\ReportController;
 use App\Http\Controllers\Project\UserController;
 
 Route::group(['prefix' => 'project', 'as'=>'project.','middleware' => 'auth:user'], function () { 
@@ -25,7 +26,10 @@ Route::group(['prefix' => 'project', 'as'=>'project.','middleware' => 'auth:user
         Route::post('get_gram_panchyats',[UserController::class,'getGramPanchyats'])->name('user.get_gram_panchyats');
         Route::post('get_villages',[UserController::class,'getVillages'])->name('user.get_villages');    
         Route::resource('user',UserController::class);
-        /*******************USER ROUTE END*************/  
+        /*******************USER ROUTE END*************/       
+        Route::get('report/monthly-progress',[ReportController::class,'monthlyProgress'])->name('report.monthly-progress');
+        Route::get('report/monthly-training',[ReportController::class,'monthlyTraining'])->name('report.monthly-training');
+        Route::get('report/basic-farmer-profile',[ReportController::class,'basicFarmerProfile'])->name('report.basic-farmer-profile');
     });        
 });        
 /****************** ADMIN MIDDLEWARE PAGES ROUTES END****************/

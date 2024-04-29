@@ -188,6 +188,15 @@
 								<span>Repondent Master</span>
 							</a>
 						</li>
+						<li class="nav-item nav-item-submenu {{Request::is('field_staff/report*') ?'nav-item-open':''}}">
+							<a href="#" class="nav-link"><i class="icon-home4"></i> <span>Reports</span></a>
+
+							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('field_staff/report*')   ?'display:block':''}}">
+								<li class="nav-item"><a href="{{route('field_staff.report.monthly-progress')}}" class="nav-link {{Request::is('field_staff/report/monthly-progress') ?'active':''}}">Monthly Progress</a></li>
+								<li class="nav-item"><a href="{{route('field_staff.report.monthly-training')}}" class="nav-link {{Request::is('field_staff/report/monthly-training') ?'active':''}}">Monthly Training</a></li>
+								<li class="nav-item"><a href="{{route('field_staff.report.basic-farmer-profile')}}" class="nav-link {{Request::is('field_staff/report/basic-farmer-profile') ?'active':''}}">Basic Farmer Profile</a></li>
+							</ul>
+						</li>
 						{{-- <li class="nav-item">
 							<a href="{{route('field_staff.training_report.index')}}" class="nav-link {{Request::is('project/project')?'active':''}}">
 								<i class="icon-home4"></i>
