@@ -1,3 +1,4 @@
+@extends('field_staff.layout.index')
 @section('title')
     Monthly Progress Report
 @endsection

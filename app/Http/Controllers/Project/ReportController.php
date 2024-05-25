@@ -17,6 +17,7 @@ class ReportController extends Controller
         $executive_ids = User::where('role_id',3)->where('user_id',Auth::user()->id)->get()->pluck('id')->toArray();
         $field_staff_ids = User::whereIn('executive_id',$executive_ids)->get()->pluck('id')->toArray();
         $crpUserIds = User::whereIn('field_staff_id', $field_staff_ids)->get()->pluck('id')->toArray();
+        
         return view('project.reports.monthly_progress_report',compact(
             'crpUserIds',
         ));

@@ -1,3 +1,5 @@
+@extends('executive.layout.index')
+
 @section('title')
     Monthly Training Report
 @endsection

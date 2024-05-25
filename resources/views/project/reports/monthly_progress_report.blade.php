@@ -1,3 +1,5 @@
+
+@extends('project.layout.index')
 @section('title')
     Monthly Progress Report
 @endsection

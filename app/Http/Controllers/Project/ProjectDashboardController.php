@@ -37,8 +37,6 @@ class ProjectDashboardController extends Controller
             'farmingProfiles',
             'trainingReports',
             'monthlyFarmingReports',
-            'gramPanchyats',
-            'crpUserIds',
         ));
     }
 }

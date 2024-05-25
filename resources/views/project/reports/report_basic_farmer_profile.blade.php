@@ -1,3 +1,4 @@
+@extends('project.layout.index')
 @section('title')
    Basic Farmer Profile Report
 @endsection

@@ -1,3 +1,4 @@
+@extends('executive.layout.index')
 @section('title')
    Basic Farmer Profile Report
 @endsection
