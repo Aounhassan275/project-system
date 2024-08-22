@@ -25,7 +25,7 @@
                     <th>Project Name</th>
                     <th>Project Duration</th>
                     <th>Project State Name</th>
-                    <th>Sponsored By</th>
+                    <th>Project District Name</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,7 +39,7 @@
                     </td>
                     <td>{{$project_user->project->duration}}</td>
                     <td>{{@$project_user->project->state->name}}</td>
-                    <td>{{@$project_user->project->sponcered_by}}</td>
+                    <td>{{@$project_user->project->district->name}}</td>
                 </tr>
                 @endforeach
             </tbody>

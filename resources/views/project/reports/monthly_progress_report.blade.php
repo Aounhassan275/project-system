@@ -27,7 +27,7 @@
                             <th class="text-center">Month</th>
                             <th class="text-center">Number of registered under Fishery Project</th>
                             <th class="text-center">Numbers of famers monthly report submitted</th>
-                            <th class="text-center">Percentage of farmers cleaning pound in the month</th>
+                            <th class="text-center">Percentage of farmers cleaning pond in the month</th>
                             <th class="text-center">Percentage of farmer applying lime in the month</th>
                             <th class="text-center">Percentage of farmer testing water quality in the month</th>
                             <th class="text-center">Percentage of farmers applying feed in the month</th>
@@ -40,17 +40,20 @@
                         
                         @php 
                         $monthylReports = Auth::user()->getFarmingDetailByMonth($month,$crpUserIds);
+                        // dd($monthylReports['currentMonthFarmingProfiles']);
+                        
                         @endphp
                         <tr>
                             <td class="text-center">{{$month}}</td>
+                            <td class="text-center">{{ $monthylReports['memberRegisterInMonth']}}</td>
+                            <td class="text-center">{{ $monthylReports['currentMonthFarmingReports'] }}</td>
+                            <td class="text-center">{{ number_format($monthylReports['percentageFarming'], 2) }}%</td>
+                            <td class="text-center">{{ number_format($monthylReports['percentageLime'], 2) }}%</td>
+                            <td class="text-center">{{ number_format($monthylReports['percentageTestingWater'], 2) }}%</td>
+                            <td class="text-center">{{ number_format($monthylReports['percentageFeed'], 2) }}%</td>
                             <td class="text-center">0</td>
-                            <td class="text-center">0</td>
-                            <td class="text-center">0</td>
-                            <td class="text-center">0</td>
-                            <td class="text-center">0</td>
-                            <td class="text-center">0</td>
-                            <td class="text-center">0</td>
-                            <td class="text-center">0</td>
+                            <td class="text-center">{{ number_format($monthylReports['averageincomeFishery2'], 2) }}</td>
+                         
                         </tr>
                         @endforeach
                     </tbody>

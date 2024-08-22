@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Project;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\FarmingProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,7 +22,7 @@ class DashboardController extends Controller
         $farmingProfiles = User::query()->join('farming_profiles', 'users.id', '=', 'farming_profiles.user_id')
             ->whereIn('users.field_staff_id', $field_staff_ids)
             ->select('farming_profiles.*')
-            ->count();
+            ->count();         
         $monthlyFarmingReports = User::query()->join('monthly_farming_reports', 'users.id', '=', 'monthly_farming_reports.user_id')
             ->whereIn('users.field_staff_id', $field_staff_ids)
             ->select('monthly_farming_reports.*')

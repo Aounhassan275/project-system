@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Project;
 use App\Http\Controllers\Controller;
 use App\Models\GramPanchyat;
 use App\Models\Village;
+use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Block;
 use App\Models\District;
@@ -33,7 +34,7 @@ class ReportController extends Controller
     }
     public function monthlyTraining()
     {
-
+        $now = Carbon::now();
         $executive_ids = User::where('role_id', 3)->where('user_id', Auth::user()->id)->get()->pluck('id')->toArray();
         $field_staff_ids = User::whereIn('executive_id', $executive_ids)->get()->pluck('id')->toArray();
         $crpUserIds = User::whereIn('field_staff_id', $field_staff_ids)->get()->pluck('id')->toArray();

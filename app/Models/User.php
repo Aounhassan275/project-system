@@ -58,30 +58,30 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    
+
     public function role()
     {
-        return $this->belongsTo(Role::class,'role_id');
+        return $this->belongsTo(Role::class, 'role_id');
     }
     public function field_staff()
     {
-        return $this->belongsTo(User::class,'field_staff_id');
+        return $this->belongsTo(User::class, 'field_staff_id');
     }
     public function executive()
     {
-        return $this->belongsTo(User::class,'executive_id');
+        return $this->belongsTo(User::class, 'executive_id');
     }
     public function user()
     {
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
     public function district()
     {
-        return $this->belongsTo(District::class,'district_id');
+        return $this->belongsTo(District::class, 'district_id');
     }
     public function project_manager()
     {
-        return $this->belongsTo(User::class,'project_manager_id');
+        return $this->belongsTo(User::class, 'project_manager_id');
     }
     public function projects()
     {
@@ -107,25 +107,27 @@ class User extends Authenticatable
     {
         return $this->role->name ?? null;
     }
-    
-    public function setPasswordAttribute($value){
-        if (!empty($value)){
+
+    public function setPasswordAttribute($value)
+    {
+        if (!empty($value)) {
             $this->attributes['password'] = Hash::make($value);
         }
     }
-    public function setImageAttribute($value){
-        $this->attributes['image'] = ImageHelper::saveImage($value,'/uploaded_images/profiles/');
+    public function setImageAttribute($value)
+    {
+        $this->attributes['image'] = ImageHelper::saveImage($value, '/uploaded_images/profiles/');
     }
     public function getVillagesName()
     {
         $user_villages = UserVillage::query()->select('villages.name as name')
-                        ->join('villages','user_villages.village_id','villages.id')
-                        ->where('user_villages.user_id',$this->id)->get()->pluck('name')->toArray();
+            ->join('villages', 'user_villages.village_id', 'villages.id')
+            ->where('user_villages.user_id', $this->id)->get()->pluck('name')->toArray();
         return implode(',', $user_villages);
     }
-    public function getFisheringFarmer($gp_id,$userIds)
+    public function getFisheringFarmer($gp_id, $userIds)
     {
-        
+
         $users = User::query()
             ->join('user_gram_panchyats', 'users.id', '=', 'user_gram_panchyats.user_id')
             ->whereIn('users.id', $userIds)
@@ -133,11 +135,11 @@ class User extends Authenticatable
             ->select('users.id as id')
             ->get()->pluck('id')->toArray();
         $nurseryFarmers =   FarmingProfile::whereIn('user_id', $users)
-                                ->where('involvement_in_fishery','=' ,'Nursery Farmer')->count();
+            ->where('involvement_in_fishery', '=', 'Nursery Farmer')->count();
         $growerFarmers =   FarmingProfile::whereIn('user_id', $users)
-                                ->where('involvement_in_fishery','=' ,'Grower')->count();
+            ->where('involvement_in_fishery', '=', 'Grower')->count();
         $bothFarmers =   FarmingProfile::whereIn('user_id', $users)
-                                ->where('involvement_in_fishery','=' ,'Both')->count();
+            ->where('involvement_in_fishery', '=', 'Both')->count();
         $totalWaterBody =   FarmingProfile::whereIn('user_id', $users)->sum('total_water_body');
         $total_annual_income =   FarmingProfile::whereIn('user_id', $users)->sum('total_annual_income');
         $total_annual_income_from_fishery =   FarmingProfile::whereIn('user_id', $users)->sum('total_annual_income_from_fishery');
@@ -150,11 +152,13 @@ class User extends Authenticatable
             'total_annual_income_from_fishery' => $total_annual_income_from_fishery,
         ];
     }
-    public function getFarmingDetailByMonth($month,$users)
+    public function getFarmingDetailByMonth($month, $users)
     {
-        $m = Carbon::parse($month)->format('M');
-        
-        $users = [];
+        $m = Carbon::parse($month)->format('m');
+        $monthName = Carbon::parse($month)->format('F');
+
+        // $users = [];
+        // dd($m);
         // if($this->role_id == 3)
         // {
         //  $users = User::query()
@@ -163,17 +167,73 @@ class User extends Authenticatable
         //                 ->select('users.id as id')
         //                 ->get()->pluck('id')->toArray();
         // }
+        $memberRegisterInMonth = FarmingProfile::whereMonth('created_at', $m)->count();
         $currentMonthFarmingProfiles = FarmingProfile::whereIn('user_id', $users)
-                                ->whereMonth('created_at',$m)->count();
-        $currentMonthFarmingReports = MonthlyFarmingReport::whereIn('user_id', $users)
-                                ->whereMonth('created_at',$m)->count();
+            ->whereMonth('created_at', $m)->count();
+        $currentMonthFarmingReports = MonthlyFarmingReport::where('month', $monthName)->count();
+        
+        $percentageFarmingPonds  = MonthlyFarmingReport::where('month',$monthName)->where('is_pond_preparation',1)->count();
+        if($percentageFarmingPonds > 0){
+            $percentageFarming  = ($percentageFarmingPonds / $currentMonthFarmingReports ) * 100;
+        }else{
+            $percentageFarming = 0;
+        }
+
+        $averageincomeFishery  = MonthlyFarmingReport::where('month',$monthName)->where('fish_amount','>',0)->count();
+        $averageincomeFisherySum  = MonthlyFarmingReport::where('month',$monthName)->sum('fish_amount');
+        if($averageincomeFisherySum > 0){
+            $averageincomeFishery2  = ($averageincomeFisherySum / $averageincomeFishery );
+        }else{
+            $averageincomeFishery2 = 0;
+        }
+
+        $percentageFarmingLime  = MonthlyFarmingReport::where('month',$monthName)->where('is_lime_applied',1)->count();
+        if($percentageFarmingLime > 0){
+            $percentageLime  = ($percentageFarmingLime / $currentMonthFarmingReports ) * 100;
+        }else{
+            $percentageLime = 0;
+        }
+
+        $percentageFarmingTestingWater  = MonthlyFarmingReport::where('month',$monthName)->where('is_hydrological',1)->count();
+        if($percentageFarmingTestingWater > 0){
+            $percentageTestingWater  = ($percentageFarmingTestingWater / $currentMonthFarmingReports ) * 100;
+        }else{
+            $percentageTestingWater = 0;
+        }
+
+        $percentageFarmingFeed  = MonthlyFarmingReport::where('month',$monthName)->where('is_providing_feed',1)->count();
+        if($percentageFarmingFeed > 0){
+            $percentageFeed  = ($percentageFarmingFeed / $currentMonthFarmingReports ) * 100;
+        }else{
+            $percentageFeed = 0;
+        }
+       
+       
+       
+        // dd($percentageFarmingPonds);  
+        // if ($memberRegisterInMonth > 0) {
+        //     $percentageFarmingPonds = ($currentMonthFarmingReports / $memberRegisterInMonth) * 100;
+        // } else {
+        //     $percentageFarmingPonds = 0; 
+        // }
+        // dd($currentMonthFarmingReports);
 
         return [
             'currentMonthFarmingProfiles' => $currentMonthFarmingProfiles,
             'currentMonthFarmingReports' => $currentMonthFarmingReports,
+            'memberRegisterInMonth' => $memberRegisterInMonth,
+            'percentageFarmingPonds' => $percentageFarmingPonds,
+            'percentageFarming' => $percentageFarming,
+            'percentageFarmingLime' => $percentageFarmingLime,
+            'percentageLime' => $percentageLime,
+            'percentageFarmingTestingWater' => $percentageFarmingTestingWater,
+            'percentageTestingWater' => $percentageTestingWater,
+            'percentageFarmingFeed' => $percentageFarmingFeed,
+            'percentageFeed' => $percentageFeed,
+            'averageincomeFishery2' => $averageincomeFishery2,
         ];
     }
-    public function getTrainingDetailByMonth($month,$users)
+    public function getTrainingDetailByMonth($month, $users)
     {
         $m = Carbon::parse($month)->format('M');
         // $users = [];
@@ -186,9 +246,9 @@ class User extends Authenticatable
         //             ->get()->pluck('id')->toArray();
         // }
         $currentMonthTraingReport = TrainingReport::whereIn('user_id', $users)
-                                ->whereMonth('created_at',$m)->count();
+            ->whereMonth('created_at', $m)->count();
         $number_of_participants = TrainingReport::whereIn('user_id', $users)
-                                ->whereMonth('created_at',$m)->sum('number_of_participants');
+            ->whereMonth('created_at', $m)->sum('number_of_participants');
 
         return [
             'number_of_participants' => $number_of_participants,
