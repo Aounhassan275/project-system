@@ -25,14 +25,14 @@
                     <thead>
                         <tr>
                             <th class="text-center">Month</th>
-                            <th class="text-center">Number of registered under Fishery Project</th>
-                            <th class="text-center">Numbers of famers monthly report submitted</th>
-                            <th class="text-center">Percentage of farmers cleaning pond in the month</th>
-                            <th class="text-center">Percentage of farmer applying lime in the month</th>
-                            <th class="text-center">Percentage of farmer testing water quality in the month</th>
-                            <th class="text-center">Percentage of farmers applying feed in the month</th>
+                            <th class="text-center">Number of registered Farmers under Fishery Project</th>
+                            <th class="text-center">Numbers of Famers monthly report submitted</th>
+                            <th class="text-center">Percentage of Farmers cleaning pond in the month</th>
+                            <th class="text-center">Percentage of Farmer applying lime in the month</th>
+                            <th class="text-center">Percentage of Farmer testing water quality in the month</th>
+                            <th class="text-center">Percentage of Farmers applying feed in the month</th>
                             <th class="text-center">Average total expenditure by the farmer on fishery activity in the month</th>
-                            <th class="text-center">Average income of fishery farmer from Fishery activity in the Month</th>
+                            <th class="text-center">Average income of Fishery Farmer from Fishery activity in the Month</th>
                         </tr>
                     </thead>
                     <tbody>
