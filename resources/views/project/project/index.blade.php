@@ -24,7 +24,7 @@
                     <th>#</th>
                     <th>Project Name</th>
                     <th>Project Duration</th>
-                    <th>Project State Name</th>
+                    <th>State</th>
                 </tr>
             </thead>
             <tbody>
