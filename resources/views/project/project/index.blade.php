@@ -24,7 +24,8 @@
                     <th>#</th>
                     <th>Project Name</th>
                     <th>Project Duration</th>
-                    <th>State</th>
+                    <th>Project State Name</th>
+                    <th>Project District Name</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,6 +39,7 @@
                     </td>
                     <td>{{$project_user->project->duration}}</td>
                     <td>{{@$project_user->project->state->name}}</td>
+                    <td>{{@$project_user->project->district->name}}</td>
                 </tr>
                 @endforeach
             </tbody>

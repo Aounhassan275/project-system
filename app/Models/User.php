@@ -171,53 +171,42 @@ class User extends Authenticatable
         $currentMonthFarmingProfiles = FarmingProfile::whereIn('user_id', $users)
             ->whereMonth('created_at', $m)->count();
         $currentMonthFarmingReports = MonthlyFarmingReport::where('month', $monthName)->count();
-        
-        $percentageFarmingPonds  = MonthlyFarmingReport::where('month',$monthName)->where('is_pond_preparation',1)->count();
-        if($percentageFarmingPonds > 0){
-            $percentageFarming  = ($percentageFarmingPonds / $currentMonthFarmingReports ) * 100;
-        }else{
+
+        $percentageFarmingPonds  = MonthlyFarmingReport::where('month', $monthName)->where('is_pond_preparation', 1)->count();
+        if ($percentageFarmingPonds > 0) {
+            $percentageFarming  = ($percentageFarmingPonds / $currentMonthFarmingReports) * 100;
+        } else {
             $percentageFarming = 0;
         }
 
-        $averageincomeFishery  = MonthlyFarmingReport::where('month',$monthName)->where('fish_amount','>',0)->count();
-        $averageincomeFisherySum  = MonthlyFarmingReport::where('month',$monthName)->sum('fish_amount');
-        if($averageincomeFisherySum > 0){
-            $averageincomeFishery2  = ($averageincomeFisherySum / $averageincomeFishery );
-        }else{
+        $averageincomeFishery  = MonthlyFarmingReport::where('month', $monthName)->where('fish_amount', '>', 0)->count();
+        $averageincomeFisherySum  = MonthlyFarmingReport::where('month', $monthName)->sum('fish_amount');
+        if ($averageincomeFisherySum > 0) {
+            $averageincomeFishery2  = ($averageincomeFisherySum / $averageincomeFishery);
+        } else {
             $averageincomeFishery2 = 0;
         }
 
-        $percentageFarmingLime  = MonthlyFarmingReport::where('month',$monthName)->where('is_lime_applied',1)->count();
-        if($percentageFarmingLime > 0){
-            $percentageLime  = ($percentageFarmingLime / $currentMonthFarmingReports ) * 100;
-        }else{
+        $percentageFarmingLime  = MonthlyFarmingReport::where('month', $monthName)->where('is_lime_applied', 1)->count();
+        if ($percentageFarmingLime > 0) {
+            $percentageLime  = ($percentageFarmingLime / $currentMonthFarmingReports) * 100;
+        } else {
             $percentageLime = 0;
         }
 
-        $percentageFarmingTestingWater  = MonthlyFarmingReport::where('month',$monthName)->where('is_hydrological',1)->count();
-        if($percentageFarmingTestingWater > 0){
-            $percentageTestingWater  = ($percentageFarmingTestingWater / $currentMonthFarmingReports ) * 100;
-        }else{
+        $percentageFarmingTestingWater  = MonthlyFarmingReport::where('month', $monthName)->where('is_hydrological', 1)->count();
+        if ($percentageFarmingTestingWater > 0) {
+            $percentageTestingWater  = ($percentageFarmingTestingWater / $currentMonthFarmingReports) * 100;
+        } else {
             $percentageTestingWater = 0;
         }
 
-        $percentageFarmingFeed  = MonthlyFarmingReport::where('month',$monthName)->where('is_providing_feed',1)->count();
-        if($percentageFarmingFeed > 0){
-            $percentageFeed  = ($percentageFarmingFeed / $currentMonthFarmingReports ) * 100;
-        }else{
+        $percentageFarmingFeed  = MonthlyFarmingReport::where('month', $monthName)->where('is_providing_feed', 1)->count();
+        if ($percentageFarmingFeed > 0) {
+            $percentageFeed  = ($percentageFarmingFeed / $currentMonthFarmingReports) * 100;
+        } else {
             $percentageFeed = 0;
         }
-       
-       
-       
-        // dd($percentageFarmingPonds);  
-        // if ($memberRegisterInMonth > 0) {
-        //     $percentageFarmingPonds = ($currentMonthFarmingReports / $memberRegisterInMonth) * 100;
-        // } else {
-        //     $percentageFarmingPonds = 0; 
-        // }
-        // dd($currentMonthFarmingReports);
-
         return [
             'currentMonthFarmingProfiles' => $currentMonthFarmingProfiles,
             'currentMonthFarmingReports' => $currentMonthFarmingReports,
@@ -235,24 +224,13 @@ class User extends Authenticatable
     }
     public function getTrainingDetailByMonth($month, $users)
     {
-        $m = Carbon::parse($month)->format('M');
-        // $users = [];
-        // if($this->role_id == 3)
-        // {
-        //     $users = User::query()
-        //             ->join('user_gram_panchyats', 'users.id', '=', 'user_gram_panchyats.user_id')
-        //             ->where('users.executive_id', $this->id)
-        //             ->select('users.id as id')
-        //             ->get()->pluck('id')->toArray();
-        // }
-        $currentMonthTraingReport = TrainingReport::whereIn('user_id', $users)
-            ->whereMonth('created_at', $m)->count();
-        $number_of_participants = TrainingReport::whereIn('user_id', $users)
-            ->whereMonth('created_at', $m)->sum('number_of_participants');
+        $m = Carbon::parse($month)->format('n');
+        $currentMonthTrainingReport = TrainingReport::whereMonth('date_of_event', $m)->count();
+        $number_of_participants = TrainingReport::whereMonth('date_of_event', $m)->sum('number_of_participants');
 
         return [
             'number_of_participants' => $number_of_participants,
-            'currentMonthTraingReport' => $currentMonthTraingReport,
+            'currentMonthTraingReport' => $currentMonthTrainingReport,
         ];
     }
 }
