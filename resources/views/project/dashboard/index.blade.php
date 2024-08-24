@@ -20,7 +20,7 @@
     .chart-container {
         position: relative;
         width: 115%;
-        height: 378px;
+        height: 350px;
         background: linear-gradient(to right, #26a69a, #26a69a);
         padding: 20px;
         border-radius: 8px;
@@ -70,6 +70,20 @@
         font-size: 16px;
         color: #fff;
     }
+
+    .metric-container {
+        margin-top: 5px;
+        padding: 2px;
+        border-radius: 2px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .metric-container .metric-item {
+        display: flex;
+        justify-content: space-between;
+        font-size: 1.2rem;
+        margin: 10px 0;
+    }
 </style>
 
 @section('content')
@@ -95,30 +109,40 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="chart-container mt-1">
-                    <div class="year-selector">
+                    {{-- <div class="year-selector">
                         <label>
-                            <input type="radio" name="year" value="{{ $currentYear }}" checked> {{ $currentYear }}
+                            <input type="radio" name="yearGraph1" value="{{ $currentYear }}" checked> {{ $currentYear }}
                         </label>
                         <label>
-                            <input type="radio" name="year" value="{{ $previousYear }}"> {{ $previousYear }}
+                            <input type="radio" name="yearGraph1" value="{{ $previousYear }}"> {{ $previousYear }}
                         </label>
-                    </div>
-                    <canvas id="customGraph" style=" height: 304px;"></canvas>
+                    </div> --}}
+                    <canvas id="customGraph" style="height: 304px;"></canvas>
                 </div>
             </div>
-            {{-- <div class="col-md-6">
+            <div class="col-md-6">
                 <div class="chart-container mt-1">
-                     <div class="year-selector">
+                    {{-- <div class="year-selector">
                         <label>
-                            <input type="radio" name="year" value="{{ $currentYear }}" checked> {{ $currentYear }}
+                            <input type="radio" name="yearGraph2" value="{{ $currentYear }}" checked> {{ $currentYear }}
                         </label>
                         <label>
-                            <input type="radio" name="year" value="{{ $previousYear }}"> {{ $previousYear }}
+                            <input type="radio" name="yearGraph2" value="{{ $previousYear }}"> {{ $previousYear }}
                         </label>
-                    </div> 
-                    <canvas id="customGraph2" style=" height: 304px;"></canvas>
+                    </div> --}}
+                    <canvas id="customGraph2" style="height: 304px;"></canvas>
                 </div>
-            </div> --}}
+            </div>
+        </div>
+
+        <div class="card-body p-2 shadow-sm">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="metric-container">
+                        <canvas id="metricsGraph1" style="height: 304px;"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
@@ -129,147 +153,148 @@
         const currentYearData = @json($registrationsCurrentYear);
         const previousYearData = @json($registrationsPreviousYear);
         const months = @json($months);
+        const currentMonthFarmingReportsData = @json($currentMonthFarmingReports);
+        const pondCleaningPercentages = @json($pondCleaningPercentages).map(val => val.toFixed(2));
+        const limeApplyingPercentages = @json($limeApplyingPercentages).map(val => val.toFixed(2));
+        const waterQualityPercentages = @json($waterQualityPercentages).map(val => val.toFixed(2));
+        const feedApplyingPercentages = @json($feedApplyingPercentages).map(val => val.toFixed(2));
         const currentYearLabel = '{{ $currentYear }}';
         const previousYearLabel = '{{ $previousYear }}';
 
-        const ctx = document.getElementById('customGraph').getContext('2d');
-        const customGraph = new Chart(ctx, {
+        const ctx1 = document.getElementById('customGraph').getContext('2d');
+        const customGraph1 = new Chart(ctx1, {
             type: 'line',
             data: {
                 labels: months,
                 datasets: [{
-                    label: `Number of Registered Farmers (${currentYearLabel})`,
-                    data: currentYearData,
-                    backgroundColor: 'rgba(31, 59, 179, 0.2)',
-                    borderColor: '#E91E63',
-                    borderWidth: 2,
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#26a69a',
-                    pointHoverBorderColor: '#26a69a',
-                    tension: 0.4
-                }]
+                        label: `Number of Registered Farmers (${currentYearLabel})`,
+                        data: currentYearData,
+                        borderColor: '#26a69a',
+                        backgroundColor: 'rgba(38, 166, 154, 0.2)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: `Number of Registered Farmers (${previousYearLabel})`,
+                        data: previousYearData,
+                        borderColor: '#ff5722',
+                        backgroundColor: 'rgba(255, 87, 34, 0.2)',
+                        borderWidth: 2
+                    }
+                ]
             },
             options: {
                 responsive: true,
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        grid: {
-                            color: '#e5e7eb'
-                        },
-                        title: {
-                            display: true,
-                            text: 'Number of Registered Farmers'
-                        }
-                    },
-                    x: {
-                        grid: {
-                            display: false
-                        },
-                        title: {
-                            display: true,
-                            text: 'Months'
-                        }
-                    }
-                },
                 plugins: {
                     legend: {
                         position: 'top',
-                        labels: {
-                            usePointStyle: true,
-                            font: {
-                                size: 16
-                            }
-                        }
                     },
-                    tooltip: {
-                        enabled: true,
-                        backgroundColor: '#E91E63',
-                        titleColor: '#fff',
-                        bodyColor: '#fff',
-                        borderColor: '#52CDFF',
-                        borderWidth: 1
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
                     }
                 }
             }
         });
 
-        // const ctx2 = document.getElementById('customGraph2').getContext('2d');
-        // const customGraph2 = new Chart(ctx2, {
-        //     type: 'line',
-        //     data: {
-        //         labels: months,
-        //         datasets: [{
-        //             label: `Number of Farmer Monthly Report Submitted (${currentYearLabel})`,
-        //             data: currentYearData,
-        //             backgroundColor: 'rgba(31, 59, 179, 0.2)',
-        //             borderColor: '#673AB7',
-        //             borderWidth: 2,
-        //             pointBorderColor: '#fff',
-        //             pointHoverBackgroundColor: '#26a69a',
-        //             pointHoverBorderColor: '#26a69a',
-        //             tension: 0.4
-        //         }]
-        //     },
-        //     options: {
-        //         responsive: true,
-        //         scales: {
-        //             y: {
-        //                 beginAtZero: true,
-        //                 grid: {
-        //                     color: '#e5e7eb'
-        //                 },
-        //                 title: {
-        //                     display: true,
-        //                     text: 'Number of Farmer Monthly Report Submitted'
-        //                 }
-        //             },
-        //             x: {
-        //                 grid: {
-        //                     display: false
-        //                 },
-        //                 title: {
-        //                     display: true,
-        //                     text: 'Months'
-        //                 }
-        //             }
-        //         },
-        //         plugins: {
-        //             legend: {
-        //                 position: 'top',
-        //                 labels: {
-        //                     usePointStyle: true,
-        //                     font: {
-        //                         size: 16
-        //                     }
-        //                 }
-        //             },
-        //             tooltip: {
-        //                 enabled: true,
-        //                 backgroundColor: '#673AB7',
-        //                 titleColor: '#fff',
-        //                 bodyColor: '#fff',
-        //                 borderColor: '#52CDFF',
-        //                 borderWidth: 1
-        //             }
-        //         }
-        //     }
-        // });
+        const ctx2 = document.getElementById('customGraph2').getContext('2d');
+        const customGraph2 = new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                        label: `Number of Monthly Reports Submitted (${currentYearLabel})`,
+                        data: currentMonthFarmingReportsData,
+                        borderColor: '#26a69a',
+                        backgroundColor: 'rgba(38, 166, 154, 0.2)',
+                        borderWidth: 2
+                    },
+                    {
+                        label: `Number of Monthly Reports Submitted (${previousYearLabel})`,
+                        data: currentMonthFarmingReportsData.map(val => val * 0.8),
+                        borderColor: '#ff5722',
+                        backgroundColor: 'rgba(255, 87, 34, 0.2)',
+                        borderWidth: 2
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
 
-
-        document.querySelectorAll('input[name="year"]').forEach((radio) => {
-            radio.addEventListener('change', function() {
-                const selectedYear = this.value;
-                customGraph.data.datasets[0].label = `Number of Registered Farmers (${selectedYear})`;
-                customGraph.data.datasets[0].data = selectedYear === currentYearLabel ? currentYearData :
-                    previousYearData;
-                customGraph.update();
-
-                // customGraph2.data.datasets[0].label = label;
-                // customGraph2.data.datasets[0].data = selectedYear === currentYearLabel ? currentYearData :
-                //     previousYearData;
-                // customGraph2.update();
-            });
+        const ctx3 = document.getElementById('metricsGraph1').getContext('2d');
+        const metricsGraph1 = new Chart(ctx3, {
+            type: 'bar',
+            data: {
+                labels: months,
+                datasets: [{
+                        label: 'Pond Cleaning Percentage',
+                        data: pondCleaningPercentages,
+                        backgroundColor: '#673AB7',
+                        borderColor: '#673AB7',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Lime Applying Percentage',
+                        data: limeApplyingPercentages,
+                        backgroundColor: '#25b72b',
+                        borderColor: '#25b72b',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Water Quality Testing Percentage',
+                        data: waterQualityPercentages,
+                        backgroundColor: '#E91E63',
+                        borderColor: '#E91E63',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Feed Applying Percentage',
+                        data: feedApplyingPercentages,
+                        backgroundColor: '#ffc107',
+                        borderColor: '#ffc107',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    },
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function(value) {
+                                return value + '%';
+                            }
+                        }
+                    }
+                }
+            }
         });
     </script>
 @endsection

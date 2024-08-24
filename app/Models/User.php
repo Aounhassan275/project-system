@@ -170,21 +170,12 @@ class User extends Authenticatable
         $memberRegisterInMonth = FarmingProfile::whereMonth('created_at', $m)->count();
         $currentMonthFarmingProfiles = FarmingProfile::whereIn('user_id', $users)
             ->whereMonth('created_at', $m)->count();
-        $currentMonthFarmingReports = MonthlyFarmingReport::where('month', $monthName)->count();
-
+        $currentMonthFarmingReports = MonthlyFarmingReport::where('month', $monthName)->count();       
         $percentageFarmingPonds  = MonthlyFarmingReport::where('month', $monthName)->where('is_pond_preparation', 1)->count();
         if ($percentageFarmingPonds > 0) {
             $percentageFarming  = ($percentageFarmingPonds / $currentMonthFarmingReports) * 100;
         } else {
             $percentageFarming = 0;
-        }
-
-        $averageincomeFishery  = MonthlyFarmingReport::where('month', $monthName)->where('fish_amount', '>', 0)->count();
-        $averageincomeFisherySum  = MonthlyFarmingReport::where('month', $monthName)->sum('fish_amount');
-        if ($averageincomeFisherySum > 0) {
-            $averageincomeFishery2  = ($averageincomeFisherySum / $averageincomeFishery);
-        } else {
-            $averageincomeFishery2 = 0;
         }
 
         $percentageFarmingLime  = MonthlyFarmingReport::where('month', $monthName)->where('is_lime_applied', 1)->count();
@@ -206,6 +197,14 @@ class User extends Authenticatable
             $percentageFeed  = ($percentageFarmingFeed / $currentMonthFarmingReports) * 100;
         } else {
             $percentageFeed = 0;
+        }
+        
+        $averageincomeFishery  = MonthlyFarmingReport::where('month', $monthName)->where('fish_amount', '>', 0)->count();
+        $averageincomeFisherySum  = MonthlyFarmingReport::where('month', $monthName)->sum('fish_amount');
+        if ($averageincomeFisherySum > 0) {
+            $averageincomeFishery2  = ($averageincomeFisherySum / $averageincomeFishery);
+        } else {
+            $averageincomeFishery2 = 0;
         }
         return [
             'currentMonthFarmingProfiles' => $currentMonthFarmingProfiles,

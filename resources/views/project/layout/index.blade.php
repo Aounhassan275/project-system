@@ -163,6 +163,9 @@
 								<i class="icon-home4"></i>
 								<span>Dashboard</span>
 							</a>
+							<ul class="nav nav-group-sub" data-submenu-title="Layouts">
+								<li class="nav-item"><a href="{{ route('project.dashboard.farming-profile') }}" class="nav-link {{Request::is('project/dashboard/farming-profile') ?'active':''}}">Farmers Profile</a></li>
+							</ul>
 						</li>	
 						<li class="nav-item">
 							<a href="{{route('project.project.index')}}" class="nav-link {{Request::is('project/project')?'active':''}}">

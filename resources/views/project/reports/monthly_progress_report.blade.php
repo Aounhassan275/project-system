@@ -9,7 +9,7 @@
                 <div class="card-header header-elements-inline">
                     <h5 class="card-title">Summary of Whole Project Monthly Progress Report (Year
                         {{ App\Helpers\Helpers::yearRange() }}) </h5>
-                    <a href="" class="btn btn-danger">Export</a>                        
+                    {{-- <a href="" class="btn btn-danger">Export</a>--}}
                 </div>
                 <div class="card-body">
                     <table class="table">
