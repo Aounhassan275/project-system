@@ -20,8 +20,8 @@
     .chart-container {
         position: relative;
         width: 115%;
-        height: 350px;
-        background: linear-gradient(to right, #26a69a, #26a69a);
+        height: 345px;
+        background: linear-gradient(to right, #4b4949, #229489);
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

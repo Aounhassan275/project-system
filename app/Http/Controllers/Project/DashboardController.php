@@ -95,14 +95,57 @@ class DashboardController extends Controller
             'registrationsCurrentYear',
             'registrationsPreviousYear',
             'currentMonthFarmingReports',
-            'pondCleaningPercentages', 
-            'limeApplyingPercentages', 
-            'waterQualityPercentages', 
+            'pondCleaningPercentages',
+            'limeApplyingPercentages',
+            'waterQualityPercentages',
             'feedApplyingPercentages',
         ));
     }
-    public function framingProfile(){
-        return view('project.dashboard.framing_profile');
+    public function framingProfile()
+    {
+        $kcc_account = FarmingProfile::where('has_hh_kcc_account', 1)->count();
+        $bank_account = FarmingProfile::where('has_hh_bank_account', 1)->count();
+        $mgnrega_card = FarmingProfile::where('has_hh_mgnrega_card', 1)->count();
+        $bpl_no = FarmingProfile::where('has_hh_bpl_no', 1)->count();
+        $pb_member = FarmingProfile::where('fish_pb_member', 1)->count();
+        $shg_member = FarmingProfile::where('shg_member', 1)->count();
+        $nursery_farmer = FarmingProfile::where('involvement_in_fishery', 'Nursery Farmer')->count();
+        $grower = FarmingProfile::where('involvement_in_fishery', 'Grower')->count();
+        $both_count = FarmingProfile::where('involvement_in_fishery', 'Both')->count();
+        $totalWaterBody = FarmingProfile::sum('total_water_body');
+        $lease_out = FarmingProfile::sum('lease_out_water_body');
+        $lease_in = FarmingProfile::sum('lease_in_water_body');
+        $own_water = FarmingProfile::sum('own_water_body');
+        $aereator = FarmingProfile::where('aereator', 1)->count();
+        $fishing_net = FarmingProfile::where('fishing_net', 1)->count();
+        $tube_well = FarmingProfile::where('have_tube_well', 1)->count();
+        $pump_set = FarmingProfile::where('have_pump_set', 1)->count();
+        $cow_dung = FarmingProfile::where('have_apply_cow_dung', 1)->count();
+        $applied_lime = FarmingProfile::where('have_applied_lime', 1)->count();
+        $black_soil = FarmingProfile::where('have_remove_black_soil', 1)->count();
+        $pond_preparation = MonthlyFarmingReport::where('is_pond_preparation',1)->count();
+        return view('project.dashboard.framing_profile', compact(
+            'kcc_account',
+            'bank_account',
+            'bpl_no',
+            'mgnrega_card',
+            'pb_member',
+            'shg_member',
+            'nursery_farmer',
+            'grower',
+            'both_count',
+            'totalWaterBody',
+            'lease_out',
+            'lease_in',
+            'own_water',
+            'aereator',
+            'fishing_net',
+            'tube_well',
+            'pump_set',
+            'cow_dung',
+            'applied_lime',
+            'black_soil',
+            'pond_preparation'
+        ));
     }
-
 }
