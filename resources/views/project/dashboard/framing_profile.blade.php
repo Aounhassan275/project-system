@@ -37,11 +37,14 @@
         <div class="col-md-4">
             <canvas id="preStockingManagement" style="width: 100%; height: 290px !important;"></canvas>
         </div>
+        <div class="col-md-4">
+            <canvas id="stockingOfFish" style="width: 100%; height: 290px !important;"></canvas>
+        </div>
     </div>
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   
     <script>
         // Farming Profile Chart
         var farmingLabels = ['KCC Account', 'Bank Account', 'MGNREGA Card', 'BPL No', 'PB Member', 'SHG Member'];
@@ -302,5 +305,89 @@
                 }
             }
         });
+
+        //stocking the fish
+     document.addEventListener('DOMContentLoaded', function() {
+    var percentages = @json($percentages);
+
+    console.log('Percentages Data:', percentages);
+
+    var years = ['2023', '2024']; // Specify the years you want to show
+    var fingerlingsData = years.map(year => percentages[year]?.percentage_figerlings || 0);
+    var yearlingsData = years.map(year => percentages[year]?.percentage_yearlings || 0);
+
+    var ctx = document.getElementById('stockingOfFish').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: years,
+            datasets: [
+                {
+                    label: 'Fingerlings',
+                    data: fingerlingsData,
+                    backgroundColor: 'rgba(53, 89, 203, 0.6)',
+                    borderColor: 'rgba(53, 89, 203, 1)',
+                    borderWidth: 1,
+                    barThickness: 20
+                },
+                {
+                    label: 'Yearlings',
+                    data: yearlingsData,
+                    backgroundColor: 'rgba(203, 53, 155, 0.6)',
+                    borderColor: 'rgba(203, 53, 155, 1)',
+                    borderWidth: 1,
+                    barThickness: 20
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                title: {
+                    display: true,
+                    text: 'Stocking of Fish',
+                    font: {
+                        size: 16
+                    },
+                    padding: {
+                        bottom: 10
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    stacked: false, // Make sure bars are not stacked
+                    title: {
+                        display: true,
+                        text: 'Year',
+                        font: {
+                            size: 14
+                        }
+                    }
+                },
+                y: {
+                    stacked: false, // Make sure bars are not stacked
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Percentage',
+                        font: {
+                            size: 14
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+
     </script>
 @endsection

@@ -15,4 +15,8 @@ class District extends Model
     {
         return $this->belongsTo(State::class,'state_id');
     }
+    public function blocks()
+    {
+        return $this->belongsTo(Block::class, 'district_id');
+    }
 }

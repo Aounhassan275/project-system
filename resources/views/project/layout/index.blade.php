@@ -158,13 +158,15 @@
 					<ul class="nav nav-sidebar" data-nav-type="accordion">
 							<!-- Main -->
 						<li class="nav-item-header"><div class="text-uppercase font-size-xs line-height-xs">Project Panel</div> <i class="icon-menu" title="Main"></i></li>
-						<li class="nav-item">
-							<a href="{{route('project.dashboard.index')}}" class="nav-link {{Request::is('project/dashboard')?'active':''}}">
-								<i class="icon-home4"></i>
-								<span>Dashboard</span>
-							</a>
-							<ul class="nav nav-group-sub" data-submenu-title="Layouts">
-								<li class="nav-item"><a href="{{ route('project.dashboard.farming-profile') }}" class="nav-link {{Request::is('project/dashboard/farming-profile') ?'active':''}}">Farmers Profile</a></li>
+					
+						<li class="nav-item nav-item-submenu {{Request::is('project/dashboard*') ?'nav-item-open':''}}">
+							<a href="#" class="nav-link"><i class="icon-home4"></i> <span>Dashboard</span></a>
+
+							<ul class="nav nav-group-sub" data-submenu-title="Layouts" style="{{Request::is('project/dashboard*')   ?'display:block':''}}">
+								<li class="nav-item"><a href="{{route('project.dashboard.monthly-process')}}" class="nav-link {{Request::is('project/dashboard/monthly-progress') ?'active':''}}">Monthly Progress</a></li>
+								<li class="nav-item"><a href="{{route('project.dashboard.farming-profile')}}" class="nav-link {{Request::is('project/dashboard/farming-profile') ?'active':''}}">Farmering Profile</a></li>								
+								<li class="nav-item"><a href="{{route('project.dashboard.monthly-training')}}" class="nav-link {{Request::is('project/dashboard/monthly-training') ?'active':''}}">Monthly Training</a></li>								
+								<li class="nav-item"><a href="{{route('project.dashboard.respondent')}}" class="nav-link {{Request::is('project/dashboard/respondent') ?'active':''}}">Respondent</a></li>								
 							</ul>
 						</li>	
 						<li class="nav-item">

@@ -93,7 +93,7 @@
                 <div class="media mb-0">
                     <div class="media-body">
                         <h3 class="font-weight-semibold mb-0 text-center">
-                            Project System
+                            Monthly Progress
                         </h3>
                     </div>
                 </div>
@@ -101,11 +101,11 @@
         </div>
     </div>
     <div class="card-body p-2 shadow-sm">
-        <div class="d-sm-flex justify-content-between align-items-start">
+        {{-- <div class="d-sm-flex justify-content-between align-items-start">
             <h2 class="card-title card-title-dash mb-1">Monthly Progress</h2>
             <div id="performance-line-legend" class="d-flex align-items-center">
             </div>
-        </div>
+        </div> --}}
         <div class="row">
             <div class="col-md-6">
                 <div class="chart-container mt-1">
@@ -147,8 +147,7 @@
     </div>
 @endsection
 
-@section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+@section('scripts') 
     <script>
         const currentYearData = @json($registrationsCurrentYear);
         const previousYearData = @json($registrationsPreviousYear);

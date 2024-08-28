@@ -6,11 +6,19 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Models\FarmingProfile;
+use Illuminate\Support\Facades\DB;
 use App\Models\MonthlyFarmingReport;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Helpers\Helpers;
+use App\Models\Block;
+use App\Models\District;
+use App\Models\FarmingYearling;
+use App\Models\GramPanchyat;
+use App\Models\RespondentMaster;
+use App\Models\TrainingReport;
+use App\Models\Village;
 
 class DashboardController extends Controller
 {
@@ -98,7 +106,71 @@ class DashboardController extends Controller
             'pondCleaningPercentages',
             'limeApplyingPercentages',
             'waterQualityPercentages',
-            'feedApplyingPercentages',
+            'feedApplyingPercentages'
+
+        ));
+    }
+    public function monthlyProgress()
+    {
+        $currentYear = Carbon::now()->year;
+        $previousYear = $currentYear - 1;
+
+        $months = collect();
+        $registrationsCurrentYear = collect();
+        $registrationsPreviousYear = collect();
+        $currentMonthFarmingReports = collect();
+
+        $pondCleaningPercentages = collect();
+        $limeApplyingPercentages = collect();
+        $waterQualityPercentages = collect();
+        $feedApplyingPercentages = collect();
+
+        foreach (range(1, 12) as $monthNumber) {
+            $monthName = Carbon::create($currentYear, $monthNumber, 1)->format('F');
+            $months->push($monthName);
+
+            $registrationsCurrentYear->push(
+                FarmingProfile::whereYear('created_at', $currentYear)
+                    ->whereMonth('created_at', $monthNumber)
+                    ->count()
+            );
+
+            $registrationsPreviousYear->push(
+                FarmingProfile::whereYear('created_at', $previousYear)
+                    ->whereMonth('created_at', $monthNumber)
+                    ->count()
+            );
+
+            $currentMonthFarmingReportsCount = MonthlyFarmingReport::where('month', $monthName)->count();
+            $currentMonthFarmingReports->push($currentMonthFarmingReportsCount);
+
+            $pondCleaning = MonthlyFarmingReport::where('month', $monthName)
+                ->where('is_pond_preparation', 1)->count();
+            $pondCleaningPercentages->push($currentMonthFarmingReportsCount > 0 ? ($pondCleaning / $currentMonthFarmingReportsCount) * 100 : 0);
+
+            $limeApplying = MonthlyFarmingReport::where('month', $monthName)
+                ->where('is_lime_applied', 1)->count();
+            $limeApplyingPercentages->push($currentMonthFarmingReportsCount > 0 ? ($limeApplying / $currentMonthFarmingReportsCount) * 100 : 0);
+
+            $waterQualityTesting = MonthlyFarmingReport::where('month', $monthName)
+                ->where('is_hydrological', 1)->count();
+            $waterQualityPercentages->push($currentMonthFarmingReportsCount > 0 ? ($waterQualityTesting / $currentMonthFarmingReportsCount) * 100 : 0);
+
+            $feedApplying = MonthlyFarmingReport::where('month', $monthName)
+                ->where('is_providing_feed', 1)->count();
+            $feedApplyingPercentages->push($currentMonthFarmingReportsCount > 0 ? ($feedApplying / $currentMonthFarmingReportsCount) * 100 : 0);
+        }
+        return view('project.dashboard.monthly-progress', compact(
+            'months',
+            'currentYear',
+            'previousYear',
+            'registrationsCurrentYear',
+            'registrationsPreviousYear',
+            'currentMonthFarmingReports',
+            'pondCleaningPercentages',
+            'limeApplyingPercentages',
+            'waterQualityPercentages',
+            'feedApplyingPercentages'
         ));
     }
     public function framingProfile()
@@ -123,7 +195,37 @@ class DashboardController extends Controller
         $cow_dung = FarmingProfile::where('have_apply_cow_dung', 1)->count();
         $applied_lime = FarmingProfile::where('have_applied_lime', 1)->count();
         $black_soil = FarmingProfile::where('have_remove_black_soil', 1)->count();
-        $pond_preparation = MonthlyFarmingReport::where('is_pond_preparation',1)->count();
+        $pond_preparation = MonthlyFarmingReport::where('is_pond_preparation', 1)->count();
+
+        // $year1 = FarmingYearling::where('year',2023)->get();
+        // $year2 = FarmingYearling::where('year',2024)->get();
+        $years = FarmingYearling::distinct()->pluck('year');
+        $countData = FarmingYearling::whereIn('year', $years)
+            ->select(
+                'year',
+                DB::raw('SUM(figerlings) as total_figerlings'),
+                DB::raw('SUM(yearlings) as total_yearlings')
+            )
+            ->groupBy('year')
+            ->get();
+
+        $percentages = [];
+
+        foreach ($countData as $data) {
+            $year = $data->year;
+            $totalFigerlings = $data->total_figerlings;
+            $totalYearlings = $data->total_yearlings;
+
+            $total = $totalFigerlings + $totalYearlings;
+
+            $percentageFigerlings = ($total > 0) ? ($totalFigerlings / $total) * 100 : 0;
+            $percentageYearlings = ($total > 0) ? ($totalYearlings / $total) * 100 : 0;
+            $percentages[$year] = [
+                'percentage_figerlings' => round($percentageFigerlings, 2),
+                'percentage_yearlings' => round($percentageYearlings, 2)
+            ];
+        }
+
         return view('project.dashboard.framing_profile', compact(
             'kcc_account',
             'bank_account',
@@ -145,7 +247,117 @@ class DashboardController extends Controller
             'cow_dung',
             'applied_lime',
             'black_soil',
-            'pond_preparation'
+            'pond_preparation',
+            'percentages'
+        ));
+    }
+    public function monthlyTraining()
+    {
+        $monthlyData = TrainingReport::select(
+            DB::raw('YEAR(date_of_event) as year'),
+            DB::raw('MONTH(date_of_event) as month'),
+            DB::raw('SUM(number_of_male) as total_male'),
+            DB::raw('SUM(number_of_female) as total_female'),
+            DB::raw('SUM(number_of_participants) as total_participants')
+        )
+            ->groupBy(DB::raw('YEAR(date_of_event)'), DB::raw('MONTH(date_of_event)'))
+            ->orderBy(DB::raw('YEAR(date_of_event)'), 'desc')
+            ->orderBy(DB::raw('MONTH(date_of_event)'), 'desc')
+            ->get();
+        $village = TrainingReport::where('level_of_training', 'Village')->count();
+        $district = TrainingReport::where('level_of_training', 'District')->count();
+        $block = TrainingReport::where('level_of_training', 'Block')->count();
+        $workshop = TrainingReport::where('type', 'Workshop')->count();
+        $training = TrainingReport::where('type', 'Training')->count();
+        $others = TrainingReport::where('type', 'Others')->count();
+        $exposure = TrainingReport::where('type', 'Exposure')->count();
+        $conceptSeeding = TrainingReport::where('type', 'Concept Seeding')->count();
+        $farmer = TrainingReport::where('type_of_participants', 'Farmer')->count();
+        $boD = TrainingReport::where('type_of_participants', 'BoD')->count();
+        $fPOStaff = TrainingReport::where('type_of_participants', 'FPO Staff')->count();
+        $govtStaff = TrainingReport::where('type_of_participants', 'Govt Staff')->count();
+        return view('project.dashboard.monthly-training', compact(
+            'monthlyData',
+            'village',
+            'district',
+            'block',
+            'workshop',
+            'training',
+            'others',
+            'exposure',
+            'conceptSeeding',
+            'farmer',
+            'boD',
+            'fPOStaff',
+            'govtStaff'
+
+        ));
+    }
+
+    public function respondent()
+    {
+        $districts = District::pluck('name', 'id');
+        $blocksCount = [];
+        $gramPanchayatsCount = [];
+        $villagesCount = [];
+        $respondentsCount = [];
+
+        foreach ($districts as $districtId => $districtName) {
+            $blocks = Block::where('district_id', $districtId)->get();
+            $blocksCount[$districtName] = $blocks->count();
+
+            $districtGramPanchayatsCount = [];
+            $districtVillagesCount = [];
+
+            foreach ($blocks as $block) {
+                $gramPanchayats = GramPanchyat::where('block_id', $block->id)->get();
+                $districtGramPanchayatsCount[$block->id] = $gramPanchayats->count();
+
+                $gramPanchayatVillagesCount = [];
+                foreach ($gramPanchayats as $panchayat) {
+                    $villages = Village::where('gram_panchyat_id', $panchayat->id)->count();
+                    $gramPanchayatVillagesCount[$panchayat->id] = $villages;
+                }
+
+                $districtVillagesCount[$block->id] = $gramPanchayatVillagesCount;
+            }
+
+            $gramPanchayatsCount[$districtName] = $districtGramPanchayatsCount;
+            $villagesCount[$districtName] = $districtVillagesCount;
+
+            $respondentsCount[$districtName] = RespondentMaster::where('district_id', $districtId)->count();
+        }
+        $male = RespondentMaster::where('gender', 'Male')->count();
+        $female = RespondentMaster::where('gender', 'Female')->count();
+        $education_Primary = RespondentMaster::where('education', 'Primary')->count();
+        $education_Illiterate = RespondentMaster::where('education', 'Illiterate')->count();
+        $education_HSLC = RespondentMaster::where('education', 'HSLC')->count();
+        $education_Graduate = RespondentMaster::where('education', 'Graduate')->count();
+        $education_PG = RespondentMaster::where('education', 'PG')->count();
+        $education_Technical = RespondentMaster::where('education', 'Technical Education')->count();
+        $caste_general = RespondentMaster::where('caste', 'General')->count();
+        $caste_st = RespondentMaster::where('caste', 'ST')->count();
+        $caste_obc = RespondentMaster::where('caste', 'OBC')->count();
+        $caste_sc = RespondentMaster::where('caste', 'SC')->count();
+
+        return view('project.dashboard.respondent', compact(
+            'districts',
+            'blocksCount',
+            'gramPanchayatsCount',
+            'villagesCount',
+            'respondentsCount',
+            'male',
+            'female',
+            'education_Primary',
+            'education_Illiterate',
+            'education_HSLC',
+            'education_Graduate',
+            'education_PG',
+            'education_Technical',
+            'caste_general',
+            'caste_st',
+            'caste_obc',
+            'caste_sc'
         ));
     }
 }
