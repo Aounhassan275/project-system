@@ -5,84 +5,70 @@
 @endsection
 
 <style>
-    .card-title-dash {
-        font-size: 1.60rem;
-        font-weight: 600;
-        text-align: center;
-        color: #333;
+    body {
+        background-color: #bdc3c7;
     }
 
-    .card-subtitle-dash {
-        font-size: 1.2rem;
-        color: #0f0f0f;
+    .container {
+        margin-top: -17px;
     }
 
-    .chart-container {
-        position: relative;
-        width: 115%;
-        height: 345px;
-        background: linear-gradient(to right, #4b4949, #229489);
-        padding: 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        margin-top: 20px;
-    }
-
-    canvas {
-        background: #fff;
-        border-radius: 8px;
-        padding: 7px;
+    .table {
         width: 100%;
-        height: 100%;
+        background-color: #f3f3f3;
+        border-collapse: collapse;
     }
 
-    .chartjs-legend ul {
-        display: flex;
-        justify-content: center;
-        list-style: none;
-        padding: 0;
-        margin: 10px 0 0;
+    .table thead {
+        background-color: #f39c12;
+        border-color: #e67e22;
     }
 
-    .chartjs-legend ul li {
-        margin: 0 10px;
-        font-size: 14px;
-        color: #333;
+    .table thead th {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0;
+        background-color: #f39c12;
+        color: white;
+        z-index: 1;
     }
 
-    .chartjs-legend ul li span {
-        display: inline-block;
-        width: 12px;
-        height: 12px;
-        margin-right: 5px;
-        border-radius: 50%;
+    .table tbody {
+        overflow-y: visible;
+        /* Removes the scroll */
     }
 
-    .year-selector {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 5px;
-        margin-top: -11px;
+    .table thead th,
+    .table tbody td {
+        width: 20%;
+        /* Adjusted width to evenly distribute columns */
+        box-sizing: border-box;
     }
 
-    .year-selector label {
-        margin: 0 10px;
-        font-size: 16px;
+    .table tbody tr {
+        width: 100%;
+        /* Ensures rows span full width */
+        display: table-row;
+        /* Resets display to table-row */
+    }
+
+    .table tbody td {
+        background-color: #f3f3f3;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .table thead th {
+        background-color: #f39c12;
         color: #fff;
+        border: 1px solid #e67e22;
     }
 
-    .metric-container {
-        margin-top: 5px;
-        padding: 2px;
-        border-radius: 2px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    .table tbody tr:nth-child(even) {
+        background-color: #f9f9f9;
     }
 
-    .metric-container .metric-item {
-        display: flex;
-        justify-content: space-between;
-        font-size: 1.2rem;
-        margin: 10px 0;
+    .table tbody tr:hover {
+        background-color: #e1e1e1;
     }
 </style>
 
@@ -93,208 +79,83 @@
                 <div class="media mb-0">
                     <div class="media-body">
                         <h3 class="font-weight-semibold mb-0 text-center">
-                            Project System
+                            Project Overview ({{ $project_name }})
                         </h3>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="card-body p-2 shadow-sm">
-        <div class="d-sm-flex justify-content-between align-items-start">
-            <h2 class="card-title card-title-dash mb-1">Monthly Progress</h2>
-            <div id="performance-line-legend" class="d-flex align-items-center">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="chart-container mt-1">
-                    {{-- <div class="year-selector">
-                        <label>
-                            <input type="radio" name="yearGraph1" value="{{ $currentYear }}" checked> {{ $currentYear }}
-                        </label>
-                        <label>
-                            <input type="radio" name="yearGraph1" value="{{ $previousYear }}"> {{ $previousYear }}
-                        </label>
-                    </div> --}}
-                    <canvas id="customGraph" style="height: 304px;"></canvas>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="chart-container mt-1">
-                    {{-- <div class="year-selector">
-                        <label>
-                            <input type="radio" name="yearGraph2" value="{{ $currentYear }}" checked> {{ $currentYear }}
-                        </label>
-                        <label>
-                            <input type="radio" name="yearGraph2" value="{{ $previousYear }}"> {{ $previousYear }}
-                        </label>
-                    </div> --}}
-                    <canvas id="customGraph2" style="height: 304px;"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <div class="card-body p-2 shadow-sm">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="metric-container">
-                        <canvas id="metricsGraph1" style="height: 304px;"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="container">
+        <table class="table table-fixed">
+            <thead>
+                <tr>
+                    <th class="col-xs-3">Name Of District</th>
+                    <th class="col-xs-3">No Of Block</th>
+                    <th class="col-xs-3">No Of GP</th>
+                    <th class="col-xs-3">No Of Village</th>
+                    <th class="col-xs-3">No Of Respondents</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($districts as $districtId => $districtName)
+                    <tr class="length">
+                        <td class="col-xs-3">
+                            <span>{{ $districtName }}</span>
+                        </td>
+                        <td class="col-xs-3">
+                            <span>{{ $blocksCount[$districtName] ?? 0 }}</span>
+                        </td>
+                        <td class="col-xs-3">
+                            @php
+                                $gpCount = 0;
+                                if (isset($gramPanchayatsCount[$districtName])) {
+                                    foreach ($gramPanchayatsCount[$districtName] as $blockGpCount) {
+                                        $gpCount += $blockGpCount;
+                                    }
+                                }
+                            @endphp
+                            <span>{{ $gpCount }}</span>
+                        </td>
+                        <td class="col-xs-3">
+                            @php
+                                $villageCount = 0;
+                                if (isset($villagesCount[$districtName])) {
+                                    foreach ($villagesCount[$districtName] as $blockVillages) {
+                                        foreach ($blockVillages as $village) {
+                                            $villageCount += $village;
+                                        }
+                                    }
+                                }
+                            @endphp
+                            <span>{{ $villageCount }}</span>
+                        </td>
+                        <td class="col-xs-3">
+                            <span>{{ $respondentsCount[$districtName] ?? 0 }}</span>
+                        </td>
+                    </tr>
+                @endforeach
+                <tr class="font-weight-bold">
+                    <td class="col-xs-3">
+                        <span>Total</span>
+                    </td>
+                    <td class="col-xs-3">
+                        <span>{{ $totalBlocks }}</span>
+                    </td>
+                    <td class="col-xs-3">
+                        <span>{{ $totalGramPanchayats }}</span>
+                    </td>
+                    <td class="col-xs-3">
+                        <span>{{ $totalVillages }}</span>
+                    </td>
+                    <td class="col-xs-3">
+                        <span>{{ $totalRespondents }}</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 @endsection
 
 @section('scripts')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        const currentYearData = @json($registrationsCurrentYear);
-        const previousYearData = @json($registrationsPreviousYear);
-        const months = @json($months);
-        const currentMonthFarmingReportsData = @json($currentMonthFarmingReports);
-        const pondCleaningPercentages = @json($pondCleaningPercentages).map(val => val.toFixed(2));
-        const limeApplyingPercentages = @json($limeApplyingPercentages).map(val => val.toFixed(2));
-        const waterQualityPercentages = @json($waterQualityPercentages).map(val => val.toFixed(2));
-        const feedApplyingPercentages = @json($feedApplyingPercentages).map(val => val.toFixed(2));
-        const currentYearLabel = '{{ $currentYear }}';
-        const previousYearLabel = '{{ $previousYear }}';
-
-        const ctx1 = document.getElementById('customGraph').getContext('2d');
-        const customGraph1 = new Chart(ctx1, {
-            type: 'line',
-            data: {
-                labels: months,
-                datasets: [{
-                        label: `Number of Registered Farmers (${currentYearLabel})`,
-                        data: currentYearData,
-                        borderColor: '#26a69a',
-                        backgroundColor: 'rgba(38, 166, 154, 0.2)',
-                        borderWidth: 2
-                    },
-                    {
-                        label: `Number of Registered Farmers (${previousYearLabel})`,
-                        data: previousYearData,
-                        borderColor: '#ff5722',
-                        backgroundColor: 'rgba(255, 87, 34, 0.2)',
-                        borderWidth: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    },
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        const ctx2 = document.getElementById('customGraph2').getContext('2d');
-        const customGraph2 = new Chart(ctx2, {
-            type: 'line',
-            data: {
-                labels: months,
-                datasets: [{
-                        label: `Number of Monthly Reports Submitted (${currentYearLabel})`,
-                        data: currentMonthFarmingReportsData,
-                        borderColor: '#26a69a',
-                        backgroundColor: 'rgba(38, 166, 154, 0.2)',
-                        borderWidth: 2
-                    },
-                    {
-                        label: `Number of Monthly Reports Submitted (${previousYearLabel})`,
-                        data: currentMonthFarmingReportsData.map(val => val * 0.8),
-                        borderColor: '#ff5722',
-                        backgroundColor: 'rgba(255, 87, 34, 0.2)',
-                        borderWidth: 2
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    },
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        const ctx3 = document.getElementById('metricsGraph1').getContext('2d');
-        const metricsGraph1 = new Chart(ctx3, {
-            type: 'bar',
-            data: {
-                labels: months,
-                datasets: [{
-                        label: 'Pond Cleaning Percentage',
-                        data: pondCleaningPercentages,
-                        backgroundColor: '#673AB7',
-                        borderColor: '#673AB7',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Lime Applying Percentage',
-                        data: limeApplyingPercentages,
-                        backgroundColor: '#25b72b',
-                        borderColor: '#25b72b',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Water Quality Testing Percentage',
-                        data: waterQualityPercentages,
-                        backgroundColor: '#E91E63',
-                        borderColor: '#E91E63',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Feed Applying Percentage',
-                        data: feedApplyingPercentages,
-                        backgroundColor: '#ffc107',
-                        borderColor: '#ffc107',
-                        borderWidth: 1
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                },
-                scales: {
-                    x: {
-                        beginAtZero: true
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            callback: function(value) {
-                                return value + '%';
-                            }
-                        }
-                    }
-                }
-            }
-        });
-    </script>
 @endsection

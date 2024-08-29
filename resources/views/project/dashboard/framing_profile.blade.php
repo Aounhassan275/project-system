@@ -47,7 +47,7 @@
    
     <script>
         // Farming Profile Chart
-        var farmingLabels = ['KCC Account', 'Bank Account', 'MGNREGA Card', 'BPL No', 'PB Member', 'SHG Member'];
+        var farmingLabels = ['KCC Account', 'Bank Account', 'MGNREGA Card', 'BPL No', 'PG Member', 'SHG Member'];
         var farmingData = [
             {{ $kcc_account }},
             {{ $bank_account }},

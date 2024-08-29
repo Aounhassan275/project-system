@@ -69,19 +69,19 @@
     .table tbody tr:hover {
         background-color: #e1e1e1;
     }
-    #gender {
-        width: 255px !important;
-        height: 255px !important;
-    }
-
-    #education {
-        width: 310px !important;
-        height: 310px !important;
-    }
-    #caste {
+    /* #gender {
         width: 300px !important;
         height: 300px !important;
+    }*/
+
+    #education {
+        width: 370px !important;
+        height: 370px !important;
     }
+    /* #caste {
+        width: 300px !important;
+        height: 300px !important;
+    }  */
 
 </style>
 @section('content')

@@ -43,71 +43,65 @@ class DashboardController extends Controller
             ->whereIn('users.field_staff_id', $field_staff_ids)
             ->select('training_reports.*')
             ->count();
-        $currentYear = Carbon::now()->year;
-        $previousYear = $currentYear - 1;
+        $project_name = Project::where('id', 9)->value('name');
+        $districts = District::pluck('name', 'id');
+        $blocksCount = [];
+        $gramPanchayatsCount = [];
+        $villagesCount = [];
+        $respondentsCount = [];
+        $totalBlocks = 0;
+        $totalGramPanchayats = 0;
+        $totalVillages = 0;
+        $totalRespondents = 0;
 
-        $months = collect();
-        $registrationsCurrentYear = collect();
-        $registrationsPreviousYear = collect();
-        $currentMonthFarmingReports = collect();
+        foreach ($districts as $districtId => $districtName) {
+            $blocks = Block::where('district_id', $districtId)->get();
+            $blocksCount[$districtName] = $blocks->count();
 
-        $pondCleaningPercentages = collect();
-        $limeApplyingPercentages = collect();
-        $waterQualityPercentages = collect();
-        $feedApplyingPercentages = collect();
+            $totalBlocks += $blocks->count();
 
-        foreach (range(1, 12) as $monthNumber) {
-            $monthName = Carbon::create($currentYear, $monthNumber, 1)->format('F');
-            $months->push($monthName);
+            $districtGramPanchayatsCount = [];
+            $districtVillagesCount = [];
 
-            $registrationsCurrentYear->push(
-                FarmingProfile::whereYear('created_at', $currentYear)
-                    ->whereMonth('created_at', $monthNumber)
-                    ->count()
-            );
+            foreach ($blocks as $block) {
+                $gramPanchayats = GramPanchyat::where('block_id', $block->id)->get();
+                $districtGramPanchayatsCount[$block->id] = $gramPanchayats->count();
 
-            $registrationsPreviousYear->push(
-                FarmingProfile::whereYear('created_at', $previousYear)
-                    ->whereMonth('created_at', $monthNumber)
-                    ->count()
-            );
+                $totalGramPanchayats += $gramPanchayats->count();
 
-            $currentMonthFarmingReportsCount = MonthlyFarmingReport::where('month', $monthName)->count();
-            $currentMonthFarmingReports->push($currentMonthFarmingReportsCount);
+                $gramPanchayatVillagesCount = [];
+                foreach ($gramPanchayats as $panchayat) {
+                    $villages = Village::where('gram_panchyat_id', $panchayat->id)->count();
+                    $gramPanchayatVillagesCount[$panchayat->id] = $villages;
 
-            $pondCleaning = MonthlyFarmingReport::where('month', $monthName)
-                ->where('is_pond_preparation', 1)->count();
-            $pondCleaningPercentages->push($currentMonthFarmingReportsCount > 0 ? ($pondCleaning / $currentMonthFarmingReportsCount) * 100 : 0);
+                    $totalVillages += $villages;
+                }
 
-            $limeApplying = MonthlyFarmingReport::where('month', $monthName)
-                ->where('is_lime_applied', 1)->count();
-            $limeApplyingPercentages->push($currentMonthFarmingReportsCount > 0 ? ($limeApplying / $currentMonthFarmingReportsCount) * 100 : 0);
+                $districtVillagesCount[$block->id] = $gramPanchayatVillagesCount;
+            }
 
-            $waterQualityTesting = MonthlyFarmingReport::where('month', $monthName)
-                ->where('is_hydrological', 1)->count();
-            $waterQualityPercentages->push($currentMonthFarmingReportsCount > 0 ? ($waterQualityTesting / $currentMonthFarmingReportsCount) * 100 : 0);
+            $gramPanchayatsCount[$districtName] = $districtGramPanchayatsCount;
+            $villagesCount[$districtName] = $districtVillagesCount;
 
-            $feedApplying = MonthlyFarmingReport::where('month', $monthName)
-                ->where('is_providing_feed', 1)->count();
-            $feedApplyingPercentages->push($currentMonthFarmingReportsCount > 0 ? ($feedApplying / $currentMonthFarmingReportsCount) * 100 : 0);
+            $respondentsCount[$districtName] = RespondentMaster::where('district_id', $districtId)->count();
+
+            $totalRespondents += $respondentsCount[$districtName];
         }
-
         return view('project.dashboard.index', compact(
             'total_respondent_masters',
             'farmingProfiles',
             'trainingReports',
             'monthlyFarmingReports',
-            'months',
-            'currentYear',
-            'previousYear',
-            'registrationsCurrentYear',
-            'registrationsPreviousYear',
-            'currentMonthFarmingReports',
-            'pondCleaningPercentages',
-            'limeApplyingPercentages',
-            'waterQualityPercentages',
-            'feedApplyingPercentages'
-
+            'districts',
+            'blocksCount',
+            'gramPanchayatsCount',
+            'villagesCount',
+            'respondentsCount',
+            'project_name',
+            'totalBlocks',
+            'totalGramPanchayats',
+            'totalVillages',
+            'totalRespondents'
         ));
     }
     public function monthlyProgress()
@@ -358,6 +352,46 @@ class DashboardController extends Controller
             'caste_st',
             'caste_obc',
             'caste_sc'
+        ));
+    }
+    public function framingProfile2()
+    {
+        $water_ph_regularly = FarmingProfile::where('have_water_ph_regularly', 1)->count();
+        $feeding_regularly = FarmingProfile::where('done_feeding_regularly', 1)->count();
+        $regularly_cow_dung = FarmingProfile::where('have_regularly_apply_cow_dung', 1)->count();
+        $regularly_apply_lime = FarmingProfile::where('have_regularly_apply_lime', 1)->count();
+        $training = FarmingProfile::where('attend_training_programme', 1)->count();
+        $exposure = FarmingProfile::where('exposure_good_practics', 1)->count();
+
+        $averageFishQuantities = DB::table('monthly_farming_reports')
+            ->select(
+                DB::raw('YEAR(date_of_update) as year'),
+                DB::raw('AVG(fish_quantity) as avg_quantity')
+            )
+            ->whereNotNull('date_of_update')
+            ->whereIn(DB::raw('YEAR(date_of_update)'), [2023, 2024]) 
+            ->groupBy(DB::raw('YEAR(date_of_update)'))
+            ->get();
+        // dd($averageFishQuantities);
+        $averageFishAmounts = DB::table('monthly_farming_reports')
+            ->select(
+                DB::raw('YEAR(date_of_update) as year'),
+                DB::raw('AVG(fish_amount) as avg_amount')
+            )
+            ->whereNotNull('date_of_update')
+            ->whereIn(DB::raw('YEAR(date_of_update)'), [2023, 2024]) 
+            ->groupBy(DB::raw('YEAR(date_of_update)'))
+            ->get();
+        //  dd($averageFishAmounts);    
+        return view('project.dashboard.framing_profile2', compact(
+            'water_ph_regularly',
+            'feeding_regularly',
+            'regularly_cow_dung',
+            'regularly_apply_lime',
+            'training',
+            'exposure',
+            'averageFishQuantities',
+            'averageFishAmounts'
         ));
     }
 }

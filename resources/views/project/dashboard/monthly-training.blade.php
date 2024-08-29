@@ -4,16 +4,6 @@
     Dashboard
 @endsection
 <style>
-    #levelOfTraining {
-        width: 255px !important;
-        height: 255px !important;
-    }
-
-    #typeOfTraining {
-        width: 310px !important;
-        height: 310px !important;
-    }
-
     .year-selector {
         display: flex;
         justify-content: center;
@@ -21,10 +11,20 @@
         margin-top: -9px;
     }
 
+     #levelOfTraining {
+        width: 340px !important;
+        height: 350px !important;
+    }
+
+    /* #typeOfTraining {
+        width: 310px !important;
+        height: 310px !important;
+    }
+
     #typeOfParticipants {
         width: 290px !important;
         height: 290px !important;
-    }
+    }  */
 </style>
 
 @section('content')
@@ -297,9 +297,9 @@
                     label: 'Type of Participants',
                     data: [farmerCount, boDCount, fPOStaffCount, govtStaffCount],
                     backgroundColor: [
-                        'rgba(255, 99, 132, 0.6)', 
-                        'rgba(54, 162, 235, 0.6)', 
-                        'rgba(255, 206, 86, 0.6)', 
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
                         'rgba(52, 73, 94, 0.6)'
                     ],
                     borderColor: [
@@ -315,7 +315,7 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        position: 'bottom', 
+                        position: 'bottom',
                     },
                     tooltip: {
                         callbacks: {
