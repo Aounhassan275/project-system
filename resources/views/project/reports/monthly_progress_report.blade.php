@@ -9,7 +9,7 @@
                 <div class="card-header header-elements-inline">
                     <h5 class="card-title">Summary of Whole Project Monthly Progress Report (Year
                         {{ App\Helpers\Helpers::yearRange() }}) </h5>
-                    {{-- <a href="" class="btn btn-danger">Export</a>--}}
+                    {{-- <a href="" class="btn btn-danger">Export</a> --}}
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -22,7 +22,8 @@
                                 <th class="text-center">Percentage of farmer applying lime in the month</th>
                                 <th class="text-center">Percentage of farmer testing water quality in the month</th>
                                 <th class="text-center">Percentage of farmers applying feed in the month</th>
-                                <th class="text-center">Average total expenditure by the farmer on fishery activity in the month</th>
+                                <th class="text-center">Average total expenditure by the farmer on fishery activity in the
+                                    month</th>
                                 <th class="text-center">Average income of fishery farmer from Fishery activity in the Month
                                 </th>
                             </tr>
@@ -37,9 +38,11 @@
                                     <td class="text-center">{{ $month }}</td>
                                     <td class="text-center">{{ $monthylReports['memberRegisterInMonth'] }}</td>
                                     <td class="text-center">{{ $monthylReports['currentMonthFarmingReports'] }}</td>
-                                    <td class="text-center">{{ number_format($monthylReports['percentageFarming'], 2) }}%</td>
+                                    <td class="text-center">{{ number_format($monthylReports['percentageFarming'], 2) }}%
+                                    </td>
                                     <td class="text-center">{{ number_format($monthylReports['percentageLime'], 2) }}%</td>
-                                    <td class="text-center">{{ number_format($monthylReports['percentageTestingWater'], 2) }}%</td>
+                                    <td class="text-center">
+                                        {{ number_format($monthylReports['percentageTestingWater'], 2) }}%</td>
                                     <td class="text-center">{{ number_format($monthylReports['percentageFeed'], 2) }}%</td>
                                     <td class="text-center">0</td>
                                     <td class="text-center">{{ number_format($monthylReports['averageincomeFishery2'], 2) }}

@@ -39,7 +39,7 @@
             <div class="tab-pane fade" id="top-tab3">
                 @include('project.user.partials.crp')
             </div>
-        </div>
+        </div> 
 
     </div>
 </div>

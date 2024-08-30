@@ -369,7 +369,7 @@ class DashboardController extends Controller
                 DB::raw('AVG(fish_quantity) as avg_quantity')
             )
             ->whereNotNull('date_of_update')
-            ->whereIn(DB::raw('YEAR(date_of_update)'), [2023, 2024]) 
+            ->whereIn(DB::raw('YEAR(date_of_update)'), [2023, 2024])
             ->groupBy(DB::raw('YEAR(date_of_update)'))
             ->get();
         // dd($averageFishQuantities);
@@ -379,7 +379,7 @@ class DashboardController extends Controller
                 DB::raw('AVG(fish_amount) as avg_amount')
             )
             ->whereNotNull('date_of_update')
-            ->whereIn(DB::raw('YEAR(date_of_update)'), [2023, 2024]) 
+            ->whereIn(DB::raw('YEAR(date_of_update)'), [2023, 2024])
             ->groupBy(DB::raw('YEAR(date_of_update)'))
             ->get();
         //  dd($averageFishAmounts);    
@@ -392,6 +392,23 @@ class DashboardController extends Controller
             'exposure',
             'averageFishQuantities',
             'averageFishAmounts'
+        ));
+    }
+    public function dashboard()
+    {
+        $executives = User::where('role_id', 3)->count();
+        $field_staff = User::where('role_id', 4)->count();
+        $crp = User::where('role_id', 5)->count();
+        $executives_names = User::where('role_id', 3)->pluck('name');
+        $field_staff_names = User::where('role_id', 4)->pluck('name');
+        $crp_names = User::where('role_id', 5)->pluck('name');
+        return view('project.dashboard.hr_dashboard', compact(
+            'executives',
+            'field_staff',
+            'crp',
+            'executives_names',
+            'field_staff_names',
+            'crp_names'
         ));
     }
 }

@@ -179,11 +179,11 @@
                             </a>
                         </li>
                         <li
-                            class="nav-item nav-item-submenu  {{ Request::is('project/dashboard/respondent*') || Request::is('project/dashboard/farming-profile*') || Request::is('project/dashboard/farming-profile2*') || Request::is('project/dashboard/monthly-progress*') || Request::is('project/dashboard/monthly-training*') ? 'nav-item-open' : '' }}">
+                            class="nav-item nav-item-submenu  {{ Request::is('project/dashboard/respondent*') || Request::is('project/dashboard/farming-profile*') || Request::is('project/dashboard/farming-profile2*') || Request::is('project/dashboard/monthly-progress*') || Request::is('project/dashboard/monthly-training*') || Request::is('project/dashboard/hr/dashboard') ? 'nav-item-open' : '' }}">
                             <a href="#" class="nav-link"><i class="bi bi-speedometer2"></i>
                                 <span>Dashboards</span></a>
                             <ul class="nav nav-group-sub" data-submenu-title="Layouts"
-                                style="{{ Request::is('project/dashboard/respondent*') || Request::is('project/dashboard/farming-profile*') || Request::is('project/dashboard/farming-profile2*') || Request::is('project/dashboard/monthly-progress*') || Request::is('project/dashboard/monthly-training*') ? 'display:block' : '' }}">
+                                style="{{ Request::is('project/dashboard/respondent*') || Request::is('project/dashboard/farming-profile*') || Request::is('project/dashboard/farming-profile2*') || Request::is('project/dashboard/monthly-progress*') || Request::is('project/dashboard/monthly-training*') || Request::is('project/dashboard/hr/dashboard') ? 'display:block' : '' }}">
 
                                 <li class="nav-item"><a href="{{ route('project.dashboard.respondent') }}"
                                         class="nav-link {{ Request::is('project/dashboard/respondent') ? 'active' : '' }}">Respondent
@@ -200,7 +200,10 @@
                                 <li class="nav-item"><a href="{{ route('project.dashboard.monthly-training') }}"
                                         class="nav-link {{ Request::is('project/dashboard/monthly-training') ? 'active' : '' }}">Monthly
                                         Training</a></li>
-
+                                <li class="nav-item"><a href="{{ route('project.dashboard.hr-dashboard') }}"
+                                        class="nav-link {{ Request::is('project/dashboard/hr/dashboard') ? 'active' : '' }}">Hr Dashboard
+                                        </a></li>
+                                        
                             </ul>
                         </li>
                         <li class="nav-item">

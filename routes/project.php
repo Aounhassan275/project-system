@@ -17,6 +17,7 @@ Route::group(['prefix' => 'project', 'as' => 'project.', 'middleware' => 'auth:u
         Route::get('dashboard/farming-profile2', [DashboardController::class, 'framingProfile2'])->name('dashboard.farming-profile2');
         Route::get('dashboard/monthly-training', [DashboardController::class, 'monthlyTraining'])->name('dashboard.monthly-training');
         Route::get('dashboard/respondent', [DashboardController::class, 'respondent'])->name('dashboard.respondent');
+        Route::get('dashboard/hr/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.hr-dashboard');
         Route::get('project_dashboard', [ProjectDashboardController::class, 'index'])->name('project_dashboard.index');
         /*******************DASHBOARD ROUTE END*************/
         /*******************Project ROUTE START*************/
