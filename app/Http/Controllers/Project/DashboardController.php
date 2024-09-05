@@ -396,12 +396,12 @@ class DashboardController extends Controller
     }
     public function dashboard()
     {
-        $executives = User::where('role_id', 3)->count();
-        $field_staff = User::where('role_id', 4)->count();
-        $crp = User::where('role_id', 5)->count();
-        $executives_names = User::where('role_id', 3)->pluck('name');
-        $field_staff_names = User::where('role_id', 4)->pluck('name');
-        $crp_names = User::where('role_id', 5)->pluck('name');
+        $executives = User::where('role_id', 3)->where('is_verified',1)->where('is_active',1)->count();
+        $field_staff = User::where('role_id', 4)->where('is_verified',1)->where('is_active',1)->count();
+        $crp = User::where('role_id', 5)->where('is_verified',1)->where('is_active',1)->count();
+        $executives_names = User::where('role_id', 3)->where('is_verified',1)->where('is_active',1)->pluck('name');
+        $field_staff_names = User::where('role_id', 4)->where('is_verified',1)->where('is_active',1)->pluck('name');
+        $crp_names = User::where('role_id', 5)->where('is_verified',1)->where('is_active',1)->pluck('name');
         return view('project.dashboard.hr_dashboard', compact(
             'executives',
             'field_staff',

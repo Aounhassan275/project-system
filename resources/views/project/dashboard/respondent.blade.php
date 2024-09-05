@@ -69,20 +69,21 @@
     .table tbody tr:hover {
         background-color: #e1e1e1;
     }
+
     /* #gender {
         width: 300px !important;
         height: 300px !important;
     }*/
 
-    #education {
-        width: 370px !important;
+    /* #education {
+        width: 375px !important;
         height: 370px !important;
-    }
+    } */
+
     /* #caste {
         width: 300px !important;
         height: 300px !important;
     }  */
-
 </style>
 @section('content')
     <div class="row">
@@ -238,11 +239,11 @@
                     ],
                     backgroundColor: [
                         'rgba(155, 89, 182, 0.7)',
-                        'rgba(75, 192, 192, 0.7)', 
-                        'rgba(255, 205, 86, 0.7)', 
-                        'rgba(33, 47, 60, 0.7)', 
-                        'rgba(231, 76, 60, 0.7)', 
-                        'rgba(54, 162, 235, 0.7)' 
+                        'rgba(75, 192, 192, 0.7)',
+                        'rgba(255, 205, 86, 0.7)',
+                        'rgba(33, 47, 60, 0.7)',
+                        'rgba(231, 76, 60, 0.7)',
+                        'rgba(54, 162, 235, 0.7)'
                     ],
                     borderColor: [
                         'rgba(155, 89, 182, 1)',
@@ -303,10 +304,10 @@
                         {{ $caste_sc }}
                     ],
                     backgroundColor: [
-                        'rgba(203, 67, 53, 0.7)', 
-                        'rgba(41, 128, 185, 0.7)', 
+                        'rgba(203, 67, 53, 0.7)',
+                        'rgba(41, 128, 185, 0.7)',
                         'rgba(255, 206, 86, 0.7)',
-                        'rgba(75, 192, 192, 0.7)' 
+                        'rgba(75, 192, 192, 0.7)'
                     ],
                     borderColor: [
                         'rgba(203, 67, 53, 1)',
@@ -328,7 +329,7 @@
                             display: true,
                             text: 'Caste',
                             font: {
-                                size: 18, 
+                                size: 18,
                                 weight: 'bold'
                             },
                             padding: {
@@ -337,7 +338,7 @@
                             }
                         },
                         legend: {
-                            position: 'bottom', 
+                            position: 'bottom',
                         },
                         tooltip: {
                             callbacks: {

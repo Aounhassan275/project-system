@@ -35,21 +35,17 @@
 
     .table tbody {
         overflow-y: visible;
-        /* Removes the scroll */
     }
 
     .table thead th,
     .table tbody td {
         width: 20%;
-        /* Adjusted width to evenly distribute columns */
         box-sizing: border-box;
     }
 
     .table tbody tr {
         width: 100%;
-        /* Ensures rows span full width */
         display: table-row;
-        /* Resets display to table-row */
     }
 
     .table tbody td {

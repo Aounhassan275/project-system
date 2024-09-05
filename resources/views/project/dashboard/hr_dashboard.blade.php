@@ -31,7 +31,6 @@
     .table tbody {
         display: block;
         height: 200px;
-        /* Set a fixed height for the tbody */
         overflow-y: auto;
     }
 
@@ -40,7 +39,6 @@
         display: table;
         width: 100%;
         table-layout: fixed;
-        /* Ensures the width is consistent */
     }
 
     .table tbody td {
@@ -48,7 +46,6 @@
         border-bottom: 1px solid #ddd;
         box-sizing: border-box;
         width: 25%;
-        /* Adjusted width to fit the 4 columns */
     }
 
     .table tbody tr:nth-child(even) {
@@ -67,7 +64,7 @@
                 <div class="media mb-0">
                     <div class="media-body">
                         <h2 class="font-weight-semibold mb-0 text-center">
-                            HR Dashboard
+                            Project HR Dashboard
                         </h2>
                     </div>
                 </div>
@@ -95,54 +92,18 @@
         </div>
     </div>
 
-    {{-- <div class="col-md-12 mt-4">
-        <table class="table" style="color: #2c2b2b; font-size: 17px;">
-            <thead class="table-danger" style="background-color: #f9e1e1;">
-                <tr>
-                    <th scope="col">Project Manager</th>
-                    <th scope="col">SMS</th>
-                    <th scope="col">CC</th>
-                    <th scope="col">CRP</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php
-                    $maxRows = max($executives_names->count(), $field_staff_names->count(), $crp_names->count());
-                @endphp
-    
-                @for ($i = 0; $i < $maxRows; $i++)
-                    <tr>
-                        <th scope="row">
-                            @if ($i === 0)
-                                {{ Auth::user()->name }}
-                            @endif
-                        </th>
-                        <td>{{ $executives_names[$i]->name ?? '' }}</td>
-                        <td>{{ $field_staff_names[$i]->name ?? '' }}</td>
-                        <td>{{ $crp_names[$i]->name ?? '' }}</td>
-                    </tr>
-                @endfor
-            </tbody>
-        </table>      
-    </div> 
-    <!-- Pagination Links -->
-     <div class="d-flex justify-content-center mt-1">
-        {{ $crp_names->links() }}
-    </div> --}}
-
-    <div class="container mt-3">
+    <div class="container mt-2">
         <table class="table table-fixed">
             <thead>
                 <tr>
                     <th class="col-xs-3">Project Manager</th>
-                    <th class="col-xs-3">Name of SMS</th>
-                    <th class="col-xs-3">Name of CC</th>
-                    <th class="col-xs-3">Name of CRP</th>
+                    <th class="col-xs-3">SMS</th>
+                    <th class="col-xs-3">CC</th>
+                    <th class="col-xs-3">CRP</th>
                 </tr>
             </thead>
             <tbody>
                 @php
-                    // Determine the maximum number of rows needed
                     $maxRows = max(count($executives_names), count($field_staff_names), count($crp_names));
                 @endphp
 

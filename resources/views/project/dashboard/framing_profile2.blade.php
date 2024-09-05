@@ -159,7 +159,7 @@
                             position: 'top',
                             labels: {
                                 font: {
-                                    size: 16 // Increase legend label font size
+                                    size: 16
                                 }
                             }
                         },
@@ -205,8 +205,8 @@
                         label: 'Average Annual Income',
                         data: data3,
                         backgroundColor: [
-                            'rgba(52, 185, 41, 0.6)', 
-                            'rgba(161, 41, 185, 0.6)' 
+                            'rgba(52, 185, 41, 0.6)',
+                            'rgba(161, 41, 185, 0.6)'
                         ],
                         borderColor: [
                             'rgba(52, 185, 41, 1)',
@@ -224,7 +224,7 @@
                             position: 'top',
                             labels: {
                                 font: {
-                                    size: 16 
+                                    size: 16
                                 }
                             }
                         },

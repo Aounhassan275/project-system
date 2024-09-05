@@ -101,35 +101,14 @@
         </div>
     </div>
     <div class="card-body p-2 shadow-sm">
-        {{-- <div class="d-sm-flex justify-content-between align-items-start">
-            <h2 class="card-title card-title-dash mb-1">Monthly Progress</h2>
-            <div id="performance-line-legend" class="d-flex align-items-center">
-            </div>
-        </div> --}}
         <div class="row">
             <div class="col-md-6">
                 <div class="chart-container mt-1">
-                    {{-- <div class="year-selector">
-                        <label>
-                            <input type="radio" name="yearGraph1" value="{{ $currentYear }}" checked> {{ $currentYear }}
-                        </label>
-                        <label>
-                            <input type="radio" name="yearGraph1" value="{{ $previousYear }}"> {{ $previousYear }}
-                        </label>
-                    </div> --}}
                     <canvas id="customGraph" style="height: 304px;"></canvas>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="chart-container mt-1">
-                    {{-- <div class="year-selector">
-                        <label>
-                            <input type="radio" name="yearGraph2" value="{{ $currentYear }}" checked> {{ $currentYear }}
-                        </label>
-                        <label>
-                            <input type="radio" name="yearGraph2" value="{{ $previousYear }}"> {{ $previousYear }}
-                        </label>
-                    </div> --}}
                     <canvas id="customGraph2" style="height: 304px;"></canvas>
                 </div>
             </div>
@@ -147,7 +126,7 @@
     </div>
 @endsection
 
-@section('scripts') 
+@section('scripts')
     <script>
         const currentYearData = @json($registrationsCurrentYear);
         const previousYearData = @json($registrationsPreviousYear);
